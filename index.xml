@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Securiy Blog</title>
+    <link>https://yoavshah.github.io/</link>
+    <description>Recent content on Securiy Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
+    <atom:link href="https://yoavshah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>oh-snap</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</guid>
+      <description>asdasdasdsad</description>
+    </item>
+    <item>
+      <title>test</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-helman/test/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-helman/test/</guid>
+      <description>asdasdasdsad</description>
+    </item>
+  </channel>
+</rss>

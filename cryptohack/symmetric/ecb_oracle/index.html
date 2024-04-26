@@ -35,7 +35,7 @@
 
     <title>
         
-            passwords_as_keys |
+            ecb_oracle |
             SecurityBlog
         
     </title>
@@ -134,7 +134,7 @@
 
     <div class="header_middle">
         
-            passwords_as_keys -
+            ecb_oracle -
             SecurityBlog
         
     </div>
@@ -296,7 +296,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                passwords_as_keys
+                ecb_oracle
             </h1>
 
             <div class="author-date-readtime">
@@ -330,7 +330,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        3 mins to read
                     </div>
                 
             </div>
@@ -399,12 +399,12 @@
 
 
 
-<a href="http://localhost:1313/cryptohack/symmetric/passwords_as_keys/" class="bread-btn">
+<a href="http://localhost:1313/cryptohack/symmetric/ecb_oracle/" class="bread-btn">
     
 
     
         
-            passwords_as_keys
+            ecb_oracle
         
 
     
@@ -424,6 +424,7 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
+<p>This is an interesting challenge, in this challenge we can send data to the program and the program then returns the encrypted(data + flag) with ECB mode</p>
 
 
 
@@ -434,52 +435,46 @@
 <div class="codeblock">
     
         <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0aimport%20hashlib%0d%0aimport%20random%0d%0a%0d%0a%0d%0a#%20/usr/share/dict/words%20from%0d%0a#%20https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words%0d%0awith%20open%28%22/usr/share/dict/words%22%29%20as%20f:%0d%0a%20%20%20%20words%20=%20[w.strip%28%29%20for%20w%20in%20f.readlines%28%29]%0d%0akeyword%20=%20random.choice%28words%29%0d%0a%0d%0aKEY%20=%20hashlib.md5%28keyword.encode%28%29%29.digest%28%29%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/decrypt/%3cciphertext%3e/%3cpassword_hash%3e/%27%29%0d%0adef%20decrypt%28ciphertext,%20password_hash%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%20%20%20%20key%20=%20bytes.fromhex%28password_hash%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28key,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
+            <button class="copy-button" state="copy" data="%0d%0afrom%20Crypto.Cipher%20import%20AES%0d%0afrom%20Crypto.Util.Padding%20import%20pad,%20unpad%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecb_oracle/encrypt/%3cplaintext%3e/%27%29%0d%0adef%20encrypt%28plaintext%29:%0d%0a%20%20%20%20plaintext%20=%20bytes.fromhex%28plaintext%29%0d%0a%0d%0a%20%20%20%20padded%20=%20pad%28plaintext%20&#43;%20FLAG.encode%28%29,%2016%29%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20encrypted%20=%20cipher.encrypt%28padded%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
                 <i class="bi bi-copy"></i>
             </button>
         </div>
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /usr/share/dict/words from</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;/usr/share/dict/words&#34;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>readlines()]
-</span></span><span style="display:flex;"><span>keyword <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>choice(words)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(keyword<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
+</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
 </span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/decrypt/&lt;ciphertext&gt;/&lt;password_hash&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext, password_hash):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(password_hash)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecb_oracle/encrypt/&lt;plaintext&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(plaintext):
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(plaintext)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>    padded <span style="color:#f92672">=</span> pad(plaintext <span style="color:#f92672">+</span> FLAG<span style="color:#f92672">.</span>encode(), <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>        encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(padded)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: encrypted<span style="color:#f92672">.</span>hex()}</span></span></code></pre></div>
     
 </div>
+<p><img src="/cryptohack/symmetric/images/ECB_encryption.svg" alt="ECB Encryption"></p>
 <h1 id="solution">Solution</h1>
-<p>This is quite an easy challenge, all we have to do here is to bruteforce the key using the keywords from <a href="https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words">here</a></p>
+<p>Because of how ECB mode it built, if we send 2 of the same plaintext blocks their ciphertext will be the same.
+We will bruteforce each character from the last one to the first one.</p>
+<p>Because we have control over the prefix of the payload we can make the prefix larger until we find that another cipher block was created - with that we can find the flag size.</p>
+<p>Then we can send a prefix of [BYTE][PAD-16] + [GARBAGE] so that the last block plaintext will be [FLAG_LAST_BYTE][PAD-16].</p>
+<p>We can then change the prefix first byte bruteforce it over 256 posible values, if we found the right byte the first plaintext block and the last plaintext block one should be equals meaning the first cipher text block and the last cipher text block will be also equals.</p>
+<p>To get the other bytes we can just create the following payload
+[BYTE][KNOWN-FLAG][PAD-16] + [GARBAGE] so that the last block playintext will be [FLAG_BYTES (length(KNOWN-FLAG) + 1)][PAD-16]</p>
+<p>with the same tactic we can bruteforce each byte in the flag and in the code we should keep an eye when we find more than 16 bytes of the flag, to get to the second block</p>
 
 
 
@@ -498,31 +493,59 @@
 
     
         <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>WORDLIST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words&#34;</span>
-</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> requests<span style="color:#f92672">.</span>get(WORDLIST)<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)]
+</span></span><span style="display:flex;"><span>SITE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecb_oracle/encrypt/&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c92b7734070205bdf6c0087a751466ec13ae15e6f1bcdd3f3a535ec0f4bbae66&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># should be identical to the last block</span>
+</span></span><span style="display:flex;"><span>START_PAD <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>curr_found <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>FLAG_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, FLAG_SIZE):
+</span></span><span style="display:flex;"><span>    print(curr_found)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(FLAG)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> words:
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(w<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>printable:
+</span></span><span style="display:flex;"><span>        bb <span style="color:#f92672">=</span> b<span style="color:#f92672">.</span>encode()<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>        curr <span style="color:#f92672">=</span> bb
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        number_of_paddings <span style="color:#f92672">=</span> (((((<span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span> START_PAD <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> FLAG_SIZE) <span style="color:#f92672">//</span> <span style="color:#ae81ff">16</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span> START_PAD <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> FLAG_SIZE)) <span style="color:#f92672">%</span> <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>        number_of_paddings <span style="color:#f92672">=</span> number_of_paddings
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> number_of_paddings <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            number_of_paddings <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>        pad_char <span style="color:#f92672">=</span> number_of_paddings<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        FIRST_BLOCK <span style="color:#f92672">=</span> curr <span style="color:#f92672">+</span> curr_found[:<span style="color:#ae81ff">15</span>]<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> pad_char<span style="color:#f92672">.</span>hex() <span style="color:#f92672">*</span> (<span style="color:#ae81ff">16</span> <span style="color:#f92672">-</span> (len(curr_found[:<span style="color:#ae81ff">15</span>]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        dec <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)<span style="color:#f92672">.</span>decode()
-</span></span><span style="display:flex;"><span>        print(dec)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span></span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>        FILL_BLOCK <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;00&#34;</span> <span style="color:#f92672">*</span> (j <span style="color:#f92672">+</span> START_PAD)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># FIRST [Brute force first character]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># SHIT</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># FIRST</span>
+</span></span><span style="display:flex;"><span>        FULL_BLOCK <span style="color:#f92672">=</span> FIRST_BLOCK <span style="color:#f92672">+</span> FILL_BLOCK
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE <span style="color:#f92672">+</span> FULL_BLOCK)<span style="color:#f92672">.</span>json()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ctext <span style="color:#f92672">=</span> k[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        c_first_block <span style="color:#f92672">=</span> ctext[:<span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>        c_second_block <span style="color:#f92672">=</span> ctext[<span style="color:#ae81ff">32</span>:<span style="color:#ae81ff">64</span>]
+</span></span><span style="display:flex;"><span>        c_third_block <span style="color:#f92672">=</span> ctext[<span style="color:#ae81ff">64</span>:<span style="color:#ae81ff">64</span><span style="color:#f92672">+</span><span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>        c_fourth_block <span style="color:#f92672">=</span> ctext[<span style="color:#ae81ff">64</span><span style="color:#f92672">+</span><span style="color:#ae81ff">32</span>:<span style="color:#ae81ff">64</span><span style="color:#f92672">+</span><span style="color:#ae81ff">32</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> c_first_block <span style="color:#f92672">==</span> c_fourth_block:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;found char &#34;</span> <span style="color:#f92672">+</span> b)
+</span></span><span style="display:flex;"><span>            curr_found <span style="color:#f92672">=</span> b<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> curr_found
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Failed to find for &#34;</span> <span style="color:#f92672">+</span> str(j))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span> </span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/symmetric/code/passwords_as_keys.py">passwords_as_keys.py</a></p>
+<p><a href="/cryptohack/symmetric/code/ecb_oracle.py">ecb_oracle.py</a></p>
 
             
         </div>
@@ -571,7 +594,7 @@
                 <li>
                     
                         Word Count:
-                        147
+                        447
                     
                 </li>
             

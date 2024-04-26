@@ -9,11 +9,18 @@
     <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
     <atom:link href="http://localhost:1313/cryptohack/symmetric/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>oh-snap</title>
-      <link>http://localhost:1313/cryptohack/symmetric/oh-snap/</link>
+      <title>ecb_oracle</title>
+      <link>http://localhost:1313/cryptohack/symmetric/ecb_oracle/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>http://localhost:1313/cryptohack/symmetric/oh-snap/</guid>
-      <description>asdasdasdsad</description>
+      <guid>http://localhost:1313/cryptohack/symmetric/ecb_oracle/</guid>
+      <description>Challenge This is an interesting challenge, in this challenge we can send data to the program and the program then returns the encrypted(data + flag) with ECB mode&#xA;from Crypto.Cipher import AES from Crypto.Util.Padding import pad, unpad KEY = ? FLAG = ? @chal.route(&amp;#39;/ecb_oracle/encrypt/&amp;lt;plaintext&amp;gt;/&amp;#39;) def encrypt(plaintext): plaintext = bytes.fromhex(plaintext) padded = pad(plaintext + FLAG.encode(), 16) cipher = AES.new(KEY, AES.MODE_ECB) try: encrypted = cipher.encrypt(padded) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;ciphertext&amp;#34;: encrypted.</description>
+    </item>
+    <item>
+      <title>ecbcbcwtf</title>
+      <link>http://localhost:1313/cryptohack/symmetric/ecbcbcwtf/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>http://localhost:1313/cryptohack/symmetric/ecbcbcwtf/</guid>
+      <description>Challenge This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode&#xA;from Crypto.Cipher import AES KEY = ? FLAG = ? @chal.route(&amp;#39;/ecbcbcwtf/decrypt/&amp;lt;ciphertext&amp;gt;/&amp;#39;) def decrypt(ciphertext): ciphertext = bytes.fromhex(ciphertext) cipher = AES.new(KEY, AES.MODE_ECB) try: decrypted = cipher.decrypt(ciphertext) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;plaintext&amp;#34;: decrypted.hex()} @chal.route(&amp;#39;/ecbcbcwtf/encrypt_flag/&amp;#39;) def encrypt_flag(): iv = os.urandom(16) cipher = AES.new(KEY, AES.MODE_CBC, iv) encrypted = cipher.</description>
     </item>
     <item>
       <title>passwords_as_keys</title>

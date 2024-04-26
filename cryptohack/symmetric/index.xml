@@ -2,18 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>symmetric on Securiy Blog</title>
-    <link>https://yoavshah.github.io/cryptohack/symmetric/</link>
+    <link>http://localhost:1313/cryptohack/symmetric/</link>
     <description>Recent content in symmetric on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
-    <atom:link href="https://yoavshah.github.io/cryptohack/symmetric/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/cryptohack/symmetric/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>oh-snap</title>
-      <link>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</link>
+      <link>http://localhost:1313/cryptohack/symmetric/oh-snap/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</guid>
+      <guid>http://localhost:1313/cryptohack/symmetric/oh-snap/</guid>
       <description>asdasdasdsad</description>
+    </item>
+    <item>
+      <title>passwords_as_keys</title>
+      <link>http://localhost:1313/cryptohack/symmetric/passwords_as_keys/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>http://localhost:1313/cryptohack/symmetric/passwords_as_keys/</guid>
+      <description>Challenge from Crypto.Cipher import AES import hashlib import random # /usr/share/dict/words from # https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words with open(&amp;#34;/usr/share/dict/words&amp;#34;) as f: words = [w.strip() for w in f.readlines()] keyword = random.choice(words) KEY = hashlib.md5(keyword.encode()).digest() FLAG = ? @chal.route(&amp;#39;/passwords_as_keys/decrypt/&amp;lt;ciphertext&amp;gt;/&amp;lt;password_hash&amp;gt;/&amp;#39;) def decrypt(ciphertext, password_hash): ciphertext = bytes.fromhex(ciphertext) key = bytes.fromhex(password_hash) cipher = AES.new(key, AES.MODE_ECB) try: decrypted = cipher.decrypt(ciphertext) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;plaintext&amp;#34;: decrypted.hex()} @chal.route(&amp;#39;/passwords_as_keys/encrypt_flag/&amp;#39;) def encrypt_flag(): cipher = AES.new(KEY, AES.MODE_ECB) encrypted = cipher.</description>
     </item>
   </channel>
 </rss>

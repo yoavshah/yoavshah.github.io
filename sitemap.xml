@@ -2,34 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/cryptohack/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/cryptohack/diffie-helman/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/diffie-helman/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/cryptohack/symmetric/ecb_oracle/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/ecb_oracle/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/cryptohack/symmetric/ecbcbcwtf/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/ecbcbcwtf/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/cryptohack/symmetric/passwords_as_keys/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://yoavshah.github.io/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/cryptohack/symmetric/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/cryptohack/diffie-helman/test/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/diffie-helman/test/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/author/</loc>
+    <loc>https://yoavshah.github.io/author/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://yoavshah.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://yoavshah.github.io/tags/</loc>
   </url>
 </urlset>

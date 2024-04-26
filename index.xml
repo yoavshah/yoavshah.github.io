@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Securiy Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>https://yoavshah.github.io/</link>
     <description>Recent content on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yoavshah.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ecb_oracle</title>
-      <link>http://localhost:1313/cryptohack/symmetric/ecb_oracle/</link>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/ecb_oracle/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>http://localhost:1313/cryptohack/symmetric/ecb_oracle/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/ecb_oracle/</guid>
       <description>Challenge This is an interesting challenge, in this challenge we can send data to the program and the program then returns the encrypted(data + flag) with ECB mode&#xA;from Crypto.Cipher import AES from Crypto.Util.Padding import pad, unpad KEY = ? FLAG = ? @chal.route(&amp;#39;/ecb_oracle/encrypt/&amp;lt;plaintext&amp;gt;/&amp;#39;) def encrypt(plaintext): plaintext = bytes.fromhex(plaintext) padded = pad(plaintext + FLAG.encode(), 16) cipher = AES.new(KEY, AES.MODE_ECB) try: encrypted = cipher.encrypt(padded) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;ciphertext&amp;#34;: encrypted.</description>
     </item>
     <item>
       <title>ecbcbcwtf</title>
-      <link>http://localhost:1313/cryptohack/symmetric/ecbcbcwtf/</link>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/ecbcbcwtf/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>http://localhost:1313/cryptohack/symmetric/ecbcbcwtf/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/ecbcbcwtf/</guid>
       <description>Challenge This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode&#xA;from Crypto.Cipher import AES KEY = ? FLAG = ? @chal.route(&amp;#39;/ecbcbcwtf/decrypt/&amp;lt;ciphertext&amp;gt;/&amp;#39;) def decrypt(ciphertext): ciphertext = bytes.fromhex(ciphertext) cipher = AES.new(KEY, AES.MODE_ECB) try: decrypted = cipher.decrypt(ciphertext) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;plaintext&amp;#34;: decrypted.hex()} @chal.route(&amp;#39;/ecbcbcwtf/encrypt_flag/&amp;#39;) def encrypt_flag(): iv = os.urandom(16) cipher = AES.new(KEY, AES.MODE_CBC, iv) encrypted = cipher.</description>
     </item>
     <item>
       <title>passwords_as_keys</title>
-      <link>http://localhost:1313/cryptohack/symmetric/passwords_as_keys/</link>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>http://localhost:1313/cryptohack/symmetric/passwords_as_keys/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</guid>
       <description>Challenge from Crypto.Cipher import AES import hashlib import random # /usr/share/dict/words from # https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words with open(&amp;#34;/usr/share/dict/words&amp;#34;) as f: words = [w.strip() for w in f.readlines()] keyword = random.choice(words) KEY = hashlib.md5(keyword.encode()).digest() FLAG = ? @chal.route(&amp;#39;/passwords_as_keys/decrypt/&amp;lt;ciphertext&amp;gt;/&amp;lt;password_hash&amp;gt;/&amp;#39;) def decrypt(ciphertext, password_hash): ciphertext = bytes.fromhex(ciphertext) key = bytes.fromhex(password_hash) cipher = AES.new(key, AES.MODE_ECB) try: decrypted = cipher.decrypt(ciphertext) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;plaintext&amp;#34;: decrypted.hex()} @chal.route(&amp;#39;/passwords_as_keys/encrypt_flag/&amp;#39;) def encrypt_flag(): cipher = AES.new(KEY, AES.MODE_ECB) encrypted = cipher.</description>
     </item>
     <item>
       <title>test</title>
-      <link>http://localhost:1313/cryptohack/diffie-helman/test/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-helman/test/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-helman/test/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-helman/test/</guid>
       <description>asdasdasdsad</description>
     </item>
   </channel>

@@ -9,6 +9,20 @@
     <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/cryptohack/symmetric/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>ctrime</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/ctrime/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/ctrime/</guid>
+      <description>Challenge I really enjoyed this challenge. In this challenge we get a program with the method encrypt which receives a plaintext, concat is with the flag, compress it with zlib and encrypt it with CTR mode (which is not actually a block cipher) We need to get the flag.&#xA;from Crypto.Cipher import AES from Crypto.Util import Counter import zlib KEY = ? FLAG = ? @chal.route(&amp;#39;/ctrime/encrypt/&amp;lt;plaintext&amp;gt;/&amp;#39;) def encrypt(plaintext): plaintext = bytes.</description>
+    </item>
+    <item>
+      <title>dancing_queen</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/dancing_queen/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/dancing_queen/</guid>
+      <description>Challenge In this challenge we get a python code named &amp;ldquo;chacha20.py&amp;rdquo; and the output of the code &amp;ldquo;output.txt&amp;rdquo;. In the &amp;ldquo;chacha20.py&amp;rdquo; code the programmer created a randomized unknown key, randomized known iv1 (from the output.txt file), randomized iv2(from the output.txt file).&#xA;The programmer also encrypt the flag using iv1 and the key, we have access to enc_flag.&#xA;And also we have access to msg and enc_msg.&#xA;#!/usr/bin/env python3 from os import urandom FLAG = b&amp;#39;crypto{?</description>
+    </item>
+    <item>
       <title>ecb_oracle</title>
       <link>https://yoavshah.github.io/cryptohack/symmetric/ecb_oracle/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
@@ -23,11 +37,60 @@
       <description>Challenge This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode&#xA;from Crypto.Cipher import AES KEY = ? FLAG = ? @chal.route(&amp;#39;/ecbcbcwtf/decrypt/&amp;lt;ciphertext&amp;gt;/&amp;#39;) def decrypt(ciphertext): ciphertext = bytes.fromhex(ciphertext) cipher = AES.new(KEY, AES.MODE_ECB) try: decrypted = cipher.decrypt(ciphertext) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;plaintext&amp;#34;: decrypted.hex()} @chal.route(&amp;#39;/ecbcbcwtf/encrypt_flag/&amp;#39;) def encrypt_flag(): iv = os.urandom(16) cipher = AES.new(KEY, AES.MODE_CBC, iv) encrypted = cipher.</description>
     </item>
     <item>
+      <title>flipping_cookie</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/flipping_cookie/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/flipping_cookie/</guid>
+      <description>Challenge In this challenge we get a data encrypted with CBC mode and its randomized IV. To get the flag for this challenge we need to use the check_admin method, but use a cookie and an IV that will make the program think we has the string &amp;ldquo;admin=True;&amp;rdquo; instead of &amp;ldquo;admin=False;&amp;rdquo; (As generated in our cookie)&#xA;from Crypto.Cipher import AES import os from Crypto.Util.Padding import pad, unpad from datetime import datetime, timedelta KEY = ?</description>
+    </item>
+    <item>
+      <title>lazy_cbc</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/lazy_cbc/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/lazy_cbc/</guid>
+      <description>Challenge In this challenge we get a program of a lazy developer whom used the KEY also as an IV, we can use the encrypt method which encrypts the data and the receive method which decrypt the data and returns it only if the data is not textual (we can force it to not be textual)&#xA;from Crypto.Cipher import AES KEY = ? FLAG = ? @chal.route(&amp;#39;/lazy_cbc/encrypt/&amp;lt;plaintext&amp;gt;/&amp;#39;) def encrypt(plaintext): plaintext = bytes.</description>
+    </item>
+    <item>
+      <title>logon_zero</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/logon_zero/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/logon_zero/</guid>
+      <description>Challenge In this challenge we get a remote server with a code call 13399.py&#xA;The remote server support 3 method&#xA;authenticate - if the password we sent equals to the password of the challenge we ge tthe flag reset_connection - create a new CFB8 cipher with random input reset_password - it decrypt the token and get a size from the last 4 bytes, then creates a random password in that length #!</description>
+    </item>
+    <item>
       <title>passwords_as_keys</title>
       <link>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
       <guid>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</guid>
       <description>Challenge from Crypto.Cipher import AES import hashlib import random # /usr/share/dict/words from # https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words with open(&amp;#34;/usr/share/dict/words&amp;#34;) as f: words = [w.strip() for w in f.readlines()] keyword = random.choice(words) KEY = hashlib.md5(keyword.encode()).digest() FLAG = ? @chal.route(&amp;#39;/passwords_as_keys/decrypt/&amp;lt;ciphertext&amp;gt;/&amp;lt;password_hash&amp;gt;/&amp;#39;) def decrypt(ciphertext, password_hash): ciphertext = bytes.fromhex(ciphertext) key = bytes.fromhex(password_hash) cipher = AES.new(key, AES.MODE_ECB) try: decrypted = cipher.decrypt(ciphertext) except ValueError as e: return {&amp;#34;error&amp;#34;: str(e)} return {&amp;#34;plaintext&amp;#34;: decrypted.hex()} @chal.route(&amp;#39;/passwords_as_keys/encrypt_flag/&amp;#39;) def encrypt_flag(): cipher = AES.new(KEY, AES.MODE_ECB) encrypted = cipher.</description>
+    </item>
+    <item>
+      <title>stream_consciousness</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/stream_consciousness/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/stream_consciousness/</guid>
+      <description>Challenge In this challenge we get a program that has encrypt routine and when execute it will choose random text contant, encrypt it with CTR (without any prefix, suffix, and initial value 0) with an unknown KEY.&#xA;We need to decrypt the flag somehow&#xA;from Crypto.Cipher import AES from Crypto.Util import Counter import random KEY = ? TEXT = [&amp;#39;???&amp;#39;, &amp;#39;???&amp;#39;, ..., FLAG] @chal.route(&amp;#39;/stream_consciousness/encrypt/&amp;#39;) def encrypt(): random_line = random.choice(TEXT) cipher = AES.</description>
+    </item>
+    <item>
+      <title>symmetry</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</guid>
+      <description>Challenge In this challenge we get a program that its developer tried to create his own implementation to CTR mode (using the ECB mode)&#xA;from Crypto.Cipher import AES KEY = ? class StepUpCounter(object): def __init__(self, step_up=False): self.value = os.urandom(16).hex() self.step = 1 self.stup = step_up def increment(self): if self.stup: self.newIV = hex(int(self.value, 16) + self.step) else: self.newIV = hex(int(self.value, 16) - self.stup) self.value = self.newIV[2:len(self.newIV)] return bytes.fromhex(self.value.zfill(32)) def __repr__(self): self.increment() return self.</description>
+    </item>
+    <item>
+      <title>symmetry</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/symmetry/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/symmetry/</guid>
+      <description>Challenge This is actually an easy challenge, we can get the encrypted flag with a random IV and an unknown KEY in OFB mode using the encrypt_flag routine, and also we can encrypt data with a chosen IV and an unknown KEY in OFB mode&#xA;from Crypto.Cipher import AES KEY = ? FLAG = ? @chal.route(&amp;#39;/symmetry/encrypt/&amp;lt;plaintext&amp;gt;/&amp;lt;iv&amp;gt;/&amp;#39;) def encrypt(plaintext, iv): plaintext = bytes.fromhex(plaintext) iv = bytes.fromhex(iv) if len(iv) != 16: return {&amp;#34;error&amp;#34;: &amp;#34;IV length must be 16&amp;#34;} cipher = AES.</description>
+    </item>
+    <item>
+      <title>triple_des</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/triple_des/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/triple_des/</guid>
+      <description>Challenge In this challenge we get a program that can encrypt any plaintext with a chosen key, and also can encrypt the flag with a chosen key. We can&amp;rsquo;t reproduce the decryption routine in our computer, because we don&amp;rsquo;t have access to the generated IV.&#xA;Remember we also can&amp;rsquo;t just take the encrypted flag and put it in the encrypt method because the DES encryption block and the DES decryption block are not the same (Or are they ?</description>
     </item>
   </channel>
 </rss>

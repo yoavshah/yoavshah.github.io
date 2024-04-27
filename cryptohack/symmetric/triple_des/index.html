@@ -37,7 +37,7 @@
 
     <title>
         
-            ecbcbcwtf |
+            triple_des |
             SecurityBlog
         
     </title>
@@ -110,7 +110,7 @@
 
     <div class="header_middle">
         
-            ecbcbcwtf -
+            triple_des -
             SecurityBlog
         
     </div>
@@ -352,7 +352,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                ecbcbcwtf
+                triple_des
             </h1>
 
             <div class="author-date-readtime">
@@ -386,7 +386,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        3 mins to read
                     </div>
                 
             </div>
@@ -455,12 +455,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/ecbcbcwtf/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/symmetric/triple_des/" class="bread-btn">
     
 
     
         
-            ecbcbcwtf
+            triple_des
         
 
     
@@ -480,60 +480,9 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-<p>This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode</p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/decrypt/%3cciphertext%3e/%27%29%0d%0adef%20decrypt%28ciphertext%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20iv%20=%20os.urandom%2816%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CBC,%20iv%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%20%20%20%20ciphertext%20=%20iv.hex%28%29%20&#43;%20encrypted.hex%28%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20ciphertext%7d">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/decrypt/&lt;ciphertext&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> iv<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> encrypted<span style="color:#f92672">.</span>hex()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: ciphertext}</span></span></code></pre></div>
-    
-</div>
-<p><img src="/cryptohack/symmetric/images/CBC_encryption.svg" alt="CBC Encryption"></p>
-<p><img src="/cryptohack/symmetric/images/ECB_encryption.svg" alt="ECB Encryption"></p>
-<h1 id="solution">Solution</h1>
-<p>As we can see in the drawing above, the difference between CBC and ECB is that CBC uses IV.
-We can decrypt with ECB mode the encrypted flag, and then using the IV we received earlier to xor it and retreive the decrypted flag.</p>
+<p>In this challenge we get a program that can encrypt any plaintext with a chosen key, and also can encrypt the flag with a chosen key.
+We can&rsquo;t reproduce the decryption routine in our computer, because we don&rsquo;t have access to the generated IV.</p>
+<p>Remember we also can&rsquo;t just take the encrypted flag and put it in the encrypt method because the DES encryption block and the DES decryption block are not the same (Or are they ? :) )</p>
 
 
 
@@ -551,37 +500,137 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> DES3
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">xor</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># xor 2 bytestrings, repeating the 2nd one if necessary</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(x <span style="color:#f92672">^</span> y <span style="color:#66d9ef">for</span> x,y <span style="color:#f92672">in</span> zip(a, b <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> len(a) <span style="color:#f92672">//</span> len(b))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/triple_des/encrypt/&lt;key&gt;/&lt;plaintext&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(key, plaintext):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        key <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(key)
+</span></span><span style="display:flex;"><span>        plaintext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(plaintext)
+</span></span><span style="display:flex;"><span>        plaintext <span style="color:#f92672">=</span> xor(plaintext, IV)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        cipher <span style="color:#f92672">=</span> DES3<span style="color:#f92672">.</span>new(key, DES3<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>        ciphertext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(plaintext)
+</span></span><span style="display:flex;"><span>        ciphertext <span style="color:#f92672">=</span> xor(ciphertext, IV)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: ciphertext<span style="color:#f92672">.</span>hex()}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/triple_des/encrypt_flag/&lt;key&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>(key):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> encrypt(key, pad(FLAG<span style="color:#f92672">.</span>encode(), <span style="color:#ae81ff">8</span>)<span style="color:#f92672">.</span>hex())</span></span></code></pre></div>
+    
+</div>
+<p><img src="/cryptohack/symmetric/images/CBC_encryption.svg" alt="CBC Encryption"></p>
+<h1 id="solution">Solution</h1>
+<p>DES is a symmetric block encryption algorithm that uses 8 bytes for its blocks and keys.</p>
+<p>Triple DES as the name suggest is 3 times the DES algorithm therefore it uses 24 bytes key (3 DES keys) and it encrypt data as follow</p>
+<p>$$
+ciphertext = E_{k3}(D_{k2}(E_{k1}(plaintext)))
+$$</p>
+<p>and the decryption routine is
+$$
+plaintext = D_{k1}(E_{k2}(D_{k3}(ciphertext)))
+$$</p>
+<p>In DES there is a problem of weak keys, weak keys make the cipher behave in some undesirable way. The weak keys in DES make the encryption routine work as the DES decryption routine.</p>
+<p>This mean that whenever a weak key is used in DES:
+$$
+plaintext = E_{weak-key}(E_{weak-key}(plaintext))
+$$</p>
+<p>You can read more about weak keys in DES <a href="https://en.wikipedia.org/wiki/Weak_key#Weak_keys_in_DES">here</a></p>
+<p>You might think that we can set the 3 keys of Triple DES to the same weak key, that way we can surely get the flag, but the python library protects us from using the same key in Triple DES</p>
+<p><code>{&quot;error&quot;:&quot;Triple DES key degenerates to single DES&quot;}</code></p>
+<p>The reason is that if the same key is used 3 times in Triple DES the whole algorithm becomes just DES.</p>
+<p>$$
+ciphertext = E_{k}(D_{k}(E_{k}(plaintext))) = E_{k}(plaintext)
+$$</p>
+<p>Therefore we need at least 2 different keys.
+We can use 2 weak keys for DES to build a weak key for Triple DES.</p>
+<p>Let&rsquo;s create the keys</p>
+<p>$K1 = K3 = 0000000000000000$
+$K2 = FEFEFEFEFEFEFEFE$</p>
+<p>Now let&rsquo;s use the encrypt_flag with this key, we should receive this output.</p>
+<p>$$
+E_{k3}(D_{k2}(E_{k1}(flag)))
+$$</p>
+<p>Now let&rsquo;s use the encrypted flag we got and send it to the encryption routine with the same key.
+We should get something like that</p>
+<p>$$
+E_{k3}(D_{k2}(E_{k1}(E_{k3}(D_{k2}(E_{k1}(flag))))))
+$$</p>
+<p>Remember that E and E and also D and D cancel each other (if the same weak key is used) and also remember that</p>
+<p>$k1 = k3$</p>
+<p>so</p>
+<p>$$
+E_{k1}(D_{k2}(E_{k1}(E_{k1}(D_{k2}(E_{k1}(flag))))))
+$$</p>
+<p>We can now cancel the two middle encryption routines because they use the same weak key k1</p>
+<p>$$
+E_{k1}(D_{k2}(D_{k2}(E_{k1}(flag))))
+$$</p>
+<p>Now we can cancel the two middle decryption routines because they use the same weak key k2</p>
+<p>$$
+E_{k1}(E_{k1}(flag))
+$$</p>
+<p>And now we can cancel the last two encryption routines because they use the same key k1</p>
+<p>$$
+flag
+$$</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> DES3
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SITE_FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/encrypt_flag&#34;</span>
-</span></span><span style="display:flex;"><span>SITE_DECRYPT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/decrypt&#34;</span>
+</span></span><span style="display:flex;"><span>SITE_ENC_FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/triple_des/encrypt_flag/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>SITE_ENC <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/triple_des/encrypt/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_FLAG)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
+</span></span><span style="display:flex;"><span>DES_WEAK_KEY_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0000000000000000&#34;</span>
+</span></span><span style="display:flex;"><span>DES_WEAK_KEY_2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FEFEFEFEFEFEFEFE&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> cipher[<span style="color:#ae81ff">32</span>:]
-</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> cipher[:<span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>TRIPLE_DES_WEAK_KEY <span style="color:#f92672">=</span> DES_WEAK_KEY_1 <span style="color:#f92672">+</span> DES_WEAK_KEY_2 <span style="color:#f92672">+</span> DES_WEAK_KEY_1
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ENC_FLAG)
-</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(IV)
+</span></span><span style="display:flex;"><span>enc_flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_ENC_FLAG<span style="color:#f92672">.</span>format(TRIPLE_DES_WEAK_KEY))<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_ENC<span style="color:#f92672">.</span>format(TRIPLE_DES_WEAK_KEY, enc_flag))<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>SITE_DECRYPT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>ENC_FLAG<span style="color:#f92672">.</span>hex()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;plaintext&#34;</span>]
-</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ecb_dec_flag)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
-</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(IV[i] <span style="color:#f92672">^</span> ecb_dec_flag[i])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
-</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(ENC_FLAG[i] <span style="color:#f92672">^</span> ecb_dec_flag[len(IV) <span style="color:#f92672">+</span> i])
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(dec_flag)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/symmetric/code/ecbcbcwtf.py">ecbcbcwtf.py</a></p>
+<p><a href="/cryptohack/symmetric/code/triple_des.py">triple_des.py</a></p>
 
             
         </div>
@@ -630,7 +679,7 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
                 <li>
                     
                         Word Count:
-                        185
+                        574
                     
                 </li>
             

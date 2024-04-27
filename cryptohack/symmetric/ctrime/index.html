@@ -37,7 +37,7 @@
 
     <title>
         
-            ecbcbcwtf |
+            ctrime |
             SecurityBlog
         
     </title>
@@ -110,7 +110,7 @@
 
     <div class="header_middle">
         
-            ecbcbcwtf -
+            ctrime -
             SecurityBlog
         
     </div>
@@ -352,7 +352,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                ecbcbcwtf
+                ctrime
             </h1>
 
             <div class="author-date-readtime">
@@ -386,7 +386,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        2 mins to read
                     </div>
                 
             </div>
@@ -455,12 +455,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/ecbcbcwtf/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/symmetric/ctrime/" class="bread-btn">
     
 
     
         
-            ecbcbcwtf
+            ctrime
         
 
     
@@ -480,7 +480,9 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-<p>This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode</p>
+<p>I really enjoyed this challenge.
+In this challenge we get a program with the method encrypt which receives a plaintext, concat is with the flag, compress it with zlib and encrypt it with CTR mode (which is not actually a block cipher)
+We need to get the flag.</p>
 
 
 
@@ -491,7 +493,7 @@
 <div class="codeblock">
     
         <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/decrypt/%3cciphertext%3e/%27%29%0d%0adef%20decrypt%28ciphertext%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20iv%20=%20os.urandom%2816%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CBC,%20iv%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%20%20%20%20ciphertext%20=%20iv.hex%28%29%20&#43;%20encrypted.hex%28%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20ciphertext%7d">
+            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0afrom%20Crypto.Util%20import%20Counter%0d%0aimport%20zlib%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ctrime/encrypt/%3cplaintext%3e/%27%29%0d%0adef%20encrypt%28plaintext%29:%0d%0a%20%20%20%20plaintext%20=%20bytes.fromhex%28plaintext%29%0d%0a%0d%0a%20%20%20%20iv%20=%20int.from_bytes%28os.urandom%2816%29,%20%27big%27%29%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CTR,%20counter=Counter.new%28128,%20initial_value=iv%29%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28zlib.compress%28plaintext%20&#43;%20FLAG.encode%28%29%29%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
                 <i class="bi bi-copy"></i>
             </button>
         </div>
@@ -499,41 +501,99 @@
 
     
         <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util <span style="color:#f92672">import</span> Counter
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> zlib
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
 </span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/decrypt/&lt;ciphertext&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ctrime/encrypt/&lt;plaintext&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(plaintext):
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(plaintext)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>), <span style="color:#e6db74">&#39;big&#39;</span>)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CTR, counter<span style="color:#f92672">=</span>Counter<span style="color:#f92672">.</span>new(<span style="color:#ae81ff">128</span>, initial_value<span style="color:#f92672">=</span>iv))
+</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(zlib<span style="color:#f92672">.</span>compress(plaintext <span style="color:#f92672">+</span> FLAG<span style="color:#f92672">.</span>encode()))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> iv<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> encrypted<span style="color:#f92672">.</span>hex()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: ciphertext}</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: encrypted<span style="color:#f92672">.</span>hex()}</span></span></code></pre></div>
     
 </div>
-<p><img src="/cryptohack/symmetric/images/CBC_encryption.svg" alt="CBC Encryption"></p>
-<p><img src="/cryptohack/symmetric/images/ECB_encryption.svg" alt="ECB Encryption"></p>
+<p><img src="/cryptohack/symmetric/images/CTR_encryption.svg" alt="CTR Encryption"></p>
 <h1 id="solution">Solution</h1>
-<p>As we can see in the drawing above, the difference between CBC and ECB is that CBC uses IV.
-We can decrypt with ECB mode the encrypted flag, and then using the IV we received earlier to xor it and retreive the decrypted flag.</p>
+<p>We can see that because CTR is not actual block cipher it produce ciphertext without the need to pad it, so we can actually get the length of the plaintext.</p>
+<p>In this challenge the program compress the input with the flag, we can use the compression algorithm to bruteforce the flag byte after byte.</p>
+<p>zlib commpression works finds sequence of bytes that is being repeated.</p>
+<p>For example if we execute the following code</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="import%20zlib%0d%0alen%28zlib.compress%28b%22crypto%7bcrypto%7b1234567890%7d%22%29%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>import zlib
+len(zlib.compress(b&#34;crypto{crypto{1234567890}&#34;))</code></pre>
+    
+</div>
+<p>and then execute the next code</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="import%20zlib%0d%0alen%28zlib.compress%28b%22crypto%7b1crypto%7b1234567890%7d%22%29%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>import zlib
+len(zlib.compress(b&#34;crypto{1crypto{1234567890}&#34;))</code></pre>
+    
+</div>
+<p>we can see that the size of the output did not change! that because the substring &ldquo;crypto{1&rdquo; still appear in the text (as well as &ldquo;crypto{&rdquo; from the other compression)</p>
+<p>but if we execute the next line</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="import%20zlib%0d%0alen%28zlib.compress%28b%22crypto%7b2crypto%7b1234567890%7d%22%29%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>import zlib
+len(zlib.compress(b&#34;crypto{2crypto{1234567890}&#34;))</code></pre>
+    
+</div>
+<p>the length actually increased because the substring &ldquo;crypto{2&rdquo; does not appear again in the text</p>
+<p>There are few cases where the substring is too long and each character will increase the size of the compressed output by one, in those cases we just remove the first some bytes from the know flag</p>
 
 
 
@@ -552,36 +612,54 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
 
     
         <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util <span style="color:#f92672">import</span> Counter
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> zlib
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SITE_FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/encrypt_flag&#34;</span>
-</span></span><span style="display:flex;"><span>SITE_DECRYPT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/decrypt&#34;</span>
+</span></span><span style="display:flex;"><span>SITE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ctrime/encrypt/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_FLAG)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;crypto{&#34;</span>
+</span></span><span style="display:flex;"><span>USED_FLAG <span style="color:#f92672">=</span> FLAG
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> cipher[<span style="color:#ae81ff">32</span>:]
-</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> cipher[:<span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>curr_plain <span style="color:#f92672">=</span> FLAG<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>lastlen <span style="color:#f92672">=</span> len(requests<span style="color:#f92672">.</span>get(SITE<span style="color:#f92672">.</span>format(curr_plain))<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ENC_FLAG)
-</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(IV)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Length of the compressed data &#34;</span> <span style="color:#f92672">+</span> str(lastlen))
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lastc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>SITE_DECRYPT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>ENC_FLAG<span style="color:#f92672">.</span>hex()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;plaintext&#34;</span>]
-</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ecb_dec_flag)
+</span></span><span style="display:flex;"><span>padding <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> lastc <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;}&#34;</span>:
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
-</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(IV[i] <span style="color:#f92672">^</span> ecb_dec_flag[i])
+</span></span><span style="display:flex;"><span>    curr_plain <span style="color:#f92672">=</span> FLAG<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>printable<span style="color:#f92672">.</span>encode():
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        curr_text <span style="color:#f92672">=</span> padding<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> USED_FLAG<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> c<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)<span style="color:#f92672">.</span>hex()
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> len(requests<span style="color:#f92672">.</span>get(SITE<span style="color:#f92672">.</span>format(curr_text))<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> l <span style="color:#f92672">==</span> lastlen:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;found char &#34;</span> <span style="color:#f92672">+</span> chr(c))
+</span></span><span style="display:flex;"><span>            lastc <span style="color:#f92672">=</span> chr(c)
+</span></span><span style="display:flex;"><span>            FLAG <span style="color:#f92672">+=</span> c<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>            USED_FLAG <span style="color:#f92672">+=</span> c<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>            print(FLAG)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Could not find it, removing first data from flag&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
-</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(ENC_FLAG[i] <span style="color:#f92672">^</span> ecb_dec_flag[len(IV) <span style="color:#f92672">+</span> i])
+</span></span><span style="display:flex;"><span>        USED_FLAG <span style="color:#f92672">=</span> USED_FLAG[<span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        curr_text <span style="color:#f92672">=</span> USED_FLAG<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>        print(SITE<span style="color:#f92672">.</span>format(curr_text))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>        lastlen <span style="color:#f92672">=</span> len(requests<span style="color:#f92672">.</span>get(SITE<span style="color:#f92672">.</span>format(curr_text))<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>])
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Found new length &#34;</span> <span style="color:#f92672">+</span> str(lastlen))</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/symmetric/code/ecbcbcwtf.py">ecbcbcwtf.py</a></p>
+<p><a href="/cryptohack/symmetric/code/ctrime.py">ctrime.py</a></p>
 
             
         </div>
@@ -630,7 +708,7 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
                 <li>
                     
                         Word Count:
-                        185
+                        381
                     
                 </li>
             

@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</loc>
+    <lastmod>2024-04-26T10:59:55+03:00</lastmod>
+  </url><url>
     <loc>https://yoavshah.github.io/cryptohack/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
@@ -29,6 +32,9 @@
     <loc>https://yoavshah.github.io/cryptohack/symmetric/logon_zero/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</loc>
+    <lastmod>2024-04-26T10:59:55+03:00</lastmod>
+  </url><url>
     <loc>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
@@ -39,9 +45,6 @@
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/symmetric/</loc>
-    <lastmod>2024-04-26T10:59:55+03:00</lastmod>
-  </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/symmetric/symmetry/</loc>

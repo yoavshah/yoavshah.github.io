@@ -201,6 +201,16 @@
         
             
                 <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/bean_counter/" title="./cryptohack/symmetric/bean_counter/">
+                        
+                            bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
                     <a href="https://yoavshah.github.io/cryptohack/symmetric/ctrime/" title="./cryptohack/symmetric/ctrime/">
                         
                             ctrime
@@ -271,6 +281,16 @@
         
             
                 <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/oh-snap/" title="./cryptohack/symmetric/oh-snap/">
+                        
+                            oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
                     <a href="https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/" title="./cryptohack/symmetric/passwords_as_keys/">
                         
                             passwords_as_keys
@@ -284,16 +304,6 @@
                     <a href="https://yoavshah.github.io/cryptohack/symmetric/stream_consciousness/" title="./cryptohack/symmetric/stream_consciousness/">
                         
                             stream_consciousness
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/bean_counter/" title="./cryptohack/symmetric/bean_counter/">
-                        
-                            symmetry
                         
                     </a>
                 </li>
@@ -386,7 +396,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        2 mins to read
+                        3 mins to read
                     </div>
                 
             </div>
@@ -481,7 +491,7 @@
             
                 <h1 id="challenge">Challenge</h1>
 <p>I really enjoyed this challenge.
-In this challenge we get a program with the method encrypt which receives a plaintext, concat is with the flag, compress it with zlib and encrypt it with CTR mode (which is not actually a block cipher)
+In this challenge we get a program with the method encrypt which receives a plaintext, concat it with the flag, compress it with zlib and encrypt it with AES CTR mode (which is not actually a block cipher)
 We need to get the flag.</p>
 
 
@@ -522,9 +532,10 @@ We need to get the flag.</p>
 </div>
 <p><img src="/cryptohack/symmetric/images/CTR_encryption.svg" alt="CTR Encryption"></p>
 <h1 id="solution">Solution</h1>
-<p>We can see that because CTR is not actual block cipher it produce ciphertext without the need to pad it, so we can actually get the length of the plaintext.</p>
-<p>In this challenge the program compress the input with the flag, we can use the compression algorithm to bruteforce the flag byte after byte.</p>
-<p>zlib commpression works finds sequence of bytes that is being repeated.</p>
+<p>We can see that because CTR is not an actual block cipher it produces ciphertext without the need to pad it, so we can actually get the length of the plaintext.</p>
+<p>In this challenge the program compresses the input with the flag, we can use the length of the encrypted data to gain information about the flag itself, and then bruteforce it byte after byte.</p>
+<p>How do we do it?
+zlib commpression finds sequence of bytes that are being repeated.</p>
 <p>For example if we execute the following code</p>
 
 
@@ -536,7 +547,7 @@ We need to get the flag.</p>
 <div class="codeblock">
     
         <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="import%20zlib%0d%0alen%28zlib.compress%28b%22crypto%7bcrypto%7b1234567890%7d%22%29%29">
+            <button class="copy-button" state="copy" data="import%20zlib%0d%0alen%28zlib.compress%28b%22crypto%7bcrypto%7b1234567890%7d%22%29%29%0d%0alen%28zlib.compress%28b%22crypto%7b1crypto%7b1234567890%7d%22%29%29">
                 <i class="bi bi-copy"></i>
             </button>
         </div>
@@ -544,33 +555,13 @@ We need to get the flag.</p>
 
     
         <pre><code>import zlib
-len(zlib.compress(b&#34;crypto{crypto{1234567890}&#34;))</code></pre>
-    
-</div>
-<p>and then execute the next code</p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="import%20zlib%0d%0alen%28zlib.compress%28b%22crypto%7b1crypto%7b1234567890%7d%22%29%29">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <pre><code>import zlib
+len(zlib.compress(b&#34;crypto{crypto{1234567890}&#34;))
 len(zlib.compress(b&#34;crypto{1crypto{1234567890}&#34;))</code></pre>
     
 </div>
-<p>we can see that the size of the output did not change! that because the substring &ldquo;crypto{1&rdquo; still appear in the text (as well as &ldquo;crypto{&rdquo; from the other compression)</p>
-<p>but if we execute the next line</p>
+<p>We can see that the length of both of the compressed data is the same, even though the uncompressed data length is not.
+It happens because the substring &ldquo;crypto{1&rdquo; still appears in the text (as well as &ldquo;crypto{&rdquo; from the other compression).</p>
+<p>But if we execute the next line</p>
 
 
 
@@ -592,8 +583,20 @@ len(zlib.compress(b&#34;crypto{1crypto{1234567890}&#34;))</code></pre>
 len(zlib.compress(b&#34;crypto{2crypto{1234567890}&#34;))</code></pre>
     
 </div>
-<p>the length actually increased because the substring &ldquo;crypto{2&rdquo; does not appear again in the text</p>
-<p>There are few cases where the substring is too long and each character will increase the size of the compressed output by one, in those cases we just remove the first some bytes from the know flag</p>
+<p>the length actually increased, because the substring &ldquo;crypto{2&rdquo; does not appear again in the text.</p>
+<p>So let&rsquo;s build an algorithm to find the $i$ byte.</p>
+<p>First we will send the following input (its length is i, and we can set for the first round that the knownflag is &ldquo;crypto{&rdquo;)</p>
+<p><code>[KNOWNFLAG]</code></p>
+<p>Now we get an encrypted compressed data which is</p>
+<p><code>ENC(COMPRESS([KNOWNFLAG] + [FLAG]))</code></p>
+<p>where FLAG is our needed flag from the program.</p>
+<p>We get the length of the encrypted data which is the length of the compressed knownflag and flag.</p>
+<p>Now lets send another input</p>
+<p><code>[KNOWNFLAG][BYTE]</code></p>
+<p>Now we get an encrypted compressed data which is</p>
+<p><code>ENC(COMPRESS([KNOWNFLAG] + [BYTE] + [FLAG]))</code></p>
+<p>If the length of the second input equals the length of the first input, the byte we inserted in the second input is the next byte of the flag!</p>
+<p>There are a few cases where the substring is too long and every character will increase the size of the compressed output by one, in those cases we just remove the first byte from the known flag.</p>
 
 
 
@@ -708,7 +711,7 @@ len(zlib.compress(b&#34;crypto{2crypto{1234567890}&#34;))</code></pre>
                 <li>
                     
                         Word Count:
-                        381
+                        524
                     
                 </li>
             

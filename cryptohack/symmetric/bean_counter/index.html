@@ -37,7 +37,7 @@
 
     <title>
         
-            symmetry |
+            bean_counter |
             SecurityBlog
         
     </title>
@@ -110,7 +110,7 @@
 
     <div class="header_middle">
         
-            symmetry -
+            bean_counter -
             SecurityBlog
         
     </div>
@@ -201,6 +201,16 @@
         
             
                 <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/bean_counter/" title="./cryptohack/symmetric/bean_counter/">
+                        
+                            bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
                     <a href="https://yoavshah.github.io/cryptohack/symmetric/ctrime/" title="./cryptohack/symmetric/ctrime/">
                         
                             ctrime
@@ -271,6 +281,16 @@
         
             
                 <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/oh-snap/" title="./cryptohack/symmetric/oh-snap/">
+                        
+                            oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
                     <a href="https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/" title="./cryptohack/symmetric/passwords_as_keys/">
                         
                             passwords_as_keys
@@ -284,16 +304,6 @@
                     <a href="https://yoavshah.github.io/cryptohack/symmetric/stream_consciousness/" title="./cryptohack/symmetric/stream_consciousness/">
                         
                             stream_consciousness
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/bean_counter/" title="./cryptohack/symmetric/bean_counter/">
-                        
-                            symmetry
                         
                     </a>
                 </li>
@@ -352,7 +362,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                symmetry
+                bean_counter
             </h1>
 
             <div class="author-date-readtime">
@@ -460,7 +470,7 @@
 
     
         
-            symmetry
+            bean_counter
         
 
     
@@ -546,7 +556,7 @@
 <h1 id="solution">Solution</h1>
 <p>We have only one method we can use and it is the encrypt method.
 In this method the program opens the flag and for each block (16 bytes) it get the next ctr (using the ctr.increment()) and then xor the &ldquo;randomized&rdquo; key with the current block.</p>
-<p>In the code is that in the initialize method of the StepUpCounter class</p>
+<p>In the initialize method of the StepUpCounter class:</p>
 
 
 
@@ -571,7 +581,7 @@ In this method the program opens the flag and for each block (16 bytes) it get t
     
 </div>
 <p>self.stup is initialized to False (because in the class usage it doesn&rsquo;t give any parameters to it).</p>
-<p>Then in the increment method the first if statement will not succeed, so the execution flow will go to the else statement</p>
+<p>Then in the increment method the first if statement will not succeed, so the execution flow will go to the else statement:</p>
 
 
 
@@ -598,7 +608,7 @@ In this method the program opens the flag and for each block (16 bytes) it get t
         return bytes.fromhex(self.value.zfill(32))</code></pre>
     
 </div>
-<p>There was a typo in the else statement and instead of self.step it uses self.stup, remember that self.stup is False and then the counter does not increment at all because False = 0</p>
+<p>There was a typo in the else statement and instead of self.step it uses self.stup, remember that self.stup is False and then the counter does not increment at all because False = 0.</p>
 <p>Now we know that each time the IV in the increment function returns the same IV therefore the encryption block of each iteration is also the same.
 We can conclude here that this whole cipher is just a xor cipher with a constant key with size of 16&hellip;</p>
 <p>Now to find the key we need to use some information about the data.</p>
@@ -707,7 +717,7 @@ We can conclude here that this whole cipher is just a xor cipher with a constant
                 <li>
                     
                         Word Count:
-                        489
+                        484
                     
                 </li>
             

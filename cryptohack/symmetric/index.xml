@@ -9,11 +9,18 @@
     <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/cryptohack/symmetric/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>bean_counter</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</guid>
+      <description>Challenge In this challenge we get a program that its developer tried to create his own implementation to CTR mode (using the ECB mode)&#xA;from Crypto.Cipher import AES KEY = ? class StepUpCounter(object): def __init__(self, step_up=False): self.value = os.urandom(16).hex() self.step = 1 self.stup = step_up def increment(self): if self.stup: self.newIV = hex(int(self.value, 16) + self.step) else: self.newIV = hex(int(self.value, 16) - self.stup) self.value = self.newIV[2:len(self.newIV)] return bytes.fromhex(self.value.zfill(32)) def __repr__(self): self.increment() return self.</description>
+    </item>
+    <item>
       <title>ctrime</title>
       <link>https://yoavshah.github.io/cryptohack/symmetric/ctrime/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
       <guid>https://yoavshah.github.io/cryptohack/symmetric/ctrime/</guid>
-      <description>Challenge I really enjoyed this challenge. In this challenge we get a program with the method encrypt which receives a plaintext, concat is with the flag, compress it with zlib and encrypt it with CTR mode (which is not actually a block cipher) We need to get the flag.&#xA;from Crypto.Cipher import AES from Crypto.Util import Counter import zlib KEY = ? FLAG = ? @chal.route(&amp;#39;/ctrime/encrypt/&amp;lt;plaintext&amp;gt;/&amp;#39;) def encrypt(plaintext): plaintext = bytes.</description>
+      <description>Challenge I really enjoyed this challenge. In this challenge we get a program with the method encrypt which receives a plaintext, concat it with the flag, compress it with zlib and encrypt it with AES CTR mode (which is not actually a block cipher) We need to get the flag.&#xA;from Crypto.Cipher import AES from Crypto.Util import Counter import zlib KEY = ? FLAG = ? @chal.route(&amp;#39;/ctrime/encrypt/&amp;lt;plaintext&amp;gt;/&amp;#39;) def encrypt(plaintext): plaintext = bytes.</description>
     </item>
     <item>
       <title>dancing_queen</title>
@@ -58,6 +65,13 @@
       <description>Challenge In this challenge we get a remote server with a code call 13399.py&#xA;The remote server support 3 method&#xA;authenticate - if the password we sent equals to the password of the challenge we ge tthe flag reset_connection - create a new CFB8 cipher with random input reset_password - it decrypt the token and get a size from the last 4 bytes, then creates a random password in that length #!</description>
     </item>
     <item>
+      <title>oh-snap</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</link>
+      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</guid>
+      <description>Challenge This challenge was quite hard. In this challenge we get a little program that receives a ciphertext and a $nonce$, then creates a new ARC4 encryption class that its key is equal to the $nonce$ concat with the $flag$, and then decrypts the ciphertext with it. We need using some magic to get the flag (which is part of the key).&#xA;from Crypto.Cipher import ARC4 FLAG = ? @chal.route(&amp;#39;/oh_snap/send_cmd/&amp;lt;ciphertext&amp;gt;/&amp;lt;nonce&amp;gt;/&amp;#39;) def send_cmd(ciphertext, nonce): if not ciphertext: return {&amp;#34;error&amp;#34;: &amp;#34;You must specify a ciphertext&amp;#34;} if not nonce: return {&amp;#34;error&amp;#34;: &amp;#34;You must specify a nonce&amp;#34;} ciphertext = bytes.</description>
+    </item>
+    <item>
       <title>passwords_as_keys</title>
       <link>https://yoavshah.github.io/cryptohack/symmetric/passwords_as_keys/</link>
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
@@ -70,13 +84,6 @@
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
       <guid>https://yoavshah.github.io/cryptohack/symmetric/stream_consciousness/</guid>
       <description>Challenge In this challenge we get a program that has encrypt routine and when execute it will choose random text contant, encrypt it with CTR (without any prefix, suffix, and initial value 0) with an unknown KEY.&#xA;We need to decrypt the flag somehow&#xA;from Crypto.Cipher import AES from Crypto.Util import Counter import random KEY = ? TEXT = [&amp;#39;???&amp;#39;, &amp;#39;???&amp;#39;, ..., FLAG] @chal.route(&amp;#39;/stream_consciousness/encrypt/&amp;#39;) def encrypt(): random_line = random.choice(TEXT) cipher = AES.</description>
-    </item>
-    <item>
-      <title>symmetry</title>
-      <link>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</link>
-      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</guid>
-      <description>Challenge In this challenge we get a program that its developer tried to create his own implementation to CTR mode (using the ECB mode)&#xA;from Crypto.Cipher import AES KEY = ? class StepUpCounter(object): def __init__(self, step_up=False): self.value = os.urandom(16).hex() self.step = 1 self.stup = step_up def increment(self): if self.stup: self.newIV = hex(int(self.value, 16) + self.step) else: self.newIV = hex(int(self.value, 16) - self.stup) self.value = self.newIV[2:len(self.newIV)] return bytes.fromhex(self.value.zfill(32)) def __repr__(self): self.increment() return self.</description>
     </item>
     <item>
       <title>symmetry</title>

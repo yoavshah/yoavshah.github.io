@@ -6,8 +6,22 @@
     <description>Recent content on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Apr 2024 10:59:55 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 30 Apr 2024 10:59:55 +0300</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>paper_plane</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/paper_plane/</link>
+      <pubDate>Tue, 30 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/paper_plane/</guid>
+      <description>Challenge In this challenge we get a program that has a method which gives us the encrypted flag in AES IGE mode. We also have a decrypt method which decrypts the message and return message recieved or an error - meaning we can&amp;rsquo;t just use the decrypt function!&#xA;from Crypto.Cipher import AES from Crypto.Util.Padding import pad, unpad import os KEY = ? FLAG = ? class AesIge: def __init__(self, key): self.</description>
+    </item>
+    <item>
+      <title>oh-snap</title>
+      <link>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</link>
+      <pubDate>Sun, 28 Apr 2024 10:59:55 +0300</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</guid>
+      <description>Challenge This challenge was quite hard. In this challenge we get a little program that receives a ciphertext and a $nonce$, then creates a new ARC4 encryption class that its key is equal to the $nonce$ concat with the $flag$, and then decrypts the ciphertext with it. We need using some magic to get the flag (which is part of the key).&#xA;from Crypto.Cipher import ARC4 FLAG = ? @chal.route(&amp;#39;/oh_snap/send_cmd/&amp;lt;ciphertext&amp;gt;/&amp;lt;nonce&amp;gt;/&amp;#39;) def send_cmd(ciphertext, nonce): if not ciphertext: return {&amp;#34;error&amp;#34;: &amp;#34;You must specify a ciphertext&amp;#34;} if not nonce: return {&amp;#34;error&amp;#34;: &amp;#34;You must specify a nonce&amp;#34;} ciphertext = bytes.</description>
+    </item>
     <item>
       <title>bean_counter</title>
       <link>https://yoavshah.github.io/cryptohack/symmetric/bean_counter/</link>
@@ -63,13 +77,6 @@
       <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
       <guid>https://yoavshah.github.io/cryptohack/symmetric/logon_zero/</guid>
       <description>Challenge In this challenge we get a remote server with a code call 13399.py&#xA;The remote server support 3 method&#xA;authenticate - if the password we sent equals to the password of the challenge we ge tthe flag reset_connection - create a new CFB8 cipher with random input reset_password - it decrypt the token and get a size from the last 4 bytes, then creates a random password in that length #!</description>
-    </item>
-    <item>
-      <title>oh-snap</title>
-      <link>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</link>
-      <pubDate>Fri, 26 Apr 2024 10:59:55 +0300</pubDate>
-      <guid>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</guid>
-      <description>Challenge This challenge was quite hard. In this challenge we get a little program that receives a ciphertext and a $nonce$, then creates a new ARC4 encryption class that its key is equal to the $nonce$ concat with the $flag$, and then decrypts the ciphertext with it. We need using some magic to get the flag (which is part of the key).&#xA;from Crypto.Cipher import ARC4 FLAG = ? @chal.route(&amp;#39;/oh_snap/send_cmd/&amp;lt;ciphertext&amp;gt;/&amp;lt;nonce&amp;gt;/&amp;#39;) def send_cmd(ciphertext, nonce): if not ciphertext: return {&amp;#34;error&amp;#34;: &amp;#34;You must specify a ciphertext&amp;#34;} if not nonce: return {&amp;#34;error&amp;#34;: &amp;#34;You must specify a nonce&amp;#34;} ciphertext = bytes.</description>
     </item>
     <item>
       <title>passwords_as_keys</title>

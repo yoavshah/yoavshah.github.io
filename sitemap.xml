@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://yoavshah.github.io/cryptohack/</loc>
-    <lastmod>2024-04-30T10:59:55+03:00</lastmod>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/beatboxer/</loc>
+    <lastmod>2024-05-08T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/paper_plane/</loc>
-    <lastmod>2024-04-30T10:59:55+03:00</lastmod>
+    <loc>https://yoavshah.github.io/cryptohack/</loc>
+    <lastmod>2024-05-08T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/</loc>
+    <lastmod>2024-05-08T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/forbidden_fruit/</loc>
+    <lastmod>2024-05-06T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/cryptohack/symmetric/paper_plane/</loc>
     <lastmod>2024-04-30T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/symmetric/oh-snap/</loc>
@@ -23,7 +29,7 @@
     <loc>https://yoavshah.github.io/cryptohack/symmetric/dancing_queen/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-helman/</loc>
+    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/symmetric/ecb_oracle/</loc>

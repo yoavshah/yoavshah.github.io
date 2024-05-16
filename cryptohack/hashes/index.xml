@@ -57,5 +57,12 @@
       <guid>https://yoavshah.github.io/cryptohack/hashes/7-mdflag/</guid>
       <description>Challenge In this challenge we get a program that have only one option and it is to get data, then xor it together with the flag (cycle - so we can enter more bytes that the flag), the use MD5 on it. We need to somehow get the flag.&#xA;from itertools import cycle from hashlib import md5 import os from utils import listener FLAG = b&amp;#39;crypto{??????????????????????????????????????}&amp;#39; def bxor(a, b): return bytes(x ^ y for x, y in zip(a, b)) class Challenge(): def __init__(self): self.</description>
     </item>
+    <item>
+      <title>8-mixed_up</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/</guid>
+      <description>Challenge In this challenge we get a program that has the option mix which receives data and mix it with the flag&#xA;from hashlib import sha256 import os from utils import listener FLAG = b&amp;#34;crypto{???????????????????????????????}&amp;#34; def _xor(a, b): return bytes([_a ^ _b for _a, _b in zip(a, b)]) def _and(a, b): return bytes([_a &amp;amp; _b for _a, _b in zip(a, b)]) def shuffle(mixed_and, mixed_xor): return bytes([mixed_xor[i%len(mixed_xor)] for i in mixed_and]) class Challenge(): def __init__(self): self.</description>
+    </item>
   </channel>
 </rss>

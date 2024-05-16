@@ -3,7 +3,7 @@ import json
 import base64
 import hashlib
 
-r = remote('socket.cryptohack.org', 13402)#, level = 'debug')
+r = remote('socket.cryptohack.org', 13402)
 
 _ = r.recvline()
 def json_recv():
@@ -29,7 +29,7 @@ for i in range(100):
 
         json_send({"option": "mix", "data": zeros_block.hex()})
         mixed = json_recv()["mixed"]
-        
+        +
         for j in range(256):
             data_vector = j.to_bytes(1, "little") * i
 
@@ -92,39 +92,6 @@ for i in range(number_of_bits):
 
     print(flag_chars)
         
-    
-    
-
-##
-##FLAG & data
-##
-##FLAG ^ data ^ random
-##
-##
-##SHUFFLE(FLAG & data, FLAG ^ data ^ random)
-##
-##
-##set first bytes to 0 (crypto{) and bruteforce the
-## last one when it becomes equals
-## 
-## make shuffle produce the first byte in the xor for all the bytes (sending \x00)
-## the
-## 
-## 
-##somehow find the flag size... when setting data to 0 changing locations...
-##
-##
-##data = 0
-##shuffle = xored[0] = flag[0] ^ data[0] ^ random[0] = 256 options
-##=> sha256(shuffle) => 256 options at all of all bytes the same
-##
-##
-### Check specific bit is set in flag
-##data = 01 ... 00
-##if set then not all bytes will be the same because one byte is taken from other place...
-##Need to be executed multiple times to gain statistically 
-##
-
 
 r.close()
 

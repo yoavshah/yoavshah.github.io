@@ -335,6 +335,16 @@
                 </li>
             
         
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/" title="./cryptohack/hashes/8-mixed_up/">
+                        
+                            8-mixed_up
+                        
+                    </a>
+                </li>
+            
+        
     </ul>
 
 
@@ -589,7 +599,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        2 mins to read
+                        9 mins to read
                     </div>
                 
             </div>
@@ -745,7 +755,322 @@ We need to somehow get the flag.</p>
 </div>
 <h1 id="solution">Solution</h1>
 <p>In this challenge we first need to understand how MD5 works and change its functionality.
-I used the following project</p>
+I used the <a href="https://github.com/Utkarsh87/md5-hashing/blob/master/md5.py">following project</a>.</p>
+<p>First we need to get the flag length from the program, that&rsquo;s actualy easy because whenever we give input smaller than the flag we get error.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13407</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>flag_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    json_send(r, {<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;message&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">*</span>flag_size)<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> json_recv(r)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;error&#34;</span> <span style="color:#f92672">in</span> res <span style="color:#f92672">and</span> res[<span style="color:#e6db74">&#34;error&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;Bad input&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    flag_size <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()</span></span></code></pre></div>
+    
+</div>
+<p>We found that the flag size is 46 bytes.</p>
+<p>We know that MD5 is using <a href="https://en.wikipedia.org/wiki/Merkle%E2%80%93Damg%C3%A5rd_construction">Merkle–Damgård construction</a> so that if</p>
+<p>$$
+S_1 = H(M_a)
+$$</p>
+<p>$$
+S_2 = H(M_a + M_b) = H(S_1, M_b)
+$$</p>
+<p>So using the hash $S_1$ we can calculate $S_2$.
+The problem is that MD5 add padding&hellip;</p>
+<p>The padding function of <a href="https://github.com/Utkarsh87/md5-hashing/blob/master/md5.py#L16">MD5 works that way</a>.
+Append 0x80 to the last block, then append zeros until there are 8 bytes left in the block, then add the size of the input (in bits) as the last 8 bytes.</p>
+<p>Because of that we can create an input that the last 9 bytes of the state will be known
+$$
+(0x80, L)
+$$</p>
+<p>Because the flag size is 46 and each block of MD5 is 64, we can print for each block what it will be xored with.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;crypto{&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">38</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> FLAG<span style="color:#f92672">.</span>encode()
+</span></span><span style="display:flex;"><span>FLAG_LENGTH <span style="color:#f92672">=</span> len(FLAG)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_block</span>(data, block_size, block_index):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cyc <span style="color:#f92672">=</span> cycle(data)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(block_index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(block_size):
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">+=</span> cyc<span style="color:#f92672">.</span>__next__()<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">7</span>))</span></span></code></pre></div>
+    
+</div>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="b%27crypto%7b______________________________________%7dcrypto%7b___________%27%0d%0ab%27___________________________%7dcrypto%7b_____________________________%27%0d%0ab%27_________%7dcrypto%7b______________________________________%7dcrypto%7b_%27%0d%0ab%27_____________________________________%7dcrypto%7b___________________%27%0d%0ab%27___________________%7dcrypto%7b_____________________________________%27%0d%0ab%27_%7dcrypto%7b______________________________________%7dcrypto%7b_________%27%0d%0ab%27_____________________________%7dcrypto%7b___________________________%27%0d%0ab%27___________%7dcrypto%7b______________________________________%7dcrypto%27">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>b&#39;crypto{______________________________________}crypto{___________&#39;
+b&#39;___________________________}crypto{_____________________________&#39;
+b&#39;_________}crypto{______________________________________}crypto{_&#39;
+b&#39;_____________________________________}crypto{___________________&#39;
+b&#39;___________________}crypto{_____________________________________&#39;
+b&#39;_}crypto{______________________________________}crypto{_________&#39;
+b&#39;_____________________________}crypto{___________________________&#39;
+b&#39;___________}crypto{______________________________________}crypto&#39;</code></pre>
+    
+</div>
+<p>Let&rsquo;s have a look at the second block</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="b%27_________%7dcrypto%7b______________________________________%7dcrypto%7b_%27">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>b&#39;_________}crypto{______________________________________}crypto{_&#39;</code></pre>
+    
+</div>
+<p>We can see that from the last 9 bytes of the block we know 8 for sure exists in the flag (&quot;}crypto{_&quot;), so we can actually bruteforce the last character!</p>
+<p>First let&rsquo;s create 2 blocks of zeros and another 55 bytes of zeros, so the padding in the MD5 hashing algorithm will pad it with specific data we know.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%0d%0a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%0d%0a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</code></pre>
+    
+</div>
+<p>This message will be padded to the following message</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%0d%0a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%0d%0a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080b805000000000000">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080b805000000000000</code></pre>
+    
+</div>
+<p>The program will xor the whole data (without the padded suffix), so we will get (where XX is an unknown value, we know some values of the flag because it starts with &ldquo;crypto{&rdquo; and ends with &ldquo;}&rdquo;)</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="63727970746f7bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX7d63727970746f7bXXXXXXXXXXXXXXXXXXXXXX%0d%0aXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX7d63727970746f7bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX%0d%0aXXXXXXXXXXXXXXXXXX7d63727970746f7bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX80b805000000000000">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>63727970746f7bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX7d63727970746f7bXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX7d63727970746f7bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXX7d63727970746f7bXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX80b805000000000000</code></pre>
+    
+</div>
+<p>So we then hash this data and gets its state, let&rsquo;s call it $S_{base}$</p>
+<p>Now we create 3 blocks of another message that when its xored with the flag it will produce the same message above, which means the first and the second block will be $0$, then most of the last block will be also $0$, but the last 9 bytes will be different, the last one will be the byte we bruteforce, the other 8 bytes will be values that when xored with &ldquo;}crypto{&rdquo; they will result in the known suffix &ldquo;80b8050000000000&rdquo;.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>data &#43; xor(known_suffix[:8], b&#34;}crypto{&#34;)</code></pre>
+    
+</div>
+<p>Now we can send it, but the MD5 algorithm will pad it again! so it will add another block to the message.</p>
+<p>We can use the hash of the first message to calculate the hash of the first message + padding.
+We will use the function <code>md5_with_state</code> which recieves the current state and block number and another data to hash.</p>
+<p>Then we get</p>
+<p>$$
+S_1 = H(M_1)
+$$
+$$
+S_2 = H(M_1 + PAD) = H(S_1, PAD)
+$$</p>
+<p>Because of that we can bruteforce the last byte of the cyclic flag which is the first byte of the flag!
+We just calculate locally the hash of the next message plus its padding using the hash of <code>(CYCLIC_FLAG + PAD)</code> ($S_1$)</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="%28CYCLIC_FLAG%20&#43;%20PAD%29%20&#43;%20PAD">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>(CYCLIC_FLAG &#43; PAD) &#43; PAD</code></pre>
+    
+</div>
+<p>We send to the program (where B is a random char)</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="%28zeros%20&#43;%20%28%22%7dcrypto%7b%22%20xor%20PAD%29%20&#43;%20B%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>(zeros &#43; (&#34;}crypto{&#34; xor PAD) &#43; B)</code></pre>
+    
+</div>
+<p>So the program will add another pad to it and it will result to</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="%28CYCLIC_FLAG%20&#43;%20PAD%20&#43;%20%28B%20%5e%20last_flag_byte%29%29%20&#43;%20PAD">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>(CYCLIC_FLAG &#43; PAD &#43; (B ^ last_flag_byte)) &#43; PAD</code></pre>
+    
+</div>
+<p>Then we compare the MD5 hashes, if we get that the hashes are equals, we know that
+$$
+B \oplus flag[-1] = PAD[-1]
+$$
+So
+$$
+flag[-1] = PAD[-1] \oplus B
+$$</p>
+<p>We can use the following method to find the all the flag&rsquo;s bytes.</p>
 
 
 
@@ -767,50 +1092,265 @@ I used the following project</p>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> isPrime, bytes_to_long, long_to_bytes
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> cycle
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> math
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bxor</span>(a, b):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(x <span style="color:#f92672">^</span> y <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b))
+</span></span><span style="display:flex;"><span>rotate_by <span style="color:#f92672">=</span> [<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">22</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">5</span>,  <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>,  <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>,  <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">5</span>,  <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">23</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">21</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>constants <span style="color:#f92672">=</span> [int(abs(math<span style="color:#f92672">.</span>sin(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">4294967296</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">64</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>init_MDBuffer <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0x67452301</span>, <span style="color:#ae81ff">0xefcdab89</span>, <span style="color:#ae81ff">0x98badcfe</span>, <span style="color:#ae81ff">0x10325476</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leftRotate</span>(x, amount):
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">&amp;=</span> <span style="color:#ae81ff">0xFFFFFFFF</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (x <span style="color:#f92672">&lt;&lt;</span> amount <span style="color:#f92672">|</span> x <span style="color:#f92672">&gt;&gt;</span> (<span style="color:#ae81ff">32</span><span style="color:#f92672">-</span>amount)) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_pad_suffix</span>(msg):
+</span></span><span style="display:flex;"><span>    d <span style="color:#f92672">=</span> len(msg) <span style="color:#f92672">%</span> <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span>    msg_len_in_bits <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span><span style="color:#f92672">*</span>len(msg)) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffffffffffff</span>
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x80</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(msg)<span style="color:#f92672">%</span><span style="color:#ae81ff">64</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">56</span>:
+</span></span><span style="display:flex;"><span>        msg <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">+=</span> msg_len_in_bits<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">8</span>, byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> msg[<span style="color:#f92672">-</span><span style="color:#ae81ff">64</span> <span style="color:#f92672">+</span> d:]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pad</span>(msg):
+</span></span><span style="display:flex;"><span>    msg_len_in_bits <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span><span style="color:#f92672">*</span>len(msg)) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffffffffffff</span>
+</span></span><span style="display:flex;"><span>    msg<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0x80</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(msg)<span style="color:#f92672">%</span><span style="color:#ae81ff">64</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">56</span>:
+</span></span><span style="display:flex;"><span>        msg<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">+=</span> msg_len_in_bits<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">8</span>, byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> msg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pad_with_len</span>(msg, msg_len):
+</span></span><span style="display:flex;"><span>    msg_len_in_bits <span style="color:#f92672">=</span> (<span style="color:#ae81ff">8</span><span style="color:#f92672">*</span>msg_len) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffffffffffff</span>
+</span></span><span style="display:flex;"><span>    msg<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0x80</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(msg)<span style="color:#f92672">%</span><span style="color:#ae81ff">64</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">56</span>:
+</span></span><span style="display:flex;"><span>        msg<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">+=</span> msg_len_in_bits<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">8</span>, byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> msg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">vector_to_hash</span>(init_vector):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sum(buffer_content<span style="color:#f92672">&lt;&lt;</span>(<span style="color:#ae81ff">32</span><span style="color:#f92672">*</span>i) <span style="color:#66d9ef">for</span> i, buffer_content <span style="color:#f92672">in</span> enumerate(init_vector))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">number_to_vector</span>(number):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> list(struct<span style="color:#f92672">.</span>unpack(<span style="color:#e6db74">&#34;&lt;IIII&#34;</span>, number<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#34;little&#34;</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">MD_to_hex</span>(digest):
+</span></span><span style="display:flex;"><span>    raw <span style="color:#f92672">=</span> digest<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">16</span>, byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:032x}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(int<span style="color:#f92672">.</span>from_bytes(raw, byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;big&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hex_to_MD</span>(h):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> int<span style="color:#f92672">.</span>from_bytes(bytes<span style="color:#f92672">.</span>fromhex(h), <span style="color:#e6db74">&#34;little&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13388</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_message_with_state</span>(state, msg):
+</span></span><span style="display:flex;"><span>    init_temp <span style="color:#f92672">=</span> state <span style="color:#75715e">#init_MDBuffer[:]</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_recv</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> offset <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(msg), <span style="color:#ae81ff">64</span>):
+</span></span><span style="display:flex;"><span>        A, B, C, D <span style="color:#f92672">=</span> init_temp 
+</span></span><span style="display:flex;"><span>        block <span style="color:#f92672">=</span> msg[offset : offset<span style="color:#f92672">+</span><span style="color:#ae81ff">64</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">64</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">16</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Round 1</span>
+</span></span><span style="display:flex;"><span>                func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> b, c, d: (b <span style="color:#f92672">&amp;</span> c) <span style="color:#f92672">|</span> (<span style="color:#f92672">~</span>b <span style="color:#f92672">&amp;</span> d)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                index_func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> i: i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">16</span> <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">32</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Round 2</span>
+</span></span><span style="display:flex;"><span>                func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> b, c, d: (d <span style="color:#f92672">&amp;</span> b) <span style="color:#f92672">|</span> (<span style="color:#f92672">~</span>d <span style="color:#f92672">&amp;</span> c)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                index_func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> i: (<span style="color:#ae81ff">5</span><span style="color:#f92672">*</span>i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">%</span><span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">32</span> <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">48</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Round 3</span>
+</span></span><span style="display:flex;"><span>                func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> b, c, d: b <span style="color:#f92672">^</span> c <span style="color:#f92672">^</span> d
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                index_func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> i: (<span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>i <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>)<span style="color:#f92672">%</span><span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">48</span> <span style="color:#f92672">and</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">64</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Round 4</span>
+</span></span><span style="display:flex;"><span>                func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> b, c, d: c <span style="color:#f92672">^</span> (b <span style="color:#f92672">|</span> <span style="color:#f92672">~</span>d)
+</span></span><span style="display:flex;"><span>                index_func <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> i: (<span style="color:#ae81ff">7</span><span style="color:#f92672">*</span>i)<span style="color:#f92672">%</span><span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            F <span style="color:#f92672">=</span> func(B, C, D) 
+</span></span><span style="display:flex;"><span>            G <span style="color:#f92672">=</span> index_func(i)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            to_rotate <span style="color:#f92672">=</span> A <span style="color:#f92672">+</span> F <span style="color:#f92672">+</span> constants[i] <span style="color:#f92672">+</span> int<span style="color:#f92672">.</span>from_bytes(block[<span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>G : <span style="color:#ae81ff">4</span><span style="color:#f92672">*</span>G <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>], byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>)
+</span></span><span style="display:flex;"><span>            newB <span style="color:#f92672">=</span> (B <span style="color:#f92672">+</span> leftRotate(to_rotate, rotate_by[i])) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            A, B, C, D <span style="color:#f92672">=</span> D, newB, B, C
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i, val <span style="color:#f92672">in</span> enumerate([A, B, C, D]):
+</span></span><span style="display:flex;"><span>            init_temp[i] <span style="color:#f92672">+=</span> val
+</span></span><span style="display:flex;"><span>            init_temp[i] <span style="color:#f92672">&amp;=</span> <span style="color:#ae81ff">0xFFFFFFFF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> vector_to_hash(init_temp)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_message</span>(msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> process_message_with_state(init_MDBuffer[:], msg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">md5</span>(msg):
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">=</span> bytearray(msg) <span style="color:#75715e"># create a copy of the original message in form of a sequence of integers [0, 256)</span>
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">=</span> pad(msg)
+</span></span><span style="display:flex;"><span>    processed_msg <span style="color:#f92672">=</span> process_message(msg)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># processed_msg contains the integer value of the hash</span>
+</span></span><span style="display:flex;"><span>    message_hash <span style="color:#f92672">=</span> MD_to_hex(processed_msg)
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> msg, message_hash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># added function to md5 from a given state</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">md5_with_state</span>(state, msg, calculated_len):
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">=</span> bytearray(msg) <span style="color:#75715e"># create a copy of the original message in form of a sequence of integers [0, 256)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    msg_len <span style="color:#f92672">=</span> calculated_len <span style="color:#f92672">+</span> len(msg)
+</span></span><span style="display:flex;"><span>    msg <span style="color:#f92672">=</span> pad_with_len(msg, msg_len)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    num_state <span style="color:#f92672">=</span> hex_to_MD(state)
+</span></span><span style="display:flex;"><span>    vector_state <span style="color:#f92672">=</span> number_to_vector(num_state)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    processed_msg <span style="color:#f92672">=</span> process_message_with_state(vector_state, msg)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># processed_msg contains the integer value of the hash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    message_hash <span style="color:#f92672">=</span> MD_to_hex(processed_msg)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> message_hash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Start of the challenge</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;crypto{&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">38</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> FLAG<span style="color:#f92672">.</span>encode()
+</span></span><span style="display:flex;"><span>FLAG_LENGTH <span style="color:#f92672">=</span> len(FLAG)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_recv</span>(r):
 </span></span><span style="display:flex;"><span>    line <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(line<span style="color:#f92672">.</span>decode())
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_send</span>(hsh):
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_send</span>(r, hsh):
 </span></span><span style="display:flex;"><span>    request <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(hsh)<span style="color:#f92672">.</span>encode()
 </span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>sendline(request)
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_block</span>(data, block_size, block_index):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cyc <span style="color:#f92672">=</span> cycle(data)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(block_index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(block_size):
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">+=</span> cyc<span style="color:#f92672">.</span>__next__()<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Used at the start of the program to gain the flag length</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##r = remote(&#39;socket.cryptohack.org&#39;, 13407, level = &#39;debug&#39;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##_ = r.recvline()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##flag_size = 0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##while True:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    json_send(r, {&#34;option&#34;: &#34;message&#34;, &#34;data&#34;: (b&#34;\x00&#34;*flag_size).hex()})</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    res = json_recv(r)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    if &#34;error&#34; in res and res[&#34;error&#34;] == &#34;Bad input&#34;:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        pass</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    else:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##        break</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##    flag_size += 1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##r.close()</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(generate_block(FLAG, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use the second block to find the last character of it (the first character in the flag)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># crypto{....} ....</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># .....</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># .............}crypto{A</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># also ----------- 0x80 L</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># First find the last byte in the second block</span>
+</span></span><span style="display:flex;"><span>block_number <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">64</span> <span style="color:#f92672">*</span> block_number
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">64</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>known_suffix <span style="color:#f92672">=</span> get_pad_suffix(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13407</span>)<span style="color:#75715e">#, level = &#39;debug&#39;)</span>
 </span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>first_message <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">15</span>
-</span></span><span style="display:flex;"><span>first_message_padded <span style="color:#f92672">=</span> first_message <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;sign&#34;</span>, <span style="color:#e6db74">&#34;message&#34;</span>: first_message<span style="color:#f92672">.</span>hex()})
-</span></span><span style="display:flex;"><span>sig_first <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(json_recv()[<span style="color:#e6db74">&#34;signature&#34;</span>])
+</span></span><span style="display:flex;"><span>json_send(r, {<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;message&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: data<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>res_state <span style="color:#f92672">=</span> json_recv(r)[<span style="color:#e6db74">&#34;hash&#34;</span>]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>blk <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span>
-</span></span><span style="display:flex;"><span>blk <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">15</span> <span style="color:#f92672">-</span> len(blk))
-</span></span><span style="display:flex;"><span>blk_padded <span style="color:#f92672">=</span> blk <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>pad_data <span style="color:#f92672">=</span> data <span style="color:#f92672">+</span> xor(known_suffix[:<span style="color:#ae81ff">8</span>], <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;}crypto{&#34;</span>) <span style="color:#75715e"># It should produce known suffix</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>second_message <span style="color:#f92672">=</span> first_message_padded <span style="color:#f92672">+</span> blk
+</span></span><span style="display:flex;"><span>curr_valid_hash <span style="color:#f92672">=</span> md5_with_state(res_state, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>, (block_number <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">64</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>new_signature <span style="color:#f92672">=</span> bxor(AES<span style="color:#f92672">.</span>new(blk_padded, AES<span style="color:#f92672">.</span>MODE_ECB)<span style="color:#f92672">.</span>encrypt(sig_first), sig_first)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+</span></span><span style="display:flex;"><span>    curr_bruteforce_data <span style="color:#f92672">=</span> pad_data <span style="color:#f92672">+</span> c<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    json_send(r, {<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;message&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: curr_bruteforce_data<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>    curr_hash <span style="color:#f92672">=</span> json_recv(r)[<span style="color:#e6db74">&#34;hash&#34;</span>]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;get_flag&#34;</span>,
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;message&#34;</span>: second_message<span style="color:#f92672">.</span>hex(),
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;signature&#34;</span>: new_signature<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> curr_hash <span style="color:#f92672">==</span> curr_valid_hash:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> json_recv()
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>found_char <span style="color:#f92672">=</span> (known_suffix[<span style="color:#ae81ff">8</span>] <span style="color:#f92672">^</span> c)<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Find the other bytes in iterable way</span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13407</span>)
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;}crypto{&#34;</span> <span style="color:#f92672">+</span> found_char
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(s)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">38</span>):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">64</span> <span style="color:#f92672">*</span> block_number
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">64</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">9</span> <span style="color:#f92672">-</span> i)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    known_suffix <span style="color:#f92672">=</span> get_pad_suffix(data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    json_send(r, {<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;message&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: data<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>    res_state <span style="color:#f92672">=</span> json_recv(r)[<span style="color:#e6db74">&#34;hash&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pad_data <span style="color:#f92672">=</span> data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    curr_valid_hash <span style="color:#f92672">=</span> md5_with_state(res_state, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>, (block_number <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">64</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+</span></span><span style="display:flex;"><span>        curr_bruteforce_data <span style="color:#f92672">=</span> pad_data <span style="color:#f92672">+</span> c<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>) <span style="color:#f92672">+</span> xor(known_suffix[<span style="color:#ae81ff">1</span>:], s)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        json_send(r, {<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;message&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: curr_bruteforce_data<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>        curr_hash <span style="color:#f92672">=</span> json_recv(r)[<span style="color:#e6db74">&#34;hash&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> curr_hash <span style="color:#f92672">==</span> curr_valid_hash:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;BAD&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    found_char <span style="color:#f92672">=</span> (known_suffix[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">^</span> c)<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> found_char <span style="color:#f92672">+</span> s
+</span></span><span style="display:flex;"><span>    print(s)
+</span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()</span></span></code></pre></div>
     
 </div>
@@ -863,7 +1403,7 @@ I used the following project</p>
                 <li>
                     
                         Word Count:
-                        280
+                        1759
                     
                 </li>
             

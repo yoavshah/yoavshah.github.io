@@ -36,7 +36,7 @@
 
     <title>
         
-            6-md0 |
+            8-mixed_up |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            6-md0 -
+            8-mixed_up -
             SecurityBlog
         
     </div>
@@ -565,7 +565,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                6-md0
+                8-mixed_up
             </h1>
 
             <div class="author-date-readtime">
@@ -599,7 +599,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        3 mins to read
+                        4 mins to read
                     </div>
                 
             </div>
@@ -668,12 +668,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/" class="bread-btn">
     
 
     
         
-            6-md0
+            8-mixed_up
         
 
     
@@ -693,8 +693,7 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-<p>In this challenge we get a hash function that iterates for each block and uses AES-ECB with the current block as its key, then encrypts that last state and xors the encrypted state.
-To gain the flag we need to sign a message (which just return the hash of the key + the data) and then use the option <code>get_flag</code> with the parameter <code>admin=True</code> and a valid signature.</p>
+<p>In this challenge we get a program that has the option <code>mix</code> which receives data and mix it with the flag</p>
 
 
 
@@ -712,57 +711,47 @@ To gain the flag we need to sign a message (which just return the hash of the ke
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> utils <span style="color:#f92672">import</span> listener
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;crypto{???????????????}&#34;</span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;crypto{???????????????????????????????}&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bxor</span>(a, b):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(x <span style="color:#f92672">^</span> y <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_xor</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes([_a <span style="color:#f92672">^</span> _b <span style="color:#66d9ef">for</span> _a, _b <span style="color:#f92672">in</span> zip(a, b)])
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_and</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes([_a <span style="color:#f92672">&amp;</span> _b <span style="color:#66d9ef">for</span> _a, _b <span style="color:#f92672">in</span> zip(a, b)])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash</span>(data):
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> pad(data, <span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>    out <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(data), <span style="color:#ae81ff">16</span>):
-</span></span><span style="display:flex;"><span>        blk <span style="color:#f92672">=</span> data[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">16</span>]
-</span></span><span style="display:flex;"><span>        out <span style="color:#f92672">=</span> bxor(AES<span style="color:#f92672">.</span>new(blk, AES<span style="color:#f92672">.</span>MODE_ECB)<span style="color:#f92672">.</span>encrypt(out), out)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> out
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shuffle</span>(mixed_and, mixed_xor):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes([mixed_xor[i<span style="color:#f92672">%</span>len(mixed_xor)] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> mixed_and])
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Challenge</span>():
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self):
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>before_input <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;You&#39;ll never forge my signatures!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>before_input <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Oh no, how are you going to unmix this?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">challenge</span>(self, msg):
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;option&#34;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> msg:
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;You must send an option to this server.&#34;</span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> msg[<span style="color:#e6db74">&#34;option&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;sign&#34;</span>:
-</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;message&#34;</span>])
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span> <span style="color:#f92672">in</span> data:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Unauthorized to sign message&#34;</span>}
-</span></span><span style="display:flex;"><span>            sig <span style="color:#f92672">=</span> hash(self<span style="color:#f92672">.</span>key <span style="color:#f92672">+</span> data)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> msg[<span style="color:#e6db74">&#34;option&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;mix&#34;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#e6db74">&#34;data&#34;</span> <span style="color:#f92672">in</span> msg:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Please send hex-encoded data&#34;</span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;signature&#34;</span>: sig<span style="color:#f92672">.</span>hex()}
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;data&#34;</span>])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> len(data) <span style="color:#f92672">&lt;</span> len(FLAG):
+</span></span><span style="display:flex;"><span>                data <span style="color:#f92672">+=</span> os<span style="color:#f92672">.</span>urandom(len(FLAG) <span style="color:#f92672">-</span> len(data))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> msg[<span style="color:#e6db74">&#34;option&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;get_flag&#34;</span>:
-</span></span><span style="display:flex;"><span>            sent_sig <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;signature&#34;</span>])
-</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;message&#34;</span>])
-</span></span><span style="display:flex;"><span>            real_sig <span style="color:#f92672">=</span> hash(self<span style="color:#f92672">.</span>key <span style="color:#f92672">+</span> data)
+</span></span><span style="display:flex;"><span>            mixed_and <span style="color:#f92672">=</span> _and(FLAG, data)
+</span></span><span style="display:flex;"><span>            mixed_xor <span style="color:#f92672">=</span> _xor(_xor(FLAG, data), os<span style="color:#f92672">.</span>urandom(len(FLAG)))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> real_sig <span style="color:#f92672">!=</span> sent_sig:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Invalid signature&#34;</span>}
+</span></span><span style="display:flex;"><span>            very_mixed <span style="color:#f92672">=</span> shuffle(mixed_and, mixed_xor)
+</span></span><span style="display:flex;"><span>            super_mixed <span style="color:#f92672">=</span> sha256(very_mixed)<span style="color:#f92672">.</span>hexdigest()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span> <span style="color:#f92672">in</span> data:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;flag&#34;</span>: FLAG}
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Unauthorized to get flag&#34;</span>}
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;mixed&#34;</span>: super_mixed}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Invalid option&#34;</span>}
@@ -772,32 +761,89 @@ To gain the flag we need to sign a message (which just return the hash of the ke
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">When you connect, the &#39;challenge&#39; function will be called on your JSON
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">input.
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>listener<span style="color:#f92672">.</span>start_server(port<span style="color:#f92672">=</span><span style="color:#ae81ff">13388</span>)</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>listener<span style="color:#f92672">.</span>start_server(port<span style="color:#f92672">=</span><span style="color:#ae81ff">13402</span>)</span></span></code></pre></div>
     
 </div>
 <h1 id="solution">Solution</h1>
-<p>To solve this challenge we will need to find a way to recreate the signature with the chosen key.
-First we will send a message block of only zeros, the program will pad it with &ldquo;\x01&rdquo;.
-<code>b&quot;\x00&quot;*15 + b&quot;\x01&quot;</code></p>
-<p>Let&rsquo;s call its signature $S_a$</p>
-<p>Because the $key$ is only 16 bytes (full block) and we can get $S_a$ using the first send operation, we can use this state and the new block to calculate the next state!</p>
-<p>So basiclly we get $H(M_a)$
-$$
-H(M_a) = E_{b0}(E_{key}(0) \oplus 0) \oplus (E_{key}(0) \oplus 0)
-$$</p>
-<p>And then we can calculate $H(M_b)$ for each $M_b$ such that the new message is the old message plus a selected block.
-$$
-M_b = M_a + B
-$$</p>
-<p>Then
-$$
-H(M_b) = E_{b1}(E_{b0}(E_{key}(0) \oplus 0) \oplus (E_{key}(0) \oplus 0)) \oplus (E_{b0}(E_{key}(0) \oplus 0) \oplus (E_{key}(0) \oplus 0))
-$$</p>
-<p>We can use $H(M_a)$ and reduce it to
-$$
-H(M_b) = E_{b1}(H(M_a)) \oplus H(M_a)
-$$</p>
-<p>Because we have $b1$ and we have $H(M_a)$ we can easly calculate $H(M_b)$</p>
+<p>To solve this challenge we first need to find what we have control over in this &ldquo;mixing&rdquo; algorithm.
+We can see that we have control over the <code>mixed_and</code>, if we <code>send data = 0</code> then <code>mixed_and = 0</code>.
+Then in the <code>shuffle</code> function all the values will be equals to the <code>mixed_xor[0]</code> which we do not have control over (being xored with random bytes).</p>
+<p>First we will find a way to get the flag length from the program.
+We will iterate until 100 (a big number I choose that the flag size will be lower than it), and in each iteration we will create $i$ zero bytes.</p>
+<p>If the current $i$ is lower than the flag size, the program will add random bytes to the zero bytes, resulting in a non zero data.
+Otherwise, the whole data will be zero, so the whole <code>mixed_and = 0</code> so <code>shuffle = mixed_xor[0]</code>, so we will receive</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="SHA256%28mixed_xor[0]%20*%20i%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>SHA256(mixed_xor[0] * i)</code></pre>
+    
+</div>
+<p>We have 256 possible values for <code>mixed_xor[0]</code> so we will bruteforce it to check wether the hashes are equals or not!</p>
+<p>Because there is a random element in the remote program, it might produce <code>mixed_xor</code> that some bytes in it are equals to other, so we might get false positive, we will filter that using statistics (running it 5 times :) )</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>found <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>    zeros_block <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">*</span>i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate 3 times because of random</span>
+</span></span><span style="display:flex;"><span>    success_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    number_of_trials <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(number_of_trials):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;mix&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: zeros_block<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>        mixed <span style="color:#f92672">=</span> json_recv()[<span style="color:#e6db74">&#34;mixed&#34;</span>]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+</span></span><span style="display:flex;"><span>            data_vector <span style="color:#f92672">=</span> j<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>) <span style="color:#f92672">*</span> i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> hashlib<span style="color:#f92672">.</span>sha256(data_vector)<span style="color:#f92672">.</span>hexdigest() <span style="color:#f92672">==</span> mixed:
+</span></span><span style="display:flex;"><span>                success_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> success_count <span style="color:#f92672">&gt;=</span> ((number_of_trials <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>        found <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> found:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>flag_length <span style="color:#f92672">=</span> i</span></span></code></pre></div>
+    
+</div>
+<p>So now we got the flag size which is 39.
+Using the same method we can bruteforce each bit in the flag.</p>
+<p>We will create data of 39 bytes and we will set there one of the bits, because the <code>mixed_and</code> is an and operation, if this specific flag bit is 1 then the <code>mixed_and</code> will not be zero, making the <code>very_mixed</code> to not equals to <code>xor_mixed[0] * size</code>.</p>
+<p>What if the flag bit is 0? then the <code>mixed_and</code> will be zero, making the <code>very_mixed</code> to be equals to <code>xor_mixed[0] * size</code>.</p>
+<p>Because we don&rsquo;t know the value of <code>xor_mixed[0]</code> but we have only 256 possible values for it, we can bruteforce it!</p>
 
 
 
@@ -819,17 +865,10 @@ $$</p>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> isPrime, bytes_to_long, long_to_bytes
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13402</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bxor</span>(a, b):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(x <span style="color:#f92672">^</span> y <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13388</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_recv</span>():
 </span></span><span style="display:flex;"><span>    line <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(line<span style="color:#f92672">.</span>decode())
@@ -840,33 +879,87 @@ $$</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># First get the flag length</span>
+</span></span><span style="display:flex;"><span>found <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>first_message <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">15</span>
-</span></span><span style="display:flex;"><span>first_message_padded <span style="color:#f92672">=</span> first_message <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;sign&#34;</span>, <span style="color:#e6db74">&#34;message&#34;</span>: first_message<span style="color:#f92672">.</span>hex()})
-</span></span><span style="display:flex;"><span>sig_first <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(json_recv()[<span style="color:#e6db74">&#34;signature&#34;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+</span></span><span style="display:flex;"><span>    zeros_block <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">*</span>i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate 3 times because of random</span>
+</span></span><span style="display:flex;"><span>    success_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    number_of_trials <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(number_of_trials):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;mix&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: zeros_block<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>        mixed <span style="color:#f92672">=</span> json_recv()[<span style="color:#e6db74">&#34;mixed&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+</span></span><span style="display:flex;"><span>            data_vector <span style="color:#f92672">=</span> j<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>) <span style="color:#f92672">*</span> i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> hashlib<span style="color:#f92672">.</span>sha256(data_vector)<span style="color:#f92672">.</span>hexdigest() <span style="color:#f92672">==</span> mixed:
+</span></span><span style="display:flex;"><span>                success_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> success_count <span style="color:#f92672">&gt;=</span> ((number_of_trials <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>        found <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> found:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>flag_length <span style="color:#f92672">=</span> i
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>blk <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span>
-</span></span><span style="display:flex;"><span>blk <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">15</span> <span style="color:#f92672">-</span> len(blk))
-</span></span><span style="display:flex;"><span>blk_padded <span style="color:#f92672">=</span> blk <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>second_message <span style="color:#f92672">=</span> first_message_padded <span style="color:#f92672">+</span> blk
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>new_signature <span style="color:#f92672">=</span> bxor(AES<span style="color:#f92672">.</span>new(blk_padded, AES<span style="color:#f92672">.</span>MODE_ECB)<span style="color:#f92672">.</span>encrypt(sig_first), sig_first)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;get_flag&#34;</span>,
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;message&#34;</span>: second_message<span style="color:#f92672">.</span>hex(),
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;signature&#34;</span>: new_signature<span style="color:#f92672">.</span>hex()})
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> json_recv()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Flag length = &#34;</span> <span style="color:#f92672">+</span> str(flag_length))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Generating SHA256 vectors&#34;</span>)
+</span></span><span style="display:flex;"><span>sha256_vectors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+</span></span><span style="display:flex;"><span>    h <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha256(i<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>) <span style="color:#f92672">*</span> flag_length)<span style="color:#f92672">.</span>hexdigest()
+</span></span><span style="display:flex;"><span>    sha256_vectors<span style="color:#f92672">.</span>append(h)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>number_of_bits <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>found_flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(number_of_bits):
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#f92672">*</span> i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#f92672">*</span> (number_of_bits <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    mask_bytes <span style="color:#f92672">=</span> hex(int(b, base<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>))[<span style="color:#ae81ff">2</span>:]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mask_bytes <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(mask_bytes<span style="color:#f92672">.</span>zfill(<span style="color:#ae81ff">39</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    success_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    number_of_trials <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(number_of_trials):
+</span></span><span style="display:flex;"><span>        json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;mix&#34;</span>, <span style="color:#e6db74">&#34;data&#34;</span>: mask_bytes<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>        mixed <span style="color:#f92672">=</span> json_recv()[<span style="color:#e6db74">&#34;mixed&#34;</span>]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> mixed <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> sha256_vectors:
+</span></span><span style="display:flex;"><span>            success_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># The current bit in the flag is zero</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> success_count <span style="color:#f92672">&gt;=</span> ((number_of_trials <span style="color:#f92672">*</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>):
+</span></span><span style="display:flex;"><span>        found_flag <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># The current bit in the flag is non zero</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        found_flag <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(str(i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - &#34;</span> <span style="color:#f92672">+</span> found_flag)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    flag_chars <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(found_flag), <span style="color:#ae81ff">8</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(found_flag[k:k<span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>:
+</span></span><span style="display:flex;"><span>            flag_chars <span style="color:#f92672">+=</span> chr(int(found_flag[k:k<span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>], <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(flag_chars)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/hashes/code/md0.py">md0.py</a></p>
+<p><a href="/cryptohack/hashes/code/mixed_up.py">mixed_up.py</a></p>
 
             
         </div>
@@ -915,7 +1008,7 @@ $$</p>
                 <li>
                     
                         Word Count:
-                        523
+                        819
                     
                 </li>
             

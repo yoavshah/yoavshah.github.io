@@ -145,7 +145,6 @@ def md5_with_state(state, msg, calculated_len):
 
 FLAG = "crypto{" + '_'*38 + "}"
 FLAG = FLAG.encode()
-
 FLAG_LENGTH = len(FLAG)
 
 def json_recv(r):
@@ -168,7 +167,7 @@ def generate_block(data, block_size, block_index):
 
         
 
-
+### Used at the start of the program to gain the flag length
 ##r = remote('socket.cryptohack.org', 13407, level = 'debug')
 ##_ = r.recvline()
 ##flag_size = 0
@@ -185,12 +184,6 @@ def generate_block(data, block_size, block_index):
 ##r.close()
 
 
-
-
-flag_size = 46
-print("flag_size: " + str(flag_size))
-
-
 print(generate_block(FLAG, 64, 2))
 
 
@@ -199,11 +192,14 @@ print(generate_block(FLAG, 64, 2))
 # .....
 # .............}crypto{A
 # also ----------- 0x80 L
+
+# First find the last byte in the second block
 block_number = 2
 data = b"\x00" * 64 * block_number
 data += b"\x00" * (64 - 9)
 
 known_suffix = get_pad_suffix(data)
+
 
 r = remote('socket.cryptohack.org', 13407)#, level = 'debug')
 _ = r.recvline()
@@ -212,34 +208,30 @@ json_send(r, {"option": "message", "data": data.hex()})
 res_state = json_recv(r)["hash"]
 
 
-test_data = data + xor(known_suffix[:8], b"}crypto{") # It should produce known suffix
+pad_data = data + xor(known_suffix[:8], b"}crypto{") # It should produce known suffix
 
+curr_valid_hash = md5_with_state(res_state, b"", (block_number + 1) * 64)
 
 for c in range(256):
-    curr_test = test_data + c.to_bytes(1, "little")
+    curr_bruteforce_data = pad_data + c.to_bytes(1, "little")
     
-    json_send(r, {"option": "message", "data": curr_test.hex()})
+    json_send(r, {"option": "message", "data": curr_bruteforce_data.hex()})
     curr_hash = json_recv(r)["hash"]
 
-    curr_hash_test = md5_with_state(res_state, b"", (block_number + 1) * 64)
-
-    if curr_hash == curr_hash_test:
+    if curr_hash == curr_valid_hash:
         break
 
 r.close()
-
-
 found_char = (known_suffix[8] ^ c).to_bytes(1, "little")
 
 
-
-r = remote('socket.cryptohack.org', 13407)#, level = 'debug')
+# Find the other bytes in iterable way
+r = remote('socket.cryptohack.org', 13407)
 _ = r.recvline()
 
 s = b"}crypto{" + found_char
 
 print(s)
-
 for i in range(1, 38):
     data = b"\x00" * 64 * block_number
     data += b"\x00" * (64 - 9 - i)
@@ -249,20 +241,19 @@ for i in range(1, 38):
     json_send(r, {"option": "message", "data": data.hex()})
     res_state = json_recv(r)["hash"]
 
-    test_data = data
+    pad_data = data
 
+    curr_valid_hash = md5_with_state(res_state, b"", (block_number + 1) * 64)
+    
     for c in range(256):
-        curr_test = test_data + c.to_bytes(1, "little") + xor(known_suffix[1:], s)
+        curr_bruteforce_data = pad_data + c.to_bytes(1, "little") + xor(known_suffix[1:], s)
         
-        json_send(r, {"option": "message", "data": curr_test.hex()})
+        json_send(r, {"option": "message", "data": curr_bruteforce_data.hex()})
         curr_hash = json_recv(r)["hash"]
 
-        curr_hash_test = md5_with_state(res_state, b"", (block_number + 1) * 64)
-
-        if curr_hash == curr_hash_test:
+        if curr_hash == curr_valid_hash:
             break
     else:
-        print("BAD")
         raise Exception("BAD")
 
     found_char = (known_suffix[0] ^ c).to_bytes(1, "little")
@@ -271,21 +262,4 @@ for i in range(1, 38):
     print(s)
         
 r.close()
-
-
-##print(generate_block(FLAG, 64, 0))
-##print(generate_block(FLAG, 64, 1))
-##print(generate_block(FLAG, 64, 2))
-##print(generate_block(FLAG, 64, 3))
-##print(generate_block(FLAG, 64, 4))
-##print(generate_block(FLAG, 64, 5))
-##print(generate_block(FLAG, 64, 6))
-##print(generate_block(FLAG, 64, 7))
-
-
-
-
-
-
-
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hashes on Securiy Blog</title>
+    <link>https://yoavshah.github.io/cryptohack/hashes/</link>
+    <description>Recent content in hashes on Securiy Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 May 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://yoavshah.github.io/cryptohack/hashes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1-collider</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/1-collider/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/1-collider/</guid>
+      <description>Challenge In this challenge we get a program that stores documents based on their MD5 hash. To get the flag we need to send 2 documents with the same hash.&#xA;import hashlib from utils import listener FLAG = &amp;#34;crypto{???????????????????????????????????}&amp;#34; class Challenge(): def __init__(self): self.before_input = &amp;#34;Give me a document to store\n&amp;#34; self.documents = { &amp;#34;508dcc4dbe9113b15a1f971639b335bd&amp;#34;: b&amp;#34;Particle physics (also known as high energy physics) is a branch of physics that studies the nature of the particles that constitute matter and radiation.</description>
+    </item>
+    <item>
+      <title>2-hash_stuffing</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/</guid>
+      <description>Challenge In this challenge we get a program that creates its own hash algorithm. We need to send two inputs that produce the same hash to gain the flag.&#xA;# 2^128 collision protection! BLOCK_SIZE = 32 # Nothing up my sleeve numbers (ref: Dual_EC_DRBG P-256 coordinates) W = [0x6b17d1f2, 0xe12c4247, 0xf8bce6e5, 0x63a440f2, 0x77037d81, 0x2deb33a0, 0xf4a13945, 0xd898c296] X = [0x4fe342e2, 0xfe1a7f9b, 0x8ee7eb4a, 0x7c0f9e16, 0x2bce3357, 0x6b315ece, 0xcbb64068, 0x37bf51f5] Y = [0xc97445f4, 0x5cdef9f0, 0xd3e05e1e, 0x585fc297, 0x235b82b5, 0xbe8ff3ef, 0xca67c598, 0x52018192] Z = [0xb28ef557, 0xba31dfcb, 0xdd21ac46, 0xe2a91e3c, 0x304f44cb, 0x87058ada, 0x2cb81515, 0x1e610046] # Lets work with bytes instead!</description>
+    </item>
+    <item>
+      <title>3-PriMeD5</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/3-primed5/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/3-primed5/</guid>
+      <description>Challenge In this challenge we get a program that allows us the send a prime and sign its hash. Then the program allows us to use the check method, sending a prime, a signature and a number a, then the program validate the signature of the prime, calculates the GCD between the prime and a, then returns the flag based on the GCD between them. The problem is that the GCD between a prime and another number is 1.</description>
+    </item>
+    <item>
+      <title>4-twin_keys</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/</guid>
+      <description>Challenge In this challenge we get a program that has a lock, we can set the key and we can try to unlock it. To unlock it we need that some calculation on 2 of our keys will result in the same value. One of the keys must start with &amp;ldquo;CryptoHack Secure Safe&amp;rdquo;, the other mustn&amp;rsquo;t.&#xA;import os import random from Crypto.Hash import MD5 from utils import listener KEY_START = b&amp;#34;CryptoHack Secure Safe&amp;#34; FLAG = b&amp;#34;crypto{?</description>
+    </item>
+    <item>
+      <title>5-no_difference</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/5-no_difference/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/5-no_difference/</guid>
+      <description>Challenge In this challenge we get a hash function and we need to find collision in it.&#xA;from utils import listener SBOX = [ 0xf0, 0xf3, 0xf1, 0x69, 0x45, 0xff, 0x2b, 0x4f, 0x63, 0xe1, 0xf3, 0x71, 0x44, 0x1b, 0x35, 0xc8, 0xbe, 0xc0, 0x1a, 0x89, 0xec, 0x3e, 0x1d, 0x3a, 0xe3, 0xbe, 0xd3, 0xcf, 0x20, 0x4e, 0x56, 0x22, 0xe4, 0x43, 0x9a, 0x6f, 0x43, 0xa9, 0x87, 0x37, 0xec, 0x2, 0x3b, 0x8a, 0x7a, 0x13, 0x7e, 0x79, 0xcc, 0x92, 0xd7, 0xd1, 0xff, 0x5e, 0xe2, 0xb1, 0xc9, 0xd3, 0xda, 0x40, 0xfb, 0x80, 0xe6, 0x30, 0x79, 0x1a, 0x28, 0x13, 0x1f, 0x2c, 0x73, 0xb9, 0x71, 0x9e, 0xa6, 0xd5, 0x30, 0x84, 0x9d, 0xa1, 0x9b, 0x6d, 0xf9, 0x8a, 0x3d, 0xe9, 0x47, 0x15, 0x50, 0xb, 0xe2, 0x3d, 0x3f, 0x1, 0x59, 0x9b, 0x85, 0xe4, 0xe5, 0x90, 0xe2, 0x2d, 0x80, 0x5e, 0x6b, 0x77, 0xa1, 0x10, 0x99, 0x72, 0x7f, 0x86, 0x1f, 0x25, 0xa3, 0xea, 0x57, 0x5f, 0xc4, 0xc6, 0x7d, 0x7, 0x15, 0x90, 0xcb, 0x8c, 0xec, 0x11, 0x9b, 0x59, 0x1, 0x3f, 0x3d, 0xe2, 0xb, 0x50, 0x15, 0x47, 0xe9, 0x3d, 0x8a, 0xf9, 0x6d, 0x9b, 0xa1, 0x9d, 0x84, 0x30, 0xd5, 0xa6, 0x9e, 0x71, 0xb9, 0x73, 0x2c, 0x1f, 0x13, 0x28, 0x1a, 0x79, 0x11, 0xec, 0x8c, 0xcb, 0x90, 0x15, 0x7, 0x7d, 0xc6, 0xc4, 0x5f, 0x57, 0xea, 0xa3, 0x25, 0x1f, 0x86, 0x7f, 0x72, 0x99, 0x10, 0xa1, 0x77, 0x6b, 0x5e, 0x80, 0x2d, 0xe2, 0x90, 0xe5, 0xe4, 0x85, 0x22, 0x56, 0x4e, 0x20, 0xcf, 0xd3, 0xbe, 0xe3, 0x3a, 0x1d, 0x3e, 0xec, 0x89, 0x1a, 0xc0, 0xbe, 0xc8, 0x35, 0x1b, 0x44, 0x71, 0xf3, 0xe1, 0x63, 0x4f, 0x2b, 0xff, 0x45, 0x69, 0xf1, 0xf3, 0xf0, 0x30, 0xe6, 0x80, 0xfb, 0x40, 0xda, 0xd3, 0xc9, 0xb1, 0xe2, 0x5e, 0xff, 0xd1, 0xd7, 0x92, 0xcc, 0x79, 0x7e, 0x13, 0x7a, 0x8a, 0x3b, 0x2, 0xec, 0x37, 0x87, 0xa9, 0x43, 0x6f, 0x9a, 0x43, 0xe4, ] FLAG = &amp;#34;crypto{?</description>
+    </item>
+    <item>
+      <title>6-md0</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/6-md0/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/6-md0/</guid>
+      <description>Challenge In this challenge we get a hash function that iterates for each block and uses AES-ECB with the current block as its key, then encrypts that last state and xors the encrypted state. To gain the flag we need to sign a message (which just return the hash of the key + the data) and then use the option get_flag with the parameter admin=True and a valid signature.&#xA;from Crypto.</description>
+    </item>
+    <item>
+      <title>7-mdflag</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/7-mdflag/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/7-mdflag/</guid>
+      <description>Challenge In this challenge we get a program that have only one option and it is to get data, then xor it together with the flag (cycle - so we can enter more bytes that the flag), the use MD5 on it. We need to somehow get the flag.&#xA;from itertools import cycle from hashlib import md5 import os from utils import listener FLAG = b&amp;#39;crypto{??????????????????????????????????????}&amp;#39; def bxor(a, b): return bytes(x ^ y for x, y in zip(a, b)) class Challenge(): def __init__(self): self.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="generator" content="Hugo 0.125.3">
+
+    
+
+    
+
+    
+        
+            <meta
+                name="description"
+                content="This is my new hugo site" />
+        
+
+        
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
+        
+
+    
+
+
+    <title>
+        
+            5-no_difference |
+            SecurityBlog
+        
+    </title>
+
+    
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+        
+        
+
+
+        
+        
+
+
+        <link
+            rel="stylesheet"
+            href="/css/index_d751713.min.912d03bce61461ecbc3ca083479e1ed814bba94df76d0bdc6aa88fdca33621b9bb410dc2c81af31e8101fec62decfa5f6e48901ad673bc5056d2f1d1f2368a34.css"
+            integrity="sha512-kS0DvOYUYey8PKCDR54e2BS7qU33bQvcaqiP3KM2Ibm7QQ3CyBrzHoEB/sYt7PpfbkiQGtZzvFBW0vHR8jaKNA==" />
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+		
+        
+
+            
+
+
+
+
+    
+        
+    
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous" />
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"></script>
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+    
+        onload="renderMathInElement(document.body , { trust: true });"
+    ></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+
+            
+                trust: true
+            
+        });
+    });
+</script>
+
+        
+
+    
+</head>
+
+
+
+    <body>
+        <header class="header">
+    <div class="header_left">
+        
+    </div>
+
+    <div class="header_middle">
+        
+            5-no_difference -
+            SecurityBlog
+        
+    </div>
+</header>
+
+
+
+        <main>
+            <aside class="sidebar">
+    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Cryptohack </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> diffie-helman </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> hashes </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
+                        
+                            1-collider
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
+                        
+                            2-hash_stuffing
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
+                        
+                            3-PriMeD5
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
+                        
+                            4-twin_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
+                        
+                            5-no_difference
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
+                        
+                            6-md0
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
+                        
+                            7-mdflag
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> symmetric </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
+                        
+                            01-passwords_as_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
+                        
+                            02-ecbcbcwtf
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
+                        
+                            03-ecb_oracle
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
+                        
+                            04-flipping_cookie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
+                        
+                            05-lazy_cbc
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
+                        
+                            06-triple_des
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
+                        
+                            07-symmetry
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
+                        
+                            08-bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
+                        
+                            09-ctrime
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
+                        
+                            10-logon_zero
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
+                        
+                            11-stream_consciousness
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
+                        
+                            12-dancing_queen
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
+                        
+                            13-oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
+                        
+                            14-paper_plane
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
+                        
+                            15-forbidden_fruit
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
+                        
+                            16-beatboxer
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+</aside>
+<aside class="exapandable"></aside>
+
+
+            
+    <article class="main">
+        <button
+    class="sidebar-toggle-btn"
+    type="menu"
+    aria-expanded="false"
+    aria-haspopup="true">
+    <i class="bi bi-list"></i>
+</button>
+
+
+
+        <div class="title">
+            <h1 class="title-header">
+                5-no_difference
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.05.10"
+                            >2024.05.10
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        7 mins to read
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="https://yoavshah.github.io/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/" class="bread-btn">
+    
+
+    
+        Cryptohack
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/hashes/" class="bread-btn">
+    
+
+    
+        hashes
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" class="bread-btn">
+    
+
+    
+        
+            5-no_difference
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
+        </div>
+
+        
+            <nav id="TableOfContents"></nav>
+        
+
+
+        <div class="content">
+            
+                <h1 id="challenge">Challenge</h1>
+<p>In this challenge we get a hash function and we need to find collision in it.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> utils <span style="color:#f92672">import</span> listener
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SBOX <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xf0</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0xf1</span>, <span style="color:#ae81ff">0x69</span>, <span style="color:#ae81ff">0x45</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0x2b</span>, <span style="color:#ae81ff">0x4f</span>, <span style="color:#ae81ff">0x63</span>, <span style="color:#ae81ff">0xe1</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x1b</span>, <span style="color:#ae81ff">0x35</span>, <span style="color:#ae81ff">0xc8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xbe</span>, <span style="color:#ae81ff">0xc0</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0x89</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x3e</span>, <span style="color:#ae81ff">0x1d</span>, <span style="color:#ae81ff">0x3a</span>, <span style="color:#ae81ff">0xe3</span>, <span style="color:#ae81ff">0xbe</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xcf</span>, <span style="color:#ae81ff">0x20</span>, <span style="color:#ae81ff">0x4e</span>, <span style="color:#ae81ff">0x56</span>, <span style="color:#ae81ff">0x22</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xe4</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0x9a</span>, <span style="color:#ae81ff">0x6f</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0xa9</span>, <span style="color:#ae81ff">0x87</span>, <span style="color:#ae81ff">0x37</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x2</span>, <span style="color:#ae81ff">0x3b</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0x7a</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x7e</span>, <span style="color:#ae81ff">0x79</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xcc</span>, <span style="color:#ae81ff">0x92</span>, <span style="color:#ae81ff">0xd7</span>, <span style="color:#ae81ff">0xd1</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0xb1</span>, <span style="color:#ae81ff">0xc9</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xda</span>, <span style="color:#ae81ff">0x40</span>, <span style="color:#ae81ff">0xfb</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0xe6</span>, <span style="color:#ae81ff">0x30</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x79</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0x28</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x1f</span>, <span style="color:#ae81ff">0x2c</span>, <span style="color:#ae81ff">0x73</span>, <span style="color:#ae81ff">0xb9</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0x9e</span>, <span style="color:#ae81ff">0xa6</span>, <span style="color:#ae81ff">0xd5</span>, <span style="color:#ae81ff">0x30</span>, <span style="color:#ae81ff">0x84</span>, <span style="color:#ae81ff">0x9d</span>, <span style="color:#ae81ff">0xa1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x9b</span>, <span style="color:#ae81ff">0x6d</span>, <span style="color:#ae81ff">0xf9</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0xe9</span>, <span style="color:#ae81ff">0x47</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x50</span>, <span style="color:#ae81ff">0xb</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0x3f</span>, <span style="color:#ae81ff">0x1</span>, <span style="color:#ae81ff">0x59</span>, <span style="color:#ae81ff">0x9b</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x85</span>, <span style="color:#ae81ff">0xe4</span>, <span style="color:#ae81ff">0xe5</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x2d</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0x6b</span>, <span style="color:#ae81ff">0x77</span>, <span style="color:#ae81ff">0xa1</span>, <span style="color:#ae81ff">0x10</span>, <span style="color:#ae81ff">0x99</span>, <span style="color:#ae81ff">0x72</span>, <span style="color:#ae81ff">0x7f</span>, <span style="color:#ae81ff">0x86</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x1f</span>, <span style="color:#ae81ff">0x25</span>, <span style="color:#ae81ff">0xa3</span>, <span style="color:#ae81ff">0xea</span>, <span style="color:#ae81ff">0x57</span>, <span style="color:#ae81ff">0x5f</span>, <span style="color:#ae81ff">0xc4</span>, <span style="color:#ae81ff">0xc6</span>, <span style="color:#ae81ff">0x7d</span>, <span style="color:#ae81ff">0x7</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0xcb</span>, <span style="color:#ae81ff">0x8c</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x11</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x9b</span>, <span style="color:#ae81ff">0x59</span>, <span style="color:#ae81ff">0x1</span>, <span style="color:#ae81ff">0x3f</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0xb</span>, <span style="color:#ae81ff">0x50</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x47</span>, <span style="color:#ae81ff">0xe9</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0xf9</span>, <span style="color:#ae81ff">0x6d</span>, <span style="color:#ae81ff">0x9b</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xa1</span>, <span style="color:#ae81ff">0x9d</span>, <span style="color:#ae81ff">0x84</span>, <span style="color:#ae81ff">0x30</span>, <span style="color:#ae81ff">0xd5</span>, <span style="color:#ae81ff">0xa6</span>, <span style="color:#ae81ff">0x9e</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0xb9</span>, <span style="color:#ae81ff">0x73</span>, <span style="color:#ae81ff">0x2c</span>, <span style="color:#ae81ff">0x1f</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x28</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0x79</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x11</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x8c</span>, <span style="color:#ae81ff">0xcb</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x7</span>, <span style="color:#ae81ff">0x7d</span>, <span style="color:#ae81ff">0xc6</span>, <span style="color:#ae81ff">0xc4</span>, <span style="color:#ae81ff">0x5f</span>, <span style="color:#ae81ff">0x57</span>, <span style="color:#ae81ff">0xea</span>, <span style="color:#ae81ff">0xa3</span>, <span style="color:#ae81ff">0x25</span>, <span style="color:#ae81ff">0x1f</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x86</span>, <span style="color:#ae81ff">0x7f</span>, <span style="color:#ae81ff">0x72</span>, <span style="color:#ae81ff">0x99</span>, <span style="color:#ae81ff">0x10</span>, <span style="color:#ae81ff">0xa1</span>, <span style="color:#ae81ff">0x77</span>, <span style="color:#ae81ff">0x6b</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0x2d</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0xe5</span>, <span style="color:#ae81ff">0xe4</span>, <span style="color:#ae81ff">0x85</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x22</span>, <span style="color:#ae81ff">0x56</span>, <span style="color:#ae81ff">0x4e</span>, <span style="color:#ae81ff">0x20</span>, <span style="color:#ae81ff">0xcf</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xbe</span>, <span style="color:#ae81ff">0xe3</span>, <span style="color:#ae81ff">0x3a</span>, <span style="color:#ae81ff">0x1d</span>, <span style="color:#ae81ff">0x3e</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x89</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0xc0</span>, <span style="color:#ae81ff">0xbe</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xc8</span>, <span style="color:#ae81ff">0x35</span>, <span style="color:#ae81ff">0x1b</span>, <span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0xe1</span>, <span style="color:#ae81ff">0x63</span>, <span style="color:#ae81ff">0x4f</span>, <span style="color:#ae81ff">0x2b</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0x45</span>, <span style="color:#ae81ff">0x69</span>, <span style="color:#ae81ff">0xf1</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0xf0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x30</span>, <span style="color:#ae81ff">0xe6</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0xfb</span>, <span style="color:#ae81ff">0x40</span>, <span style="color:#ae81ff">0xda</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xc9</span>, <span style="color:#ae81ff">0xb1</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0xd1</span>, <span style="color:#ae81ff">0xd7</span>, <span style="color:#ae81ff">0x92</span>, <span style="color:#ae81ff">0xcc</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x79</span>, <span style="color:#ae81ff">0x7e</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x7a</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0x3b</span>, <span style="color:#ae81ff">0x2</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x37</span>, <span style="color:#ae81ff">0x87</span>, <span style="color:#ae81ff">0xa9</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0x6f</span>, <span style="color:#ae81ff">0x9a</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0xe4</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;crypto{??????????????????}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># permute has the following properties:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># permute(permute(x)) = x</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># permute(a) ^ permute(b) = permute(a ^ b)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permute</span>(block):
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>)]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> block[i]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+</span></span><span style="display:flex;"><span>            result[j] <span style="color:#f92672">|=</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;&lt;</span> i
+</span></span><span style="display:flex;"><span>            x <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">substitute</span>(block):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [SBOX[x] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> block]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash</span>(data):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(data) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    state <span style="color:#f92672">=</span> [<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">96</span>, <span style="color:#ae81ff">112</span>, <span style="color:#ae81ff">128</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(data), <span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>        block <span style="color:#f92672">=</span> data[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> permute(state)
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> substitute(state)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">16</span>):
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> permute(state)
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> substitute(state)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    output <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>):
+</span></span><span style="display:flex;"><span>        output <span style="color:#f92672">+=</span> state[<span style="color:#ae81ff">4</span>:]
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> permute(state)
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> substitute(state)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(output)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Challenge</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>before_input <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#34;The difference between treason and patriotism is only a matter of dates.&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">challenge</span>(self, msg):
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#39;a&#39;</span>])
+</span></span><span style="display:flex;"><span>        b <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#39;b&#39;</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(a) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> len(b) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Inputs must be multiple of the block length!&#34;</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> a <span style="color:#f92672">==</span> b:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Identical inputs are not allowed!&#34;</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> hash(a) <span style="color:#f92672">==</span> hash(b):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;flag&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Well done, here is the flag: </span><span style="color:#e6db74">{</span>FLAG<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;The hashes don&#39;t match!&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>listener<span style="color:#f92672">.</span>start_server(port<span style="color:#f92672">=</span><span style="color:#ae81ff">13395</span>)</span></span></code></pre></div>
+    
+</div>
+<h1 id="solution">Solution</h1>
+<p>To solve this challenge we first have to look at its hashing algorithm.
+In this hash we have a state that is being initialized to some constant value, then each block does some operations on the state. After all the blocks iterated, the state is being permuted and substitude 16 times.</p>
+<p>Because the last part of the hash function does not depends on any block and is constant, if 2 messages can get the same state after the first for-loop the final hash will be the same, so we can trim this part and create <code>hash_partial</code> function</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash_partial</span>(data):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(data) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    state <span style="color:#f92672">=</span> [<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">96</span>, <span style="color:#ae81ff">112</span>, <span style="color:#ae81ff">128</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(data), <span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>        block <span style="color:#f92672">=</span> data[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> permute(state)
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> substitute(state)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> state</span></span></code></pre></div>
+    
+</div>
+<p>We can see that each block affects only the last 4 bytes of the state, so the first block of each message should make the first 4 bytes of the state equals.
+Because permute is actualy the transpose matrix of 8x8 binary input, we can create 2 inputs to it that the first 4 bytes in the state will be the same (0, 0, 0, 0).</p>
+<p>$$
+A_0 = (16, 32, 48, 80, 0, 0, 0, 0)
+$$
+$$
+B_0 = (16, 32, 48, 80, 0, 0, 0, 0x80)
+$$</p>
+<p>The thing is that using those inputs to the <code>permute</code> function will result in 4 zeros at the start and then 4 numbers.
+Because we control the last 4 bytes using the first block, we can create 2 blocks that when xored with the initial vector they will create $A_0$ and $B_0$.</p>
+<p>After that the <code>substitute</code> function will keep the first 4 bytes equals to each other!</p>
+<p>Then we need to create the second block for each message, the second block will xor the last 4 bytes of the state, after that the two equaled states will go through <code>permute</code>, so they will still be the same, and then will go through <code>substitute</code>, resulting in the same hash!</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> isPrime, bytes_to_long, long_to_bytes
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SBOX <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xf0</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0xf1</span>, <span style="color:#ae81ff">0x69</span>, <span style="color:#ae81ff">0x45</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0x2b</span>, <span style="color:#ae81ff">0x4f</span>, <span style="color:#ae81ff">0x63</span>, <span style="color:#ae81ff">0xe1</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x1b</span>, <span style="color:#ae81ff">0x35</span>, <span style="color:#ae81ff">0xc8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xbe</span>, <span style="color:#ae81ff">0xc0</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0x89</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x3e</span>, <span style="color:#ae81ff">0x1d</span>, <span style="color:#ae81ff">0x3a</span>, <span style="color:#ae81ff">0xe3</span>, <span style="color:#ae81ff">0xbe</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xcf</span>, <span style="color:#ae81ff">0x20</span>, <span style="color:#ae81ff">0x4e</span>, <span style="color:#ae81ff">0x56</span>, <span style="color:#ae81ff">0x22</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xe4</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0x9a</span>, <span style="color:#ae81ff">0x6f</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0xa9</span>, <span style="color:#ae81ff">0x87</span>, <span style="color:#ae81ff">0x37</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x2</span>, <span style="color:#ae81ff">0x3b</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0x7a</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x7e</span>, <span style="color:#ae81ff">0x79</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xcc</span>, <span style="color:#ae81ff">0x92</span>, <span style="color:#ae81ff">0xd7</span>, <span style="color:#ae81ff">0xd1</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0xb1</span>, <span style="color:#ae81ff">0xc9</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xda</span>, <span style="color:#ae81ff">0x40</span>, <span style="color:#ae81ff">0xfb</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0xe6</span>, <span style="color:#ae81ff">0x30</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x79</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0x28</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x1f</span>, <span style="color:#ae81ff">0x2c</span>, <span style="color:#ae81ff">0x73</span>, <span style="color:#ae81ff">0xb9</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0x9e</span>, <span style="color:#ae81ff">0xa6</span>, <span style="color:#ae81ff">0xd5</span>, <span style="color:#ae81ff">0x30</span>, <span style="color:#ae81ff">0x84</span>, <span style="color:#ae81ff">0x9d</span>, <span style="color:#ae81ff">0xa1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x9b</span>, <span style="color:#ae81ff">0x6d</span>, <span style="color:#ae81ff">0xf9</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0xe9</span>, <span style="color:#ae81ff">0x47</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x50</span>, <span style="color:#ae81ff">0xb</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0x3f</span>, <span style="color:#ae81ff">0x1</span>, <span style="color:#ae81ff">0x59</span>, <span style="color:#ae81ff">0x9b</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x85</span>, <span style="color:#ae81ff">0xe4</span>, <span style="color:#ae81ff">0xe5</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x2d</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0x6b</span>, <span style="color:#ae81ff">0x77</span>, <span style="color:#ae81ff">0xa1</span>, <span style="color:#ae81ff">0x10</span>, <span style="color:#ae81ff">0x99</span>, <span style="color:#ae81ff">0x72</span>, <span style="color:#ae81ff">0x7f</span>, <span style="color:#ae81ff">0x86</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x1f</span>, <span style="color:#ae81ff">0x25</span>, <span style="color:#ae81ff">0xa3</span>, <span style="color:#ae81ff">0xea</span>, <span style="color:#ae81ff">0x57</span>, <span style="color:#ae81ff">0x5f</span>, <span style="color:#ae81ff">0xc4</span>, <span style="color:#ae81ff">0xc6</span>, <span style="color:#ae81ff">0x7d</span>, <span style="color:#ae81ff">0x7</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0xcb</span>, <span style="color:#ae81ff">0x8c</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x11</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x9b</span>, <span style="color:#ae81ff">0x59</span>, <span style="color:#ae81ff">0x1</span>, <span style="color:#ae81ff">0x3f</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0xb</span>, <span style="color:#ae81ff">0x50</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x47</span>, <span style="color:#ae81ff">0xe9</span>, <span style="color:#ae81ff">0x3d</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0xf9</span>, <span style="color:#ae81ff">0x6d</span>, <span style="color:#ae81ff">0x9b</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xa1</span>, <span style="color:#ae81ff">0x9d</span>, <span style="color:#ae81ff">0x84</span>, <span style="color:#ae81ff">0x30</span>, <span style="color:#ae81ff">0xd5</span>, <span style="color:#ae81ff">0xa6</span>, <span style="color:#ae81ff">0x9e</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0xb9</span>, <span style="color:#ae81ff">0x73</span>, <span style="color:#ae81ff">0x2c</span>, <span style="color:#ae81ff">0x1f</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x28</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0x79</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x11</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x8c</span>, <span style="color:#ae81ff">0xcb</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0x15</span>, <span style="color:#ae81ff">0x7</span>, <span style="color:#ae81ff">0x7d</span>, <span style="color:#ae81ff">0xc6</span>, <span style="color:#ae81ff">0xc4</span>, <span style="color:#ae81ff">0x5f</span>, <span style="color:#ae81ff">0x57</span>, <span style="color:#ae81ff">0xea</span>, <span style="color:#ae81ff">0xa3</span>, <span style="color:#ae81ff">0x25</span>, <span style="color:#ae81ff">0x1f</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x86</span>, <span style="color:#ae81ff">0x7f</span>, <span style="color:#ae81ff">0x72</span>, <span style="color:#ae81ff">0x99</span>, <span style="color:#ae81ff">0x10</span>, <span style="color:#ae81ff">0xa1</span>, <span style="color:#ae81ff">0x77</span>, <span style="color:#ae81ff">0x6b</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0x2d</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x90</span>, <span style="color:#ae81ff">0xe5</span>, <span style="color:#ae81ff">0xe4</span>, <span style="color:#ae81ff">0x85</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x22</span>, <span style="color:#ae81ff">0x56</span>, <span style="color:#ae81ff">0x4e</span>, <span style="color:#ae81ff">0x20</span>, <span style="color:#ae81ff">0xcf</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xbe</span>, <span style="color:#ae81ff">0xe3</span>, <span style="color:#ae81ff">0x3a</span>, <span style="color:#ae81ff">0x1d</span>, <span style="color:#ae81ff">0x3e</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x89</span>, <span style="color:#ae81ff">0x1a</span>, <span style="color:#ae81ff">0xc0</span>, <span style="color:#ae81ff">0xbe</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0xc8</span>, <span style="color:#ae81ff">0x35</span>, <span style="color:#ae81ff">0x1b</span>, <span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x71</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0xe1</span>, <span style="color:#ae81ff">0x63</span>, <span style="color:#ae81ff">0x4f</span>, <span style="color:#ae81ff">0x2b</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0x45</span>, <span style="color:#ae81ff">0x69</span>, <span style="color:#ae81ff">0xf1</span>, <span style="color:#ae81ff">0xf3</span>, <span style="color:#ae81ff">0xf0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x30</span>, <span style="color:#ae81ff">0xe6</span>, <span style="color:#ae81ff">0x80</span>, <span style="color:#ae81ff">0xfb</span>, <span style="color:#ae81ff">0x40</span>, <span style="color:#ae81ff">0xda</span>, <span style="color:#ae81ff">0xd3</span>, <span style="color:#ae81ff">0xc9</span>, <span style="color:#ae81ff">0xb1</span>, <span style="color:#ae81ff">0xe2</span>, <span style="color:#ae81ff">0x5e</span>, <span style="color:#ae81ff">0xff</span>, <span style="color:#ae81ff">0xd1</span>, <span style="color:#ae81ff">0xd7</span>, <span style="color:#ae81ff">0x92</span>, <span style="color:#ae81ff">0xcc</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x79</span>, <span style="color:#ae81ff">0x7e</span>, <span style="color:#ae81ff">0x13</span>, <span style="color:#ae81ff">0x7a</span>, <span style="color:#ae81ff">0x8a</span>, <span style="color:#ae81ff">0x3b</span>, <span style="color:#ae81ff">0x2</span>, <span style="color:#ae81ff">0xec</span>, <span style="color:#ae81ff">0x37</span>, <span style="color:#ae81ff">0x87</span>, <span style="color:#ae81ff">0xa9</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0x6f</span>, <span style="color:#ae81ff">0x9a</span>, <span style="color:#ae81ff">0x43</span>, <span style="color:#ae81ff">0xe4</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># permute has the following properties:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># permute(permute(x)) = x</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># permute(a) ^ permute(b) = permute(a ^ b)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">permute</span>(block):
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>)]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> block[i]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">8</span>):
+</span></span><span style="display:flex;"><span>            result[j] <span style="color:#f92672">|=</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;&lt;</span> i
+</span></span><span style="display:flex;"><span>            x <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">substitute</span>(block):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [SBOX[x] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> block]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash_partial</span>(data):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(data) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    state <span style="color:#f92672">=</span> [<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">96</span>, <span style="color:#ae81ff">112</span>, <span style="color:#ae81ff">128</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(data), <span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>        block <span style="color:#f92672">=</span> data[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">2</span>]
+</span></span><span style="display:flex;"><span>        state[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">^=</span> block[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> permute(state)
+</span></span><span style="display:flex;"><span>        state <span style="color:#f92672">=</span> substitute(state)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> state
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Find X such that </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>initial_state <span style="color:#f92672">=</span> [<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">96</span>, <span style="color:#ae81ff">112</span>, <span style="color:#ae81ff">128</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>first_block_a <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>first_block_a_needed <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00\x00\x00\x00</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>first_block_b <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>first_block_b_needed <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00\x00\x00\x80</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>    first_block_a <span style="color:#f92672">+=</span> (initial_state[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#f92672">^</span> first_block_a_needed[i])<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>    first_block_b <span style="color:#f92672">+=</span> (initial_state[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#f92672">^</span> first_block_b_needed[i])<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hashed_first_block_a <span style="color:#f92672">=</span> hash_partial(first_block_a)
+</span></span><span style="display:flex;"><span>hashed_first_block_b <span style="color:#f92672">=</span> hash_partial(first_block_b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Now make the 2 hashes the same by xoring the last byte</span>
+</span></span><span style="display:flex;"><span>next_block_a <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>next_block_b <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>needed_state <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00\x00\x00\x00</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>    next_block_a <span style="color:#f92672">+=</span> (hashed_first_block_a[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#f92672">^</span> needed_state[i])<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>    next_block_b <span style="color:#f92672">+=</span> (hashed_first_block_b[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>] <span style="color:#f92672">^</span> needed_state[i])<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>overall_block_a <span style="color:#f92672">=</span> first_block_a <span style="color:#f92672">+</span> next_block_a
+</span></span><span style="display:flex;"><span>overall_block_b <span style="color:#f92672">=</span> first_block_b <span style="color:#f92672">+</span> next_block_b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(overall_block_a)
+</span></span><span style="display:flex;"><span>print(overall_block_b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>partial_hash_block_a <span style="color:#f92672">=</span> hash_partial(overall_block_a)
+</span></span><span style="display:flex;"><span>partial_hash_block_b <span style="color:#f92672">=</span> hash_partial(overall_block_b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Need to find collision</span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13395</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_recv</span>():
+</span></span><span style="display:flex;"><span>    line <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(line<span style="color:#f92672">.</span>decode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_send</span>(hsh):
+</span></span><span style="display:flex;"><span>    request <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(hsh)<span style="color:#f92672">.</span>encode()
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>sendline(request)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;a&#34;</span>: overall_block_a<span style="color:#f92672">.</span>hex(), <span style="color:#e6db74">&#34;b&#34;</span>: overall_block_b<span style="color:#f92672">.</span>hex()})
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> json_recv()[<span style="color:#e6db74">&#34;flag&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(flag)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()</span></span></code></pre></div>
+    
+</div>
+<p><a href="/cryptohack/hashes/code/no_difference.py">no_difference.py</a></p>
+
+            
+        </div>
+    </article>
+
+        </main>
+
+        <footer class="footer">
+    <div class="footer-left">
+        <ul class="social">
+            
+                <li>All Rights Reserved ®.</li>
+            
+
+            
+                <li>yoavshah</li>
+            
+
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="footer-right">
+        <ul class="control status clearfix">
+            
+                <li>
+                    
+                        Word Count:
+                        1393
+                    
+                </li>
+            
+
+            
+            
+
+            
+                <li>en</li>
+            
+
+            
+                <li>
+                    <a href="https://gohugo.io" class="btn" target="_blank"
+                        >Hugo: 0.125.3</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    <a
+                        href="https://github.com/JingWangTW/dark-theme-editor"
+                        class="btn"
+                        target="_blank"
+                        >Theme: dark-theme-editor</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    
+                        Last modified: &nbsp;
+                        <time>
+                            May 10 2024 00:00:00
+                        </time>
+                    
+                </li>
+            
+
+            
+                <li title="">
+                    
+                </li>
+            
+        </ul>
+    </div>
+</footer>
+
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+    
+    
+
+
+    <script
+        type="text/javascript"
+        src="/js/index_d751713.min.5eeb120f16ea146352725c420364f87befead45f678142b8f0ffbef024646931fbc06bff07a7bd6cb57fa2f8cd8a21ba6a4ee5a278ec32303a378bc1cd17f246.js"
+        integrity="sha512-XusSDxbqFGNSclxCA2T4e&#43;/q1F9ngUK48P&#43;&#43;8CRkaTH7wGv/B6e9bLV/ovjNiiG6ak7lonjsMjA6N4vBzRfyRg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+
+
+</html>

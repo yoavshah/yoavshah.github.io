@@ -14,11 +14,21 @@
 
     
         
-            <meta name="description" content="This is my new hugo site" />
+            <meta
+                name="description"
+                content="This is my new hugo site" />
         
 
         
-            <meta name="author" content="yoavshah" />
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
         
 
     
@@ -26,7 +36,7 @@
 
     <title>
         
-            Cryptohack |
+            02-ecbcbcwtf |
             SecurityBlog
         
     </title>
@@ -162,7 +172,7 @@
 
     <div class="header_middle">
         
-            Cryptohack -
+            02-ecbcbcwtf -
             SecurityBlog
         
     </div>
@@ -189,7 +199,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> Cryptohack </span>
 
@@ -334,7 +344,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> symmetric </span>
 
@@ -544,13 +554,58 @@
 
 
         <div class="title">
-            <h1 class="title-header">Cryptohack</h1>
+            <h1 class="title-header">
+                02-ecbcbcwtf
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.04.26"
+                            >2024.04.26
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        1 min to read
+                    </div>
+                
+            </div>
         </div>
 
         <div class="article-meta">
-            <div class="breadcumb">
-                <i class="bi bi-folder"></i>
-                
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
     
 
 
@@ -581,340 +636,157 @@
     
 </a>
 
-            </div>
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+    
+
+    
+        symmetric
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" class="bread-btn">
+    
+
+    
+        
+            02-ecbcbcwtf
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
         </div>
 
-        <hr />
-
-        <div class="list-files">
-            
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
         
+            <nav id="TableOfContents"></nav>
+        
+
+
+        <div class="content">
             
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> diffie-helman </span>
-
-                    
+                <h1 id="challenge">Challenge</h1>
+<p>This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode</p>
 
 
 
+
+
+
+
+<div class="codeblock">
     
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/decrypt/%3cciphertext%3e/%27%29%0d%0adef%20decrypt%28ciphertext%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20iv%20=%20os.urandom%2816%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CBC,%20iv%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%20%20%20%20ciphertext%20=%20iv.hex%28%29%20&#43;%20encrypted.hex%28%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20ciphertext%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
     
 
     
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/decrypt/&lt;ciphertext&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext):
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/encrypt_flag/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> iv<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> encrypted<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: ciphertext}</span></span></code></pre></div>
+    
+</div>
+<p><img src="/cryptohack/symmetric/images/CBC_encryption.svg" alt="CBC Encryption"></p>
+<p><img src="/cryptohack/symmetric/images/ECB_encryption.svg" alt="ECB Encryption"></p>
+<h1 id="solution">Solution</h1>
+<p>As we can see in the drawing above, the difference between CBC and ECB is that CBC uses IV.
+We can decrypt with ECB mode the encrypted flag, and then using the IV we received earlier to xor it and retreive the decrypted flag.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
     
 
     
-
-    <ul class="section-tree">
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> hashes </span>
-
-                    
-
-
-
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SITE_FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/encrypt_flag&#34;</span>
+</span></span><span style="display:flex;"><span>SITE_DECRYPT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/decrypt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_FLAG)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> cipher[<span style="color:#ae81ff">32</span>:]
+</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> cipher[:<span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ENC_FLAG)
+</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(IV)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>SITE_DECRYPT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>ENC_FLAG<span style="color:#f92672">.</span>hex()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;plaintext&#34;</span>]
+</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ecb_dec_flag)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
+</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(IV[i] <span style="color:#f92672">^</span> ecb_dec_flag[i])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
+</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(ENC_FLAG[i] <span style="color:#f92672">^</span> ecb_dec_flag[len(IV) <span style="color:#f92672">+</span> i])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
     
-    
+</div>
+<p><a href="/cryptohack/symmetric/code/ecbcbcwtf.py">ecbcbcwtf.py</a></p>
 
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
             
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
-                        
-                            1-collider
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
-                        
-                            2-hash_stuffing
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
-                        
-                            3-PriMeD5
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
-                        
-                            4-twin_keys
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
-                        
-                            5-no_difference
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
-                        
-                            6-md0
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
-                        
-                            7-mdflag
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> symmetric </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
-                        
-                            01-passwords_as_keys
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
-                        
-                            02-ecbcbcwtf
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
-                        
-                            03-ecb_oracle
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
-                        
-                            04-flipping_cookie
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
-                        
-                            05-lazy_cbc
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
-                        
-                            06-triple_des
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
-                        
-                            07-symmetry
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
-                        
-                            08-bean_counter
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
-                        
-                            09-ctrime
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
-                        
-                            10-logon_zero
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
-                        
-                            11-stream_consciousness
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
-                        
-                            12-dancing_queen
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
-                        
-                            13-oh-snap
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
-                        
-                            14-paper_plane
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
-                        
-                            15-forbidden_fruit
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
-                        
-                            16-beatboxer
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-    </ul>
-
-
         </div>
     </article>
 
@@ -960,8 +832,8 @@
             
                 <li>
                     
-                        Pages In Section:
-                        3
+                        Word Count:
+                        185
                     
                 </li>
             
@@ -995,12 +867,10 @@
             
                 <li>
                     
-                        
-                            Last build: &nbsp;
-                            <time>
-                                Apr 22 2024 17:18:35
-                            </time>
-                        
+                        Last modified: &nbsp;
+                        <time>
+                            Apr 26 2024 10:59:55
+                        </time>
                     
                 </li>
             

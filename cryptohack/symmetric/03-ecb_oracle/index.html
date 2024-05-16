@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="generator" content="Hugo 0.125.3">
+
+    
+
+    
+
+    
+        
+            <meta
+                name="description"
+                content="This is my new hugo site" />
+        
+
+        
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
+        
+
+    
+
+
+    <title>
+        
+            03-ecb_oracle |
+            SecurityBlog
+        
+    </title>
+
+    
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+        
+        
+
+
+        
+        
+
+
+        <link
+            rel="stylesheet"
+            href="/css/index_d751713.min.912d03bce61461ecbc3ca083479e1ed814bba94df76d0bdc6aa88fdca33621b9bb410dc2c81af31e8101fec62decfa5f6e48901ad673bc5056d2f1d1f2368a34.css"
+            integrity="sha512-kS0DvOYUYey8PKCDR54e2BS7qU33bQvcaqiP3KM2Ibm7QQ3CyBrzHoEB/sYt7PpfbkiQGtZzvFBW0vHR8jaKNA==" />
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+		
+        
+
+            
+
+
+
+
+    
+        
+    
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous" />
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"></script>
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+    
+        onload="renderMathInElement(document.body , { trust: true });"
+    ></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+
+            
+                trust: true
+            
+        });
+    });
+</script>
+
+        
+
+    
+</head>
+
+
+
+    <body>
+        <header class="header">
+    <div class="header_left">
+        
+    </div>
+
+    <div class="header_middle">
+        
+            03-ecb_oracle -
+            SecurityBlog
+        
+    </div>
+</header>
+
+
+
+        <main>
+            <aside class="sidebar">
+    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Cryptohack </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> diffie-helman </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> hashes </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
+                        
+                            1-collider
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
+                        
+                            2-hash_stuffing
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
+                        
+                            3-PriMeD5
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
+                        
+                            4-twin_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
+                        
+                            5-no_difference
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
+                        
+                            6-md0
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
+                        
+                            7-mdflag
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> symmetric </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
+                        
+                            01-passwords_as_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
+                        
+                            02-ecbcbcwtf
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
+                        
+                            03-ecb_oracle
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
+                        
+                            04-flipping_cookie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
+                        
+                            05-lazy_cbc
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
+                        
+                            06-triple_des
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
+                        
+                            07-symmetry
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
+                        
+                            08-bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
+                        
+                            09-ctrime
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
+                        
+                            10-logon_zero
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
+                        
+                            11-stream_consciousness
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
+                        
+                            12-dancing_queen
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
+                        
+                            13-oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
+                        
+                            14-paper_plane
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
+                        
+                            15-forbidden_fruit
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
+                        
+                            16-beatboxer
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+</aside>
+<aside class="exapandable"></aside>
+
+
+            
+    <article class="main">
+        <button
+    class="sidebar-toggle-btn"
+    type="menu"
+    aria-expanded="false"
+    aria-haspopup="true">
+    <i class="bi bi-list"></i>
+</button>
+
+
+
+        <div class="title">
+            <h1 class="title-header">
+                03-ecb_oracle
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.04.26"
+                            >2024.04.26
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        3 mins to read
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="https://yoavshah.github.io/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/" class="bread-btn">
+    
+
+    
+        Cryptohack
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+    
+
+    
+        symmetric
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" class="bread-btn">
+    
+
+    
+        
+            03-ecb_oracle
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
+        </div>
+
+        
+            <nav id="TableOfContents"></nav>
+        
+
+
+        <div class="content">
+            
+                <h1 id="challenge">Challenge</h1>
+<p>This is an interesting challenge, in this challenge we can send data to the program and the program then returns the encrypted(data + flag) with ECB mode</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="%0d%0afrom%20Crypto.Cipher%20import%20AES%0d%0afrom%20Crypto.Util.Padding%20import%20pad,%20unpad%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecb_oracle/encrypt/%3cplaintext%3e/%27%29%0d%0adef%20encrypt%28plaintext%29:%0d%0a%20%20%20%20plaintext%20=%20bytes.fromhex%28plaintext%29%0d%0a%0d%0a%20%20%20%20padded%20=%20pad%28plaintext%20&#43;%20FLAG.encode%28%29,%2016%29%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20encrypted%20=%20cipher.encrypt%28padded%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecb_oracle/encrypt/&lt;plaintext&gt;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(plaintext):
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(plaintext)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    padded <span style="color:#f92672">=</span> pad(plaintext <span style="color:#f92672">+</span> FLAG<span style="color:#f92672">.</span>encode(), <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(padded)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: encrypted<span style="color:#f92672">.</span>hex()}</span></span></code></pre></div>
+    
+</div>
+<p><img src="/cryptohack/symmetric/images/ECB_encryption.svg" alt="ECB Encryption"></p>
+<h1 id="solution">Solution</h1>
+<p>Because of how ECB mode it built, if we send 2 of the same plaintext blocks their ciphertext will be the same.
+We will bruteforce each character from the last one to the first one.</p>
+<p>Because we have control over the prefix of the payload we can make the prefix larger until we find that another cipher block was created - with that we can find the flag size.</p>
+<p>Then we can send a prefix of [BYTE][PAD-16] + [GARBAGE] so that the last block plaintext will be [FLAG_LAST_BYTE][PAD-16].</p>
+<p>We can then change the prefix first byte bruteforce it over 256 posible values, if we found the right byte the first plaintext block and the last plaintext block one should be equals meaning the first cipher text block and the last cipher text block will be also equals.</p>
+<p>To get the other bytes we can just create the following payload
+[BYTE][KNOWN-FLAG][PAD-16] + [GARBAGE] so that the last block playintext will be [FLAG_BYTES (length(KNOWN-FLAG) + 1)][PAD-16]</p>
+<p>with the same tactic we can bruteforce each byte in the flag and in the code we should keep an eye when we find more than 16 bytes of the flag, to get to the second block</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> string
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SITE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecb_oracle/encrypt/&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># should be identical to the last block</span>
+</span></span><span style="display:flex;"><span>START_PAD <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>curr_found <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>FLAG_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, FLAG_SIZE):
+</span></span><span style="display:flex;"><span>    print(curr_found)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>printable:
+</span></span><span style="display:flex;"><span>        bb <span style="color:#f92672">=</span> b<span style="color:#f92672">.</span>encode()<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>        curr <span style="color:#f92672">=</span> bb
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        number_of_paddings <span style="color:#f92672">=</span> (((((<span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span> START_PAD <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> FLAG_SIZE) <span style="color:#f92672">//</span> <span style="color:#ae81ff">16</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">16</span> <span style="color:#f92672">+</span> START_PAD <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> FLAG_SIZE)) <span style="color:#f92672">%</span> <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>        number_of_paddings <span style="color:#f92672">=</span> number_of_paddings
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> number_of_paddings <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            number_of_paddings <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        pad_char <span style="color:#f92672">=</span> number_of_paddings<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        FIRST_BLOCK <span style="color:#f92672">=</span> curr <span style="color:#f92672">+</span> curr_found[:<span style="color:#ae81ff">15</span>]<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> pad_char<span style="color:#f92672">.</span>hex() <span style="color:#f92672">*</span> (<span style="color:#ae81ff">16</span> <span style="color:#f92672">-</span> (len(curr_found[:<span style="color:#ae81ff">15</span>]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        FILL_BLOCK <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;00&#34;</span> <span style="color:#f92672">*</span> (j <span style="color:#f92672">+</span> START_PAD)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># FIRST [Brute force first character]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># SHIT</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># FIRST</span>
+</span></span><span style="display:flex;"><span>        FULL_BLOCK <span style="color:#f92672">=</span> FIRST_BLOCK <span style="color:#f92672">+</span> FILL_BLOCK
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE <span style="color:#f92672">+</span> FULL_BLOCK)<span style="color:#f92672">.</span>json()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ctext <span style="color:#f92672">=</span> k[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        c_first_block <span style="color:#f92672">=</span> ctext[:<span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>        c_second_block <span style="color:#f92672">=</span> ctext[<span style="color:#ae81ff">32</span>:<span style="color:#ae81ff">64</span>]
+</span></span><span style="display:flex;"><span>        c_third_block <span style="color:#f92672">=</span> ctext[<span style="color:#ae81ff">64</span>:<span style="color:#ae81ff">64</span><span style="color:#f92672">+</span><span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>        c_fourth_block <span style="color:#f92672">=</span> ctext[<span style="color:#ae81ff">64</span><span style="color:#f92672">+</span><span style="color:#ae81ff">32</span>:<span style="color:#ae81ff">64</span><span style="color:#f92672">+</span><span style="color:#ae81ff">32</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> c_first_block <span style="color:#f92672">==</span> c_fourth_block:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;found char &#34;</span> <span style="color:#f92672">+</span> b)
+</span></span><span style="display:flex;"><span>            curr_found <span style="color:#f92672">=</span> b<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> curr_found
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Failed to find for &#34;</span> <span style="color:#f92672">+</span> str(j))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span> </span></span></code></pre></div>
+    
+</div>
+<p><a href="/cryptohack/symmetric/code/ecb_oracle.py">ecb_oracle.py</a></p>
+
+            
+        </div>
+    </article>
+
+        </main>
+
+        <footer class="footer">
+    <div class="footer-left">
+        <ul class="social">
+            
+                <li>All Rights Reserved ®.</li>
+            
+
+            
+                <li>yoavshah</li>
+            
+
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="footer-right">
+        <ul class="control status clearfix">
+            
+                <li>
+                    
+                        Word Count:
+                        447
+                    
+                </li>
+            
+
+            
+            
+
+            
+                <li>en</li>
+            
+
+            
+                <li>
+                    <a href="https://gohugo.io" class="btn" target="_blank"
+                        >Hugo: 0.125.3</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    <a
+                        href="https://github.com/JingWangTW/dark-theme-editor"
+                        class="btn"
+                        target="_blank"
+                        >Theme: dark-theme-editor</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    
+                        Last modified: &nbsp;
+                        <time>
+                            Apr 26 2024 10:59:55
+                        </time>
+                    
+                </li>
+            
+
+            
+                <li title="">
+                    
+                </li>
+            
+        </ul>
+    </div>
+</footer>
+
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+    
+    
+
+
+    <script
+        type="text/javascript"
+        src="/js/index_d751713.min.5eeb120f16ea146352725c420364f87befead45f678142b8f0ffbef024646931fbc06bff07a7bd6cb57fa2f8cd8a21ba6a4ee5a278ec32303a378bc1cd17f246.js"
+        integrity="sha512-XusSDxbqFGNSclxCA2T4e&#43;/q1F9ngUK48P&#43;&#43;8CRkaTH7wGv/B6e9bLV/ovjNiiG6ak7lonjsMjA6N4vBzRfyRg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+
+
+</html>

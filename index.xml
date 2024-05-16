@@ -65,6 +65,13 @@
       <description>Challenge In this challenge we get a program that has the option mix which receives data and mix it with the flag&#xA;from hashlib import sha256 import os from utils import listener FLAG = b&amp;#34;crypto{???????????????????????????????}&amp;#34; def _xor(a, b): return bytes([_a ^ _b for _a, _b in zip(a, b)]) def _and(a, b): return bytes([_a &amp;amp; _b for _a, _b in zip(a, b)]) def shuffle(mixed_and, mixed_xor): return bytes([mixed_xor[i%len(mixed_xor)] for i in mixed_and]) class Challenge(): def __init__(self): self.</description>
     </item>
     <item>
+      <title>9-invariant</title>
+      <link>https://yoavshah.github.io/cryptohack/hashes/9-invariant/</link>
+      <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/hashes/9-invariant/</guid>
+      <description>Challenge In this challenge we get another custom hash function, this time we need to find the data that makes this hash produce zero block.&#xA;import itertools import json from hashlib import sha512 FLAG = &amp;#34;crypto{????????????????????????????????}&amp;#34; class MyCipher: __NR = 31 __SB = [13, 14, 0, 1, 5, 10, 7, 6, 11, 3, 9, 12, 15, 8, 2, 4] __SR = [0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12, 1, 6, 11] def __init__(self, key): self.</description>
+    </item>
+    <item>
       <title>16-beatboxer</title>
       <link>https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/</link>
       <pubDate>Wed, 08 May 2024 10:59:55 +0300</pubDate>

@@ -778,9 +778,9 @@
 </div>
 <h1 id="solution">Solution</h1>
 <p>This hash algorithm is actualy really bad.
-Each block iteration is inversable - meaning that at a given state (current state) and the desired output we can create a block which will produce it.</p>
+Each block iteration is inversable - meaning that at a given state (current state) and the desired output, we can create a block which will produce it.</p>
 <p>First we will create the inverse function <code>scramble_block_inv</code> which is the inverse of <code>scramble_block</code>.</p>
-<p>Then we will create the inverse function of the hash <code>cryptohash_specific_block_inv</code>, with a given state and a desired state it will calculate the needed block.</p>
+<p>Then we will create the inverse function of the hash <code>cryptohash_specific_block_inv</code>, with a given state (current state) and a desired state it will calculate the needed block.</p>
 <p>So now we will create two different blocks, <code>a*32</code> and <code>b*32</code>, then we will calculate the state of each of them.</p>
 <p>$$
 S_a = hash(M_a)
@@ -987,7 +987,7 @@ $$</p>
                 <li>
                     
                         Word Count:
-                        757
+                        759
                     
                 </li>
             

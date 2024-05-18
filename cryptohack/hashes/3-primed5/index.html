@@ -703,8 +703,8 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-<p>In this challenge we get a program that allows us the send a prime and sign its hash.
-Then the program allows us to use the check method, sending a prime, a signature and a number a, then the program validate the signature of the prime, calculates the GCD between the prime and a, then returns the flag based on the GCD between them.
+<p>In this challenge we get a program that allows us to send a prime and sign its hash.
+Then the program allows us to use the check method, sending a prime, a signature and a number a, then the program validates the signature of the prime, calculates the GCD between the prime and a, then returns the flag based on the GCD between them.
 The problem is that the GCD between a prime and another number is 1.</p>
 
 
@@ -783,13 +783,13 @@ The problem is that the GCD between a prime and another number is 1.</p>
     
 </div>
 <h1 id="solution">Solution</h1>
-<p>To solve this challenge we need to find a prime number and a non-prime number that both has the same hash.
-Because of <a href="https://en.wikipedia.org/wiki/Merkle%E2%80%93Damg%C3%A5rd_construction">Merkle–Damgård construction</a> given two messages $M_a$ and $M_b$ that has the same hash and another arbitrary message $M_c$</p>
+<p>To solve this challenge we need to find a prime number and a non-prime number that both have the same hash.
+Because of <a href="https://en.wikipedia.org/wiki/Merkle%E2%80%93Damg%C3%A5rd_construction">Merkle–Damgård construction</a> given two messages $M_a$ and $M_b$ that have the same hash and another arbitrary message $M_c$</p>
 <p>$$
 H(M_a) = H(M_b) \Rightarrow H(M_a + M_c) = H(M_b + M_c)
 $$</p>
 <p>So we can find two messages with the same hash and then bruteforcing $M_c$ until $M_a + M_c$ is a prime number and $M_b + M_c$ is a non-prime number.</p>
-<p>Then we sign the prime number and then use the non-prime number in the check method with a number that the GCD is higher than the flag length.</p>
+<p>Then we sign the prime number, and use the non-prime number in the check method with a number of GCD that is bigger  than the flag length.</p>
 <p>Please note that the program checks for the prime length, so we will use some collision with minimum size.</p>
 
 
@@ -954,7 +954,7 @@ $$</p>
                 <li>
                     
                         Word Count:
-                        615
+                        614
                     
                 </li>
             

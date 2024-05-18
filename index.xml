@@ -27,7 +27,7 @@
       <link>https://yoavshah.github.io/cryptohack/hashes/3-primed5/</link>
       <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
       <guid>https://yoavshah.github.io/cryptohack/hashes/3-primed5/</guid>
-      <description>Challenge In this challenge we get a program that allows us the send a prime and sign its hash. Then the program allows us to use the check method, sending a prime, a signature and a number a, then the program validate the signature of the prime, calculates the GCD between the prime and a, then returns the flag based on the GCD between them. The problem is that the GCD between a prime and another number is 1.</description>
+      <description>Challenge In this challenge we get a program that allows us to send a prime and sign its hash. Then the program allows us to use the check method, sending a prime, a signature and a number a, then the program validates the signature of the prime, calculates the GCD between the prime and a, then returns the flag based on the GCD between them. The problem is that the GCD between a prime and another number is 1.</description>
     </item>
     <item>
       <title>4-twin_keys</title>

@@ -811,7 +811,7 @@
 <h1 id="solution">Solution</h1>
 <p>To solve this challenge we first have to look at its hashing algorithm.
 In this hash we have a state that is being initialized to some constant value, then each block does some operations on the state. After all the blocks iterated, the state is being permuted and substitude 16 times.</p>
-<p>Because the last part of the hash function does not depends on any block and is constant, if 2 messages can get the same state after the first for-loop the final hash will be the same, so we can trim this part and create <code>hash_partial</code> function</p>
+<p>Because the last part of the hash function does not depend on any block and is constant, if 2 messages can get the same state after the first for-loop the final hash will be the same, so we can trim this part and create <code>hash_partial</code> function.</p>
 
 
 
@@ -847,7 +847,7 @@ In this hash we have a state that is being initialized to some constant value, t
     
 </div>
 <p>We can see that each block affects only the last 4 bytes of the state, so the first block of each message should make the first 4 bytes of the state equals.
-Because permute is actualy the transpose matrix of 8x8 binary input, we can create 2 inputs to it that the first 4 bytes in the state will be the same (0, 0, 0, 0).</p>
+Because permute is actually the transpose matrix of 8x8 binary input, we can create 2 inputs to it that the first 4 bytes in the state will be the same (0, 0, 0, 0).</p>
 <p>$$
 A_0 = (16, 32, 48, 80, 0, 0, 0, 0)
 $$
@@ -856,7 +856,7 @@ B_0 = (16, 32, 48, 80, 0, 0, 0, 0x80)
 $$</p>
 <p>The thing is that using those inputs to the <code>permute</code> function will result in 4 zeros at the start and then 4 numbers.
 Because we control the last 4 bytes using the first block, we can create 2 blocks that when xored with the initial vector they will create $A_0$ and $B_0$.</p>
-<p>After that the <code>substitute</code> function will keep the first 4 bytes equals to each other!</p>
+<p>After that the <code>substitute</code> function will keep the first 4 bytes equal to each other!</p>
 <p>Then we need to create the second block for each message, the second block will xor the last 4 bytes of the state, after that the two equaled states will go through <code>permute</code>, so they will still be the same, and then will go through <code>substitute</code>, resulting in the same hash!</p>
 
 

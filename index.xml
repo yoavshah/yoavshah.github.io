@@ -24,10 +24,17 @@
     </item>
     <item>
       <title>2-export_grade</title>
-      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export-grade/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/</link>
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export-grade/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/</guid>
       <description>Challenge In this challenge we are an attacker sits between Alice and Bob and we perform &amp;ldquo;Man in the Middle&amp;rdquo; attack. We cannot change any parameter but the number of bytes chosen and support in the algorithm. Of course we will choose DH-64 bits, but how can we crack it?&#xA;Solution This was quite a hard challenge because I wanted to understand the algorithms used to expolit DH with small keys.</description>
+    </item>
+    <item>
+      <title>3-static_client</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</link>
+      <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</guid>
+      <description>Challenge In this challenge we eavesdropping a session between Alice and Bob, we later can start a new session with Bob.&#xA;Solution The vulnerabillity in this challenge is that Bob reuses his secret key b and that he allows us to choose any p and g .&#xA;At the second part of the call, we can send any g, a, p and Bob will return us B = pow(g, b, p), using that we need to find his secret b.</description>
     </item>
     <item>
       <title>1-collider</title>

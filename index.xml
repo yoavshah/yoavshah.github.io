@@ -6,8 +6,29 @@
     <description>Recent content on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 May 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>0-diffie_hellman_explained</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</link>
+      <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</guid>
+      <description>Here I will explain the Diffie-Hellman algorithm and the discrete log problem!&#xA;Diffie-Hellman In the algorithm first Alice generates ahead of time a prime number p and a generator g.&#xA;Then when Bob starts a converstation with Alice, Alice generates a random value a, calculates A = pow(g, a, p), and then sends to Bob (g, p, A).&#xA;Bob generates a random value b, calculates B = pow(g, b, p), and then sends it to Alice.</description>
+    </item>
+    <item>
+      <title>1-parameter_injection</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/</link>
+      <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/</guid>
+      <description>Challenge In this challenge we are an attacker sits between Alice and Bob and we perform &amp;ldquo;Man in the Middle&amp;rdquo; attack. We need to get the flag and decrypt it.&#xA;Solution This is an easy challenge, all we need to do is to generate our own b, then the change the message of Bob to contain our B!&#xA;Now Alice will use our B, thus we can calculate the shared_secret by calculating</description>
+    </item>
+    <item>
+      <title>2-export_grade</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export-grade/</link>
+      <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export-grade/</guid>
+      <description>Challenge In this challenge we are an attacker sits between Alice and Bob and we perform &amp;ldquo;Man in the Middle&amp;rdquo; attack. We cannot change any parameter but the number of bytes chosen and support in the algorithm. Of course we will choose DH-64 bits, but how can we crack it?&#xA;Solution This was quite a hard challenge because I wanted to understand the algorithms used to expolit DH with small keys.</description>
+    </item>
     <item>
       <title>1-collider</title>
       <link>https://yoavshah.github.io/cryptohack/hashes/1-collider/</link>

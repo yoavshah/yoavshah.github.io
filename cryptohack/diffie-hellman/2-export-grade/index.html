@@ -36,7 +36,7 @@
 
     <title>
         
-            01-passwords_as_keys |
+            2-export_grade |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            01-passwords_as_keys -
+            2-export_grade -
             SecurityBlog
         
     </div>
@@ -220,7 +220,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> diffie-helman </span>
 
@@ -394,7 +394,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> symmetric </span>
 
@@ -605,7 +605,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                01-passwords_as_keys
+                2-export_grade
             </h1>
 
             <div class="author-date-readtime">
@@ -628,8 +628,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.04.26"
-                            >2024.04.26
+                            datetime="2024.05.25"
+                            >2024.05.25
                         </time>
                     </div>
                 
@@ -639,7 +639,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        7 mins to read
                     </div>
                 
             </div>
@@ -693,11 +693,11 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/" class="bread-btn">
     
 
     
-        symmetric
+        diffie-helman
     
 </a>
 
@@ -708,12 +708,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/2-export-grade/" class="bread-btn">
     
 
     
         
-            01-passwords_as_keys
+            2-export_grade
         
 
     
@@ -726,69 +726,189 @@
         </div>
 
         
-            <nav id="TableOfContents"></nav>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#chinese-reminder-theorem">Chinese Reminder Theorem</a></li>
+        <li><a href="#pohlig-hellman">Pohlig-Hellman</a></li>
+        <li><a href="#baby-step-giant-step-bsgs">Baby Step Giant Step (BSGS)</a></li>
+        <li><a href="#overall-solution">Overall Solution</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
         
 
 
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0aimport%20hashlib%0d%0aimport%20random%0d%0a%0d%0a%0d%0a#%20/usr/share/dict/words%20from%0d%0a#%20https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words%0d%0awith%20open%28%22/usr/share/dict/words%22%29%20as%20f:%0d%0a%20%20%20%20words%20=%20[w.strip%28%29%20for%20w%20in%20f.readlines%28%29]%0d%0akeyword%20=%20random.choice%28words%29%0d%0a%0d%0aKEY%20=%20hashlib.md5%28keyword.encode%28%29%29.digest%28%29%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/decrypt/%3cciphertext%3e/%3cpassword_hash%3e/%27%29%0d%0adef%20decrypt%28ciphertext,%20password_hash%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%20%20%20%20key%20=%20bytes.fromhex%28password_hash%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28key,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /usr/share/dict/words from</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;/usr/share/dict/words&#34;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>readlines()]
-</span></span><span style="display:flex;"><span>keyword <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>choice(words)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(keyword<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/decrypt/&lt;ciphertext&gt;/&lt;password_hash&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext, password_hash):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(password_hash)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: encrypted<span style="color:#f92672">.</span>hex()}</span></span></code></pre></div>
-    
-</div>
+<p>In this challenge we are an attacker sits between Alice and Bob and we perform &ldquo;Man in the Middle&rdquo; attack.
+We cannot change any parameter but the number of bytes chosen and support in the algorithm.
+Of course we will choose DH-64 bits, but how can we crack it?</p>
 <h1 id="solution">Solution</h1>
-<p>This is quite an easy challenge, all we have to do here is to bruteforce the key using the keywords from <a href="https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words">here</a></p>
+<p>This was quite a hard challenge because I wanted to understand the algorithms used to expolit DH with small keys.
+First I assume you understand the Diffie-Hellman algorithm and the Discrete-Log problem (<a href="/cryptohack/diffie-hellman/0-diffie_hellman/">you can visit my other post if not</a>).</p>
+<p>First we will make Alice and Bob use DH-64 bit, which uses small Diffie-Hellman prime number, and we will use this to solve the discrete-log problem resulting in finding the <code>shared_secret</code>.</p>
+<h3 id="chinese-reminder-theorem">Chinese Reminder Theorem</h3>
+<p>First I will talk about the <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Reminder Theorem</a>.
+I have watched this <a href="https://www.youtube.com/watch?v=oKMYNKbFHBE">awesome video that explains it well</a></p>
+<p>In this algorithm we get a list of tuples in length of $l$ ($r_i$, $p_i$) and we need to find $x$ such that</p>
+<p>$$
+x \equiv_{p_1} r_1
+$$$$
+x \equiv_{p_2} r_2
+$$$$
+x \equiv_{p_3} r_3
+$$$$
+&hellip;
+$$</p>
+<p>To solve this problem we need first to calculate the multiplication of $M = p_1 * p_2 * p_3 * &hellip; $</p>
+<p>then iterate over each equation we got in the input list and calculate</p>
+<p>$$
+t_i = M / p_i
+$$</p>
+<p>So we get that for each $j \neq i$
+$$
+t_i \equiv_{p_j} 0
+$$</p>
+<p>and we also get that
+$$
+t_i \not\equiv_{p_i} 0
+$$</p>
+<p>Now we need to find $s_i$ such that
+$$
+t_i * s_i \equiv_{p_i} 1
+$$</p>
+<p>Then we can multiply by $r_i$ the equation to get
+$$
+r_i * t_i * s_i \equiv_{p_i} r_i
+$$</p>
+<p>We can iterate over $s_i$ in the field to find it.
+Also, we can see that for each $j \neq i$
+$$
+r_i * t_i * s_i \equiv_{p_j} 0
+$$</p>
+<p>With it we can see that
+$$
+r_0 * t_0 * s_0 + r_1 * t_1 * s_1 + &hellip; \equiv_{p_0} r_0
+$$$$
+r_0 * t_0 * s_0 + r_1 * t_1 * s_1 + &hellip; \equiv_{p_1} r_1
+$$$$
+&hellip;
+$$</p>
+<p>So we found such an $x$. We can now make it smaller by modding it with $M$.</p>
+<p>Have a look at the <code>chinese_reminder</code> method
+<a href="/cryptohack/diffie-hellman/code/helpers/chinese_remainder_theorem.py">chinese_remainder_theorem.py</a></p>
+<h3 id="pohlig-hellman">Pohlig-Hellman</h3>
+<p>First I found the algorithm &ldquo;Pohlig-Hellman&rdquo; (<a href="https://www.youtube.com/watch?v=SmzUe_-e7oA">This video explains this algorithm great</a>).</p>
+<p>Let&rsquo;s say we want to solve the following discrete log equation</p>
+<p>$$
+log_a(b) \bmod p
+$$</p>
+<p>First have a look at the <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">Euler&rsquo;s totient function</a>.</p>
+<p>Because <code>p</code> is prime then $\varphi(p) = (p-1)$.
+Let&rsquo;s say $p-1 = p_1 * p_2$ (I use here 2 factors for simplicity but it will work also for more).</p>
+<p>We need to find $x$ such that
+$$
+a^x \equiv_p b
+$$</p>
+<p>Let $x = a_0 + a_1*p_1$</p>
+<p>So we got
+$$
+a^{a_0 + a_1*p_1} \equiv_p b
+$$</p>
+<p>Now we can power up both sides by $p_2$ (with more factors we can just power it up with their multiplication), so we get</p>
+<p>$$
+a^{p_2(a_0 + a_1*p_1)} \equiv_p b^{p_2}
+$$</p>
+<p>So
+$$
+a^{a_0<em>p_2} * a^{(a_1</em>p_1*p_2)} \equiv_p b^{p_2}
+$$</p>
+<p>$$
+(a^{p_2})^{a_0} * (a^{a_1})^{(p_1*p_2)} \equiv_p b^{p_2}
+$$</p>
+<p>$$
+(a^{p_2})^{a_0} * (a^{a_1})^{\varphi(p)} \equiv_p b^{p_2}
+$$</p>
+<p>Using the <a href="https://en.wikipedia.org/wiki/Euler%27s_theorem">Euler-Fermat Theorem</a></p>
+<p>$$
+x^{\varphi(n)} \equiv_n 1
+$$</p>
+<p>We can remove the second part in the equation, so
+$$
+(a^{p_2})^{a_0} \equiv_p b^{p_2}
+$$</p>
+<p>We know $p2$, $a$, $b$ so the only variable we do not know is $a_0$.
+Because $x = a_0 + a_1 * p_1$, then $a_0$ will be some value between $0$ to $p_1$.</p>
+<p>It is easier than the original discrete-log equation because the original solution could range from $0$ to $p$, whether the new equation&rsquo;s solution could range only from $0$ to $p_1$ - which is smaller than $p$.</p>
+<p>Then using trial-and-error we can solve this new easier discrete log equation.</p>
+<p>Using the same algorithm we iterate over all the factors of $\varphi(p)$, and calculate its discrete log.</p>
+<p>After that all of the iterations we get
+$x \equiv_{p_1} a_0$
+$x \equiv_{p_2} b_0$
+$x \equiv_{p_3} c_0$
+&hellip;</p>
+<p>And we can find $x$ using the Chinese Reminder Theorem I talked about above to find $x$!</p>
+<p>So I have wrote this algorithm in the following file
+<a href="/cryptohack/diffie-hellman/code/helpers/pohlig_hellman.py">pohlig_hellman.py</a></p>
+<p>Then I tried to use this code to solve the 64 bit discrete-log equation, but one of the prime factor of $\varphi(p)$ was too large and it took too much time to iterate over all the possible values, so I just tried another algorithm I found.</p>
+<h3 id="baby-step-giant-step-bsgs">Baby Step Giant Step (BSGS)</h3>
+<p>This algorithm is another algorithm to solve the discrete-log problem. This algorithm is based on a space-time tradeoff, meaning that instead of bruteforcing using trial and error N possible values, we store x values and compare them againts $N / x$ values.</p>
+<p>So if we choose $sqrt(N)$ we get that it will run much faster than the bruteforce method, but will require much more space.</p>
+<p>This is a <a href="https://www.youtube.com/watch?v=007MVsELvQw">great video about this algorithm</a></p>
+<p>The algorithm works as follows, given <code>a, b, p</code> we need to find</p>
+<p>$$
+log_a(b) \bmod p
+$$</p>
+<p>Or calculate $x$ such that</p>
+<p>$$
+a^x \equiv_p b
+$$</p>
+<p>First let&rsquo;s choose $K = \lceil{sqrt(p)}\rceil$, but we can choose any other $K$ we wish.</p>
+<p>We will iterate over $K$ and calculate for each
+$$
+a^i \bmod p
+$$
+and store it in hashtable.</p>
+<p>Then we will iterate another $K$ times and each time will calculate
+$$
+b * a^{-K * i}
+$$
+each iteration we will check if the current value is inside the hashtable, when we find a match we can use the hashtable to find j such that $a^j \bmod p = b * a^{-K * i}$, so</p>
+<p>$$
+a^j \bmod p \equiv_p b * a^{-K * i}
+$$</p>
+<p>$$
+a^j * a^{K * i} \bmod p \equiv_p b
+$$</p>
+<p>$$
+a^{j + K * i} \bmod p \equiv_p b
+$$</p>
+<p>So the solution to the discrete log equation is $j + K*i$</p>
+<p>I created my version of this algorithm but it still was very slow, the $sqrt(p)$ was too large and iterating through it will require better hardware.</p>
+<p>Then I stepped uppon a combined algorithm of both Pohlig-Hellman and Baby Step Giant Step.</p>
+<h3 id="overall-solution">Overall Solution</h3>
+<p>I found out that I can use Pohlig-Hellman and instead of bruteforcing the easier discrete-log equations, I could use the Baby Step Giant Step algorithm!</p>
+<p>So after performing Pohlig-Hellman, I found a list of mods and their reminders that I had to send to the Chinese Reminder Theorem, the next problem rose in my implementation.</p>
+<p>In my implementation the code bruteforce a value to find the inverse of a number in a field.</p>
+<p>So I create a new implementation which for every <code>mod</code> the input will send whether the <code>mod</code> is prime or not, if it is prime then we can find the inverse using <a href="https://en.wikipedia.org/wiki/Fermat%27s_little_theorem">Fermat&rsquo;s Little Theorem</a>, which conclude</p>
+<p>$$
+a^p \equiv_p a
+$$
+So
+$$
+a^{p-1} \equiv_p 1
+$$
+So
+$$
+a^{p-2} \equiv_p a^{-1}
+$$</p>
+<p>Now I could find the inverse easly and thus making it more efficient!</p>
+<p>Have a look at the <code>chinese_reminder_faster</code> method
+<a href="/cryptohack/diffie-hellman/code/helpers/chinese_remainder_theorem.py">chinese_remainder_theorem.py</a></p>
 
 
 
@@ -806,32 +926,82 @@
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> collections
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>WORDLIST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words&#34;</span>
-</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> requests<span style="color:#f92672">.</span>get(WORDLIST)<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#from helpers import pohlig_hellman</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> pohlig_hellman_and_bsgs
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c92b7734070205bdf6c0087a751466ec13ae15e6f1bcdd3f3a535ec0f4bbae66&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pkcs7_padded</span>(message):
+</span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span>message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all(padding[i] <span style="color:#f92672">==</span> len(padding) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padding)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_flag</span>(shared_secret: int, iv: str, ciphertext: str):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Derive AES key from shared secret</span>
+</span></span><span style="display:flex;"><span>    sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
+</span></span><span style="display:flex;"><span>    sha1<span style="color:#f92672">.</span>update(str(shared_secret)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>))
+</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> sha1<span style="color:#f92672">.</span>digest()[:<span style="color:#ae81ff">16</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Decrypt flag</span>
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_pkcs7_padded(plaintext):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> unpad(plaintext, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> plaintext<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(FLAG)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> words:
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(w<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_json</span>(s):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(s[s<span style="color:#f92672">.</span>index(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;{&#34;</span>):])
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        dec <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)<span style="color:#f92672">.</span>decode()
-</span></span><span style="display:flex;"><span>        print(dec)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span></span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13379</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recv()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>sendline(json<span style="color:#f92672">.</span>dumps({<span style="color:#e6db74">&#34;supported&#34;</span>: [<span style="color:#e6db74">&#34;DH64&#34;</span>]})<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recv()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>sendline(json<span style="color:#f92672">.</span>dumps({<span style="color:#e6db74">&#34;chosen&#34;</span>: <span style="color:#e6db74">&#34;DH64&#34;</span>})<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alice_dh_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>bob_dh_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>enc_flag <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> int(alice_dh_params[<span style="color:#e6db74">&#34;p&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> int(alice_dh_params[<span style="color:#e6db74">&#34;g&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">=</span> int(alice_dh_params[<span style="color:#e6db74">&#34;A&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> int(bob_dh_params[<span style="color:#e6db74">&#34;B&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># g ** a = A mod p =&gt; find a</span>
+</span></span><span style="display:flex;"><span>found_a <span style="color:#f92672">=</span> pohlig_hellman_and_bsgs<span style="color:#f92672">.</span>discrete_log(g, A, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># calculate shared secret</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># B ** found_a mod p </span>
+</span></span><span style="display:flex;"><span>shared_secret <span style="color:#f92672">=</span> pow(B, found_a, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># decrypt flag</span>
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> decrypt_flag(shared_secret, enc_flag[<span style="color:#e6db74">&#34;iv&#34;</span>], enc_flag[<span style="color:#e6db74">&#34;encrypted_flag&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/symmetric/code/passwords_as_keys.py">passwords_as_keys.py</a></p>
+<p><a href="/cryptohack/diffie-hellman/code/export_grade.py">export_grade.py</a></p>
 
             
         </div>
@@ -880,7 +1050,7 @@
                 <li>
                     
                         Word Count:
-                        147
+                        1358
                     
                 </li>
             
@@ -916,7 +1086,7 @@
                     
                         Last modified: &nbsp;
                         <time>
-                            Apr 26 2024 10:59:55
+                            May 25 2024 00:00:00
                         </time>
                     
                 </li>

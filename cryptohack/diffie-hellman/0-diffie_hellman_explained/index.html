@@ -36,7 +36,7 @@
 
     <title>
         
-            01-passwords_as_keys |
+            0-diffie_hellman_explained |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            01-passwords_as_keys -
+            0-diffie_hellman_explained -
             SecurityBlog
         
     </div>
@@ -220,7 +220,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> diffie-helman </span>
 
@@ -394,7 +394,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> symmetric </span>
 
@@ -605,7 +605,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                01-passwords_as_keys
+                0-diffie_hellman_explained
             </h1>
 
             <div class="author-date-readtime">
@@ -628,8 +628,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.04.26"
-                            >2024.04.26
+                            datetime="2024.05.25"
+                            >2024.05.25
                         </time>
                     </div>
                 
@@ -639,7 +639,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        2 mins to read
                     </div>
                 
             </div>
@@ -693,11 +693,11 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/" class="bread-btn">
     
 
     
-        symmetric
+        diffie-helman
     
 </a>
 
@@ -708,12 +708,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/" class="bread-btn">
     
 
     
         
-            01-passwords_as_keys
+            0-diffie_hellman_explained
         
 
     
@@ -732,7 +732,15 @@
 
         <div class="content">
             
-                <h1 id="challenge">Challenge</h1>
+                <p>Here I will explain the Diffie-Hellman algorithm and the discrete log problem!</p>
+<h1 id="diffie-hellman">Diffie-Hellman</h1>
+<p><img src="/cryptohack/diffie-hellman/images/DiffieHellman.svg" alt="DiffieHellman"></p>
+<p>In the algorithm first Alice generates ahead of time a prime number <code>p</code> and a generator <code>g</code>.</p>
+<p>Then when Bob starts a converstation with Alice, Alice generates a random value <code>a</code>, calculates <code>A = pow(g, a, p)</code>, and then sends to Bob <code>(g, p, A)</code>.</p>
+<p>Bob generates a random value <code>b</code>, calculates <code>B = pow(g, b, p)</code>, and then sends it to Alice.</p>
+<p>So the only parameters being sent through the public unsecured channel are <code>g, p, A, B</code>.</p>
+<p>To calculate the <code>shared_secret</code>, Alice calculates <code>shared_secret = pow(B, a, p)</code> and Bob calculates <code>shared_secret = pow(A, b, p)</code>.</p>
+<p>The <code>shared_secret</code> will be the same because</p>
 
 
 
@@ -743,95 +751,51 @@
 <div class="codeblock">
     
         <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0aimport%20hashlib%0d%0aimport%20random%0d%0a%0d%0a%0d%0a#%20/usr/share/dict/words%20from%0d%0a#%20https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words%0d%0awith%20open%28%22/usr/share/dict/words%22%29%20as%20f:%0d%0a%20%20%20%20words%20=%20[w.strip%28%29%20for%20w%20in%20f.readlines%28%29]%0d%0akeyword%20=%20random.choice%28words%29%0d%0a%0d%0aKEY%20=%20hashlib.md5%28keyword.encode%28%29%29.digest%28%29%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/decrypt/%3cciphertext%3e/%3cpassword_hash%3e/%27%29%0d%0adef%20decrypt%28ciphertext,%20password_hash%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%20%20%20%20key%20=%20bytes.fromhex%28password_hash%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28key,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
+            <button class="copy-button" state="copy" data="A%20=%20pow%28g,%20a,%20p%29%0d%0ashared_secret%20=%20pow%28A,%20b,%20p%29%20=%20pow%28pow%28g,%20a,%20p%29,%20b,%20p%29%0d%0a%0d%0aB%20=%20pow%28g,%20b,%20p%29%0d%0ashared_secret%20=%20pow%28B,%20a,%20p%29%20=%20pow%28pow%28g,%20b,%20p%29,%20a,%20p%29">
                 <i class="bi bi-copy"></i>
             </button>
         </div>
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /usr/share/dict/words from</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;/usr/share/dict/words&#34;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>readlines()]
-</span></span><span style="display:flex;"><span>keyword <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>choice(words)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(keyword<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/decrypt/&lt;ciphertext&gt;/&lt;password_hash&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext, password_hash):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(password_hash)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: encrypted<span style="color:#f92672">.</span>hex()}</span></span></code></pre></div>
+        <pre><code>A = pow(g, a, p)
+shared_secret = pow(A, b, p) = pow(pow(g, a, p), b, p)
+
+B = pow(g, b, p)
+shared_secret = pow(B, a, p) = pow(pow(g, b, p), a, p)</code></pre>
     
 </div>
-<h1 id="solution">Solution</h1>
-<p>This is quite an easy challenge, all we have to do here is to bruteforce the key using the keywords from <a href="https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words">here</a></p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="#ZgotmplZ">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>WORDLIST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words&#34;</span>
-</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> requests<span style="color:#f92672">.</span>get(WORDLIST)<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c92b7734070205bdf6c0087a751466ec13ae15e6f1bcdd3f3a535ec0f4bbae66&#34;</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(FLAG)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> words:
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(w<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        dec <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)<span style="color:#f92672">.</span>decode()
-</span></span><span style="display:flex;"><span>        print(dec)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span></span></span></code></pre></div>
-    
-</div>
-<p><a href="/cryptohack/symmetric/code/passwords_as_keys.py">passwords_as_keys.py</a></p>
+<p>$$
+(g^a)^b = (g^b)^a = g^{ab}
+$$</p>
+<p>The strength of this algorithm comes from that using the parameters that are exposed to the public channel (<code>g, p, A, B</code>) an attacker cannot forge <code>shared_secret</code>!</p>
+<h1 id="discrete-log">Discrete-Log</h1>
+<p>The Discrete-Log problem is that when given <code>a, b, p</code> calculate <code>x</code> such that</p>
+<p>$$
+a^x \equiv_p b
+$$</p>
+<p>Which is
+$$
+log_a(b) \bmod p
+$$</p>
+<p>In normal $log$, to calculate the $log_a(b)$ by trial and error, for example to calculate $log_2(1000)$, we can try $2^{10} = 1024$ and $2^9 = 512$ so we know the solution is between 9 to 10, but is much much closer to 10.</p>
+<p>In fields it is not straight forward, it is much more difficult.</p>
+<h1 id="diffie-hellman-and-the-discrete-log">Diffie-Hellman and the Discrete-Log</h1>
+<p>An eavesdropper can gather the publich channel DH parameters (<code>g, p, a, B</code>) and if has an efficient solution to the discrete-log problem, he can calculate
+$$
+a \equiv_p log_g(A)
+$$</p>
+<p>After he calculates <code>a</code>, he can just calculate the <code>shared_secret</code>!</p>
+<p>So we can conclude that solving the Discrete-Log problem will cause Diffie-Hellman lose its security powers.</p>
+<h1 id="solving-the-discrete-log">Solving the Discrete-Log</h1>
+<p>There are many algorithms for solving the discrete log problem.</p>
+<ul>
+<li>Baby step Giant step (BSGS)</li>
+<li>Pohlig-Hellman</li>
+<li>etc&hellip;</li>
+</ul>
+<p>Yet they are not enough efficient to crack Diffie-Hellman with an enough key length (bit size)</p>
+<p>There are also misuses of Diffie-Hellman when choosing bad parameters which can lower the strength of the algorithm.</p>
 
             
         </div>
@@ -880,7 +844,7 @@
                 <li>
                     
                         Word Count:
-                        147
+                        381
                     
                 </li>
             
@@ -916,7 +880,7 @@
                     
                         Last modified: &nbsp;
                         <time>
-                            Apr 26 2024 10:59:55
+                            May 25 2024 00:00:00
                         </time>
                     
                 </li>

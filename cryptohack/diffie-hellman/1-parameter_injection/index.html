@@ -36,7 +36,7 @@
 
     <title>
         
-            01-passwords_as_keys |
+            1-parameter_injection |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            01-passwords_as_keys -
+            1-parameter_injection -
             SecurityBlog
         
     </div>
@@ -220,7 +220,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> diffie-helman </span>
 
@@ -394,7 +394,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> symmetric </span>
 
@@ -605,7 +605,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                01-passwords_as_keys
+                1-parameter_injection
             </h1>
 
             <div class="author-date-readtime">
@@ -628,8 +628,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.04.26"
-                            >2024.04.26
+                            datetime="2024.05.25"
+                            >2024.05.25
                         </time>
                     </div>
                 
@@ -639,7 +639,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        2 mins to read
                     </div>
                 
             </div>
@@ -693,11 +693,11 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/" class="bread-btn">
     
 
     
-        symmetric
+        diffie-helman
     
 </a>
 
@@ -708,12 +708,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/" class="bread-btn">
     
 
     
         
-            01-passwords_as_keys
+            1-parameter_injection
         
 
     
@@ -733,6 +733,11 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
+<p>In this challenge we are an attacker sits between Alice and Bob and we perform &ldquo;Man in the Middle&rdquo; attack.
+We need to get the flag and decrypt it.</p>
+<h1 id="solution">Solution</h1>
+<p>This is an easy challenge, all we need to do is to generate our own <code>b</code>, then the change the message of Bob to contain our <code>B</code>!</p>
+<p>Now Alice will use our <code>B</code>, thus we can calculate the <code>shared_secret</code> by calculating</p>
 
 
 
@@ -743,52 +748,17 @@
 <div class="codeblock">
     
         <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0aimport%20hashlib%0d%0aimport%20random%0d%0a%0d%0a%0d%0a#%20/usr/share/dict/words%20from%0d%0a#%20https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words%0d%0awith%20open%28%22/usr/share/dict/words%22%29%20as%20f:%0d%0a%20%20%20%20words%20=%20[w.strip%28%29%20for%20w%20in%20f.readlines%28%29]%0d%0akeyword%20=%20random.choice%28words%29%0d%0a%0d%0aKEY%20=%20hashlib.md5%28keyword.encode%28%29%29.digest%28%29%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/decrypt/%3cciphertext%3e/%3cpassword_hash%3e/%27%29%0d%0adef%20decrypt%28ciphertext,%20password_hash%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%20%20%20%20key%20=%20bytes.fromhex%28password_hash%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28key,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/passwords_as_keys/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20encrypted.hex%28%29%7d">
+            <button class="copy-button" state="copy" data="pow%28A,%20b,%20p%29">
                 <i class="bi bi-copy"></i>
             </button>
         </div>
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># /usr/share/dict/words from</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;/usr/share/dict/words&#34;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>readlines()]
-</span></span><span style="display:flex;"><span>keyword <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>choice(words)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(keyword<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/decrypt/&lt;ciphertext&gt;/&lt;password_hash&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext, password_hash):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(password_hash)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/passwords_as_keys/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: encrypted<span style="color:#f92672">.</span>hex()}</span></span></code></pre></div>
+        <pre><code>pow(A, b, p)</code></pre>
     
 </div>
-<h1 id="solution">Solution</h1>
-<p>This is quite an easy challenge, all we have to do here is to bruteforce the key using the keywords from <a href="https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words">here</a></p>
+<p>Then decrypting the flag.</p>
 
 
 
@@ -806,32 +776,79 @@
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>WORDLIST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://gist.githubusercontent.com/wchargin/8927565/raw/d9783627c731268fb2935a731a618aa8e95cf465/words&#34;</span>
-</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> [w<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> requests<span style="color:#f92672">.</span>get(WORDLIST)<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pkcs7_padded</span>(message):
+</span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span>message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all(padding[i] <span style="color:#f92672">==</span> len(padding) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padding)))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;c92b7734070205bdf6c0087a751466ec13ae15e6f1bcdd3f3a535ec0f4bbae66&#34;</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(FLAG)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> words:
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>md5(w<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_ECB)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_flag</span>(shared_secret: int, iv: str, ciphertext: str):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Derive AES key from shared secret</span>
+</span></span><span style="display:flex;"><span>    sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
+</span></span><span style="display:flex;"><span>    sha1<span style="color:#f92672">.</span>update(str(shared_secret)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>))
+</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> sha1<span style="color:#f92672">.</span>digest()[:<span style="color:#ae81ff">16</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Decrypt flag</span>
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        dec <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)<span style="color:#f92672">.</span>decode()
-</span></span><span style="display:flex;"><span>        print(dec)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span></span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_pkcs7_padded(plaintext):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> unpad(plaintext, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> plaintext<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13371</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_recv</span>():
+</span></span><span style="display:flex;"><span>    line <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(line<span style="color:#f92672">.</span>decode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_send</span>(hsh):
+</span></span><span style="display:flex;"><span>    request <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(hsh)<span style="color:#f92672">.</span>encode()
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>sendline(request)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Our chosen B</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#ae81ff">197395083814907028991785772714920885908249341925650951555219049411298436217190605190824934787336279228785809783531814507661385111220639329358048196339626065676869119737979175531770768861808581110311903548567424039264485661330995221907803300824165469977099494284722831845653985392791480264712091293580274947132480402319812110462641143884577706335859190668240694680261160210609506891842793868297672619625924001403035676872189455767944077542198064499486164431451944</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(r<span style="color:#f92672">.</span>recvline()[len(<span style="color:#e6db74">&#34;Intercepted from Alice: &#34;</span>):])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>sendline(json<span style="color:#f92672">.</span>dumps(data)<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> pow(int(data[<span style="color:#e6db74">&#34;g&#34;</span>], <span style="color:#ae81ff">16</span>), b, int(data[<span style="color:#e6db74">&#34;p&#34;</span>], <span style="color:#ae81ff">16</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shared_secret <span style="color:#f92672">=</span> pow(int(data[<span style="color:#e6db74">&#34;A&#34;</span>], <span style="color:#ae81ff">16</span>), b, int(data[<span style="color:#e6db74">&#34;p&#34;</span>], <span style="color:#ae81ff">16</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()[len(<span style="color:#e6db74">&#34;Send to Bob: Intercepted from Bob: &#34;</span>):]
+</span></span><span style="display:flex;"><span>bob_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>B_bob <span style="color:#f92672">=</span> int(bob_data[<span style="color:#e6db74">&#34;B&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Send the attacker B</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>sendline(json<span style="color:#f92672">.</span>dumps({<span style="color:#e6db74">&#34;B&#34;</span>: hex(B)})<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> x[x<span style="color:#f92672">.</span>index(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;{&#34;</span>):]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cipher_flag <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(decrypt_flag(shared_secret, cipher_flag[<span style="color:#e6db74">&#34;iv&#34;</span>], cipher_flag[<span style="color:#e6db74">&#34;encrypted_flag&#34;</span>]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/symmetric/code/passwords_as_keys.py">passwords_as_keys.py</a></p>
+<p><a href="/cryptohack/diffie_hellman/code/parameter_injection.py">parameter_injection.py</a></p>
 
             
         </div>
@@ -880,7 +897,7 @@
                 <li>
                     
                         Word Count:
-                        147
+                        245
                     
                 </li>
             
@@ -916,7 +933,7 @@
                     
                         Last modified: &nbsp;
                         <time>
-                            Apr 26 2024 10:59:55
+                            May 25 2024 00:00:00
                         </time>
                     
                 </li>

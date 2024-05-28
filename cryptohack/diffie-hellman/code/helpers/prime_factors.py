@@ -11,14 +11,16 @@ def prime_factors(n):
 
 
     i = 3
-    n_sqrt = math.sqrt(n)
-    while i <= n_sqrt:
+    n_sqrt = math.isqrt(n)
+    while i <= n_sqrt and n != 1:
         if n % i != 0:
             i += 2
             
         else:
             n //= i
             factors.append(i)
+
+        
             
     if n > 1:
         factors.append(n)
@@ -28,4 +30,4 @@ def prime_factors(n):
 
 
 if __name__ == "__main__":
-    print(prime_factors(50))
+    print(prime_factors(5000))

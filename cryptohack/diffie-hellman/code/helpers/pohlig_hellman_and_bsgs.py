@@ -6,7 +6,7 @@ from typing import List, Dict, Tuple
 from chinese_remainder_theorem import chinese_reminder, chinese_reminder_faster
 from prime_factors import prime_factors
 from collections import Counter
-from tqdm.auto import tqdm
+from tqdm import tqdm
 import math
 
 import baby_step_giant_step as bsgs
@@ -28,8 +28,9 @@ def discrete_log(b, a, p):
         prime_factors_phi_mult *= curr_factor
 
 
-    reminders = [] 
-    for factor in factors_cnt:
+    reminders = []
+    print(factors_cnt)
+    for factor in tqdm(factors_cnt):
         power = factors_cnt[factor]
         factor_powered = pow(factor, power)
 

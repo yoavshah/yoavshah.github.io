@@ -1,4 +1,5 @@
 from typing import List, Dict, Tuple
+from tqdm import tqdm
 
 # https://www.youtube.com/watch?v=oKMYNKbFHBE
 # Written by me
@@ -42,7 +43,7 @@ def chinese_reminder_faster(reminders : List[Tuple[int, int, bool]]):
     summed_value = 0
     mods_mults = 1
     
-    for i, tup in enumerate(reminders):
+    for i, tup in tqdm(enumerate(reminders)):
         reminder = tup[0]
         mod = tup[1]
         is_mod_prime = tup[2]

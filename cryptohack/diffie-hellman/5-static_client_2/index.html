@@ -36,7 +36,7 @@
 
     <title>
         
-            6-md0 |
+            5-static_client_2 |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            6-md0 -
+            5-static_client_2 -
             SecurityBlog
         
     </div>
@@ -220,7 +220,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> diffie-helman </span>
 
@@ -317,7 +317,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> hashes </span>
 
@@ -645,7 +645,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                6-md0
+                5-static_client_2
             </h1>
 
             <div class="author-date-readtime">
@@ -668,8 +668,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.05.10"
-                            >2024.05.10
+                            datetime="2024.05.29"
+                            >2024.05.29
                         </time>
                     </div>
                 
@@ -733,11 +733,11 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/hashes/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/" class="bread-btn">
     
 
     
-        hashes
+        diffie-helman
     
 </a>
 
@@ -748,12 +748,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/" class="bread-btn">
     
 
     
         
-            6-md0
+            5-static_client_2
         
 
     
@@ -773,111 +773,13 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-<p>In this challenge we get a hash function that iterates for each block and uses AES-ECB with the current block as its key, then encrypts that last state and xors the encrypted state.
-To gain the flag we need to sign a message (which just return the hash of the key + the data) and then use the option <code>get_flag</code> with the parameter <code>admin=True</code> and a valid signature.</p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="#ZgotmplZ">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> utils <span style="color:#f92672">import</span> listener
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;crypto{???????????????}&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bxor</span>(a, b):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(x <span style="color:#f92672">^</span> y <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hash</span>(data):
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> pad(data, <span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>    out <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(data), <span style="color:#ae81ff">16</span>):
-</span></span><span style="display:flex;"><span>        blk <span style="color:#f92672">=</span> data[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">16</span>]
-</span></span><span style="display:flex;"><span>        out <span style="color:#f92672">=</span> bxor(AES<span style="color:#f92672">.</span>new(blk, AES<span style="color:#f92672">.</span>MODE_ECB)<span style="color:#f92672">.</span>encrypt(out), out)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> out
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Challenge</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self):
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>before_input <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;You&#39;ll never forge my signatures!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">challenge</span>(self, msg):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;option&#34;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> msg:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;You must send an option to this server.&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> msg[<span style="color:#e6db74">&#34;option&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;sign&#34;</span>:
-</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;message&#34;</span>])
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span> <span style="color:#f92672">in</span> data:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Unauthorized to sign message&#34;</span>}
-</span></span><span style="display:flex;"><span>            sig <span style="color:#f92672">=</span> hash(self<span style="color:#f92672">.</span>key <span style="color:#f92672">+</span> data)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;signature&#34;</span>: sig<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> msg[<span style="color:#e6db74">&#34;option&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;get_flag&#34;</span>:
-</span></span><span style="display:flex;"><span>            sent_sig <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;signature&#34;</span>])
-</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(msg[<span style="color:#e6db74">&#34;message&#34;</span>])
-</span></span><span style="display:flex;"><span>            real_sig <span style="color:#f92672">=</span> hash(self<span style="color:#f92672">.</span>key <span style="color:#f92672">+</span> data)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> real_sig <span style="color:#f92672">!=</span> sent_sig:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Invalid signature&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span> <span style="color:#f92672">in</span> data:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;flag&#34;</span>: FLAG}
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Unauthorized to get flag&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Invalid option&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">When you connect, the &#39;challenge&#39; function will be called on your JSON
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">input.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>listener<span style="color:#f92672">.</span>start_server(port<span style="color:#f92672">=</span><span style="color:#ae81ff">13388</span>)</span></span></code></pre></div>
-    
-</div>
+<p>In this challenge we get again a converstation of Alice and Bob, we later can exchange keys with Bob.
+The problem here is that Bob uses the same secret key.
+The difference between 3-static_client is that Bob now verifies $g$ and verifies $p$.</p>
 <h1 id="solution">Solution</h1>
-<p>To solve this challenge we will need to find a way to recreate the signature with the chosen key.
-First we will send a message block of only zeros, the program will pad it with &ldquo;\x01&rdquo;.
-<code>b&quot;\x00&quot;*15 + b&quot;\x01&quot;</code></p>
-<p>Let&rsquo;s call its signature $S_a$</p>
-<p>Because the $key$ is only 16 bytes (full block) and we can get $S_a$ using the first send operation, we can use this state and the new block to calculate the next state!</p>
-<p>So basiclly we get $H(M_a)$
-$$
-H(M_a) = E_{b0}(E_{key}(0) \oplus 0) \oplus (E_{key}(0) \oplus 0)
-$$</p>
-<p>And then we can calculate $H(M_b)$ for each $M_b$ such that the new message is the old message plus a selected block.
-$$
-M_b = M_a + B
-$$</p>
-<p>Then
-$$
-H(M_b) = E_{b1}(E_{b0}(E_{key}(0) \oplus 0) \oplus (E_{key}(0) \oplus 0)) \oplus (E_{b0}(E_{key}(0) \oplus 0) \oplus (E_{key}(0) \oplus 0))
-$$</p>
-<p>We can use $H(M_a)$ and reduce it to
-$$
-H(M_b) = E_{b1}(H(M_a)) \oplus H(M_a)
-$$</p>
-<p>Because we have $b1$ and we have $H(M_a)$ we can easly calculate $H(M_b)$</p>
+<p>To solve this challenge we will generate a new large weak prime number $p$.
+To make this prime number be weak we need that $\varphi(p)$ will be factored to many small prime numbers.</p>
+<p>So first we will create such a prime number with at least 1700 bits, then we will use the pohlig_hellman_and_bsgs discrete log function we wrote at <a href="/cryptohack/diffie-hellman/2-export_grade">2-export_grade</a> to calculate $b$. After that we can just use the $b$ we found to get the shared secret between Alice and Bob, and then decrypt the flag.</p>
 
 
 
@@ -899,54 +801,132 @@ $$</p>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> isPrime, bytes_to_long, long_to_bytes
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util <span style="color:#f92672">import</span> number
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> collections
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> isPrime
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> chinese_remainder_theorem
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> prime_factors
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> baby_step_giant_step <span style="color:#66d9ef">as</span> bsgs
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> pohlig_hellman_and_bsgs
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bxor</span>(a, b):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(x <span style="color:#f92672">^</span> y <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pkcs7_padded</span>(message):
+</span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span>message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all(padding[i] <span style="color:#f92672">==</span> len(padding) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padding)))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13388</span>, level <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_flag</span>(shared_secret: int, iv: str, ciphertext: str):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Derive AES key from shared secret</span>
+</span></span><span style="display:flex;"><span>    sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
+</span></span><span style="display:flex;"><span>    sha1<span style="color:#f92672">.</span>update(str(shared_secret)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>))
+</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> sha1<span style="color:#f92672">.</span>digest()[:<span style="color:#ae81ff">16</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Decrypt flag</span>
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_recv</span>():
-</span></span><span style="display:flex;"><span>    line <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(line<span style="color:#f92672">.</span>decode())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">json_send</span>(hsh):
-</span></span><span style="display:flex;"><span>    request <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(hsh)<span style="color:#f92672">.</span>encode()
-</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>sendline(request)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>_ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvline()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>first_message <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">15</span>
-</span></span><span style="display:flex;"><span>first_message_padded <span style="color:#f92672">=</span> first_message <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;sign&#34;</span>, <span style="color:#e6db74">&#34;message&#34;</span>: first_message<span style="color:#f92672">.</span>hex()})
-</span></span><span style="display:flex;"><span>sig_first <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(json_recv()[<span style="color:#e6db74">&#34;signature&#34;</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>blk <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span>
-</span></span><span style="display:flex;"><span>blk <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">15</span> <span style="color:#f92672">-</span> len(blk))
-</span></span><span style="display:flex;"><span>blk_padded <span style="color:#f92672">=</span> blk <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>second_message <span style="color:#f92672">=</span> first_message_padded <span style="color:#f92672">+</span> blk
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>new_signature <span style="color:#f92672">=</span> bxor(AES<span style="color:#f92672">.</span>new(blk_padded, AES<span style="color:#f92672">.</span>MODE_ECB)<span style="color:#f92672">.</span>encrypt(sig_first), sig_first)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>json_send({<span style="color:#e6db74">&#34;option&#34;</span>: <span style="color:#e6db74">&#34;get_flag&#34;</span>,
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;message&#34;</span>: second_message<span style="color:#f92672">.</span>hex(),
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;signature&#34;</span>: new_signature<span style="color:#f92672">.</span>hex()})
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> json_recv()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_pkcs7_padded(plaintext):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> unpad(plaintext, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> plaintext<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_json</span>(s):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(s[s<span style="color:#f92672">.</span>index(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;{&#34;</span>):])
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_bob_params</span>(g, p, A):
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13378</span>, level<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;debug&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    alice_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>    bob_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>    flag_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    my_params <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;p&#34;</span>: hex(p), <span style="color:#e6db74">&#34;g&#34;</span>: hex(g), <span style="color:#e6db74">&#34;A&#34;</span>: hex(A)}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>send(json<span style="color:#f92672">.</span>dumps(my_params)<span style="color:#f92672">.</span>encode())
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    bob_params_2 <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>    flag_params_2 <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> int(bob_params_2[<span style="color:#e6db74">&#34;B&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_basic_params</span>():
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13378</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    alice_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>    bob_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>    flag_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> alice_params, bob_params, flag_params
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_prime_partial_factors</span>(n, upper_bound):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    partial_factors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>, upper_bound):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> n <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            partial_factors<span style="color:#f92672">.</span>append(i)
+</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">=</span> n <span style="color:#f92672">//</span> i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> partial_factors
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_prime_smooth</span>(l):
+</span></span><span style="display:flex;"><span>    mul <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        mul <span style="color:#f92672">*=</span> i
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (mul <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>bit_length() <span style="color:#f92672">&gt;=</span> l <span style="color:#f92672">and</span> isPrime(mul <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mul <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> isPrime(i):
+</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Getting basic parameters&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alice_params, bob_params, flag_params <span style="color:#f92672">=</span> get_basic_params()
+</span></span><span style="display:flex;"><span>my_a <span style="color:#f92672">=</span> int(alice_params[<span style="color:#e6db74">&#34;A&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prime_number, index <span style="color:#f92672">=</span> generate_prime_smooth(<span style="color:#ae81ff">1700</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Generated prime number </span><span style="color:#e6db74">{</span>prime_number<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>my_A <span style="color:#f92672">=</span> pow(<span style="color:#ae81ff">2</span>, my_a, prime_number)
+</span></span><span style="display:flex;"><span>current_B <span style="color:#f92672">=</span> get_bob_params(<span style="color:#ae81ff">2</span>, prime_number, <span style="color:#ae81ff">0x123456789123456789123456789</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> pohlig_hellman_and_bsgs<span style="color:#f92672">.</span>discrete_log(<span style="color:#ae81ff">2</span>, current_B, prime_number)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Found b </span><span style="color:#e6db74">{</span>b<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shared_secret <span style="color:#f92672">=</span> pow(int(alice_params[<span style="color:#e6db74">&#34;A&#34;</span>], <span style="color:#ae81ff">16</span>), b, int(alice_params[<span style="color:#e6db74">&#34;p&#34;</span>], <span style="color:#ae81ff">16</span>))
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> decrypt_flag(shared_secret, flag_params[<span style="color:#e6db74">&#34;iv&#34;</span>], flag_params[<span style="color:#e6db74">&#34;encrypted&#34;</span>])
+</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/hashes/code/md0.py">md0.py</a></p>
+<p><a href="/cryptohack/diffie_hellman/code/static_client_2.py">static_client_2.py</a></p>
 
             
         </div>
@@ -995,7 +975,7 @@ $$</p>
                 <li>
                     
                         Word Count:
-                        523
+                        429
                     
                 </li>
             
@@ -1031,7 +1011,7 @@ $$</p>
                     
                         Last modified: &nbsp;
                         <time>
-                            May 10 2024 00:00:00
+                            May 29 2024 00:00:00
                         </time>
                     
                 </li>

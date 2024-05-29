@@ -14,11 +14,21 @@
 
     
         
-            <meta name="description" content="This is my new hugo site" />
+            <meta
+                name="description"
+                content="This is my new hugo site" />
         
 
         
-            <meta name="author" content="yoavshah" />
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
         
 
     
@@ -26,7 +36,7 @@
 
     <title>
         
-            symmetric |
+            4-additive |
             SecurityBlog
         
     </title>
@@ -162,7 +172,7 @@
 
     <div class="header_middle">
         
-            symmetric -
+            4-additive -
             SecurityBlog
         
     </div>
@@ -210,7 +220,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> diffie-helman </span>
 
@@ -634,13 +644,57 @@
 
 
         <div class="title">
-            <h1 class="title-header">symmetric</h1>
+            <h1 class="title-header">
+                4-additive
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.05.29"
+                            >2024.05.29
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        2 mins to read
+                    </div>
+                
+            </div>
         </div>
 
         <div class="article-meta">
-            <div class="breadcumb">
-                <i class="bi bi-folder"></i>
-                
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
     
     
 
@@ -679,197 +733,156 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/" class="bread-btn">
     
 
     
-        symmetric
+        diffie-helman
     
 </a>
 
-            </div>
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/" class="bread-btn">
+    
+
+    
+        
+            4-additive
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
         </div>
 
-        <hr />
+        
+            <nav id="TableOfContents"></nav>
+        
 
-        <div class="list-files">
+
+        <div class="content">
             
+                <h1 id="challenge">Challenge</h1>
+<p>In this challenge we eavesdrop a converstation between Alice and Bob that use Diffie-Hellman in the key changing but this time they choose to use the operator Add instead of Multiply! What could go wrong :) ?</p>
+<h1 id="solution">Solution</h1>
+<p>Because in normal Diffie-Hellman
+$$
+B = g^b \bmod p
+$$</p>
+<p>In the Diffie-Hellman in this challenge
+$$
+B = g*b \bmod p
+$$</p>
+<p>So we could find the inverse of $g$ in $Z_p$ field using the Little Fermat Theorem.
+$$
+g^{p} \bmod p = g \rightarrow g^{p-2} \bmod p = g_{inv}
+$$</p>
+<p>After we found the inverse of $g$ we could find $b$</p>
+<p>$$
+B = g*b \bmod p \rightarrow b = B * g_{inv} \bmod p
+$$</p>
+<p>After we calculated $b$ we can calculate the shared secret by multiplying $A$ with $b$</p>
+<p>$$
+secret = A * b \bmod p
+$$</p>
+<p>Then we can decrypt the flag</p>
 
 
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
 
     
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util <span style="color:#f92672">import</span> number
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> collections
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> chinese_remainder_theorem
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> prime_factors
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pkcs7_padded</span>(message):
+</span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span>message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all(padding[i] <span style="color:#f92672">==</span> len(padding) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padding)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_flag</span>(shared_secret: int, iv: str, ciphertext: str):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Derive AES key from shared secret</span>
+</span></span><span style="display:flex;"><span>    sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
+</span></span><span style="display:flex;"><span>    sha1<span style="color:#f92672">.</span>update(str(shared_secret)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>))
+</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> sha1<span style="color:#f92672">.</span>digest()[:<span style="color:#ae81ff">16</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Decrypt flag</span>
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_pkcs7_padded(plaintext):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> unpad(plaintext, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> plaintext<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_json</span>(s):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(s[s<span style="color:#f92672">.</span>index(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;{&#34;</span>):])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13380</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alice_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>bob_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>flag_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># find inverse of g in p</span>
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> int(alice_params[<span style="color:#e6db74">&#34;g&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> int(alice_params[<span style="color:#e6db74">&#34;p&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>g_inv <span style="color:#f92672">=</span> pow(g, p <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> int(bob_params[<span style="color:#e6db74">&#34;B&#34;</span>], <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> (B <span style="color:#f92672">*</span> g_inv) <span style="color:#f92672">%</span> p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># calculate shared secret</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shared_secret <span style="color:#f92672">=</span> (int(alice_params[<span style="color:#e6db74">&#34;A&#34;</span>], <span style="color:#ae81ff">16</span>) <span style="color:#f92672">*</span> b) <span style="color:#f92672">%</span> p
+</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> decrypt_flag(shared_secret, flag_params[<span style="color:#e6db74">&#34;iv&#34;</span>], flag_params[<span style="color:#e6db74">&#34;encrypted&#34;</span>])
+</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
     
+</div>
+<p><a href="/cryptohack/diffie_hellman/code/additive.py">additive.py</a></p>
 
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
             
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
-                        
-                            01-passwords_as_keys
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
-                        
-                            02-ecbcbcwtf
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
-                        
-                            03-ecb_oracle
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
-                        
-                            04-flipping_cookie
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
-                        
-                            05-lazy_cbc
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
-                        
-                            06-triple_des
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
-                        
-                            07-symmetry
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
-                        
-                            08-bean_counter
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
-                        
-                            09-ctrime
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
-                        
-                            10-logon_zero
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
-                        
-                            11-stream_consciousness
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
-                        
-                            12-dancing_queen
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
-                        
-                            13-oh-snap
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
-                        
-                            14-paper_plane
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
-                        
-                            15-forbidden_fruit
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
-                        
-                            16-beatboxer
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
         </div>
     </article>
 
@@ -915,8 +928,8 @@
             
                 <li>
                     
-                        Pages In Section:
-                        16
+                        Word Count:
+                        321
                     
                 </li>
             
@@ -950,12 +963,10 @@
             
                 <li>
                     
-                        
-                            Last build: &nbsp;
-                            <time>
-                                Apr 22 2024 17:18:35
-                            </time>
-                        
+                        Last modified: &nbsp;
+                        <time>
+                            May 29 2024 00:00:00
+                        </time>
                     
                 </li>
             

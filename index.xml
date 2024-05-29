@@ -6,8 +6,29 @@
     <description>Recent content on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>4-additive</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</guid>
+      <description>Challenge In this challenge we eavesdrop a converstation between Alice and Bob that use Diffie-Hellman in the key changing but this time they choose to use the operator Add instead of Multiply! What could go wrong :) ?&#xA;Solution Because in normal Diffie-Hellman $$ B = g^b \bmod p $$&#xA;In the Diffie-Hellman in this challenge $$ B = g*b \bmod p $$&#xA;So we could find the inverse of $g$ in $Z_p$ field using the Little Fermat Theorem.</description>
+    </item>
+    <item>
+      <title>5-static_client_2</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/</guid>
+      <description>Challenge In this challenge we get again a converstation of Alice and Bob, we later can exchange keys with Bob. The problem here is that Bob uses the same secret key. The difference between 3-static_client is that Bob now verifies $g$ and verifies $p$.&#xA;Solution To solve this challenge we will generate a new large weak prime number $p$. To make this prime number be weak we need that $\varphi(p)$ will be factored to many small prime numbers.</description>
+    </item>
+    <item>
+      <title>6-script_kiddie</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/</guid>
+      <description>Challenge In this challenge we get a custom made DH implementation, we need to find weaknesses there.&#xA;from Crypto.Cipher import AES import hashlib import secrets def header(): print(&amp;#34;&amp;#34;&amp;#34; _____ _ __ __ _ | __ \(_)/ _|/ _(_) | | | |_| |_| |_ _ ___ | | | | | _| _| |/ _ \ | |__| | | | | | | | __/ |_____/|_|_| |_| |_|\___| | | | | | | | | |__| | ___| | |_ __ ___ __ _ _ __ | __ |/ _ \ | | &amp;#39;_ ` _ \ / _` | &amp;#39;_ \ | | | | __/ | | | | | | | (_| | | | | |_| |_|\___|_|_|_| |_| |_|\__,_|_| |_| &amp;#34;&amp;#34;&amp;#34;) def is_pkcs7_padded(message): padding = message[-message[-1]:] return all(padding[i] == len(padding) for i in range(0, len(padding))) def pkcs7_unpad(message, block_size=16): if len(message) == 0: raise Exception(&amp;#34;The input data must contain at least one byte&amp;#34;) if not is_pkcs7_padded(message): return message padding_len = message[-1] return message[:-padding_len] def decrypt_flag(shared_secret: int, iv: str, ciphertext: str): # Derive AES key from shared secret sha1 = hashlib.</description>
+    </item>
     <item>
       <title>0-diffie_hellman_explained</title>
       <link>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</link>

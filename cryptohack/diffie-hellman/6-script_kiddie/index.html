@@ -36,7 +36,7 @@
 
     <title>
         
-            3-static_client |
+            6-script_kiddie |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            3-static_client -
+            6-script_kiddie -
             SecurityBlog
         
     </div>
@@ -645,7 +645,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                3-static_client
+                6-script_kiddie
             </h1>
 
             <div class="author-date-readtime">
@@ -668,8 +668,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.05.25"
-                            >2024.05.25
+                            datetime="2024.05.29"
+                            >2024.05.29
                         </time>
                     </div>
                 
@@ -679,7 +679,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        4 mins to read
+                        3 mins to read
                     </div>
                 
             </div>
@@ -748,12 +748,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/" class="bread-btn">
     
 
     
         
-            3-static_client
+            6-script_kiddie
         
 
     
@@ -773,51 +773,7 @@
         <div class="content">
             
                 <h1 id="challenge">Challenge</h1>
-<p>In this challenge we eavesdropping a session between Alice and Bob, we later can start a new session with Bob.</p>
-<h1 id="solution">Solution</h1>
-<p>The vulnerabillity in this challenge is that Bob reuses his secret key <code>b</code> and that he allows us to choose any <code>p</code> and <code>g</code> .</p>
-<p>At the second part of the call, we can send any <code>g, a, p</code> and Bob will return us <code>B = pow(g, b, p)</code>, using that we need to find his secret <code>b</code>.</p>
-<p>Let&rsquo;s say we send $p = 2^{10} - 1$ and $g = 2$
-then $g^{b} \bmod p$ will have one of the following values:</p>
-<p>$$
-{1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1, &hellip;}
-$$</p>
-<p>$$
-b \equiv_{10} 0 \rightarrow B = 1
-$$$$
-b \equiv_{10} 1 \rightarrow B = 2
-$$$$
-b \equiv_{10} 2 \rightarrow B = 4
-$$$$
-b \equiv_{10} 3 \rightarrow B = 8
-$$$$
-b \equiv_{10} 4 \rightarrow B = 16
-$$$$
-&hellip;
-$$</p>
-<p>So for any value $x$ we can finds the reminder of $b$ with $x$! How can we use it?</p>
-<p>I will generate all the prime numbers between 1800 to 3000.</p>
-<ul>
-<li>Why less than 3000? because $2^{3000}$ is too much to send.</li>
-<li>Why more than 1800? Because I needed that their multiplication will be close to $p$.</li>
-</ul>
-<p>Then I get for each prime number $p_i$ we get $B = g^{b} \bmod 2^{p_i}$.
-Using that we can $log_2(B)$ to get the reminder $b \equiv_{p_i} r_i$.</p>
-<p>Then we can use the Chinese Reminder Theorem (That was talked about in the previous article &ldquo;export_grade&rdquo;) to find a very large number that is a candidate for $b$.
-$b$ must be a multiplication of that large number to match the expected reminders!</p>
-<p>We can just iterate over numbers and multiply them with the candidate until we find a number $k$ that matches</p>
-<p>$$
-2^{(b_{candidate} * k)} \bmod p = B
-$$</p>
-<p>Then we actualy found $b$
-$$
-b = b_{candidate} * k
-$$</p>
-<p>Using that we can calculate the shared_secret
-$$
-A^b \bmod p
-$$</p>
-<p>and with that we can decrypt the flag!</p>
+<p>In this challenge we get a custom made DH implementation, we need to find weaknesses there.</p>
 
 
 
@@ -835,26 +791,39 @@ $$</p>
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util <span style="color:#f92672">import</span> number
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> collections
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> secrets
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> chinese_remainder_theorem
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> helpers <span style="color:#f92672">import</span> prime_factors
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">header</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;&#34;&#34;  _____  _  __  __ _
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> |  __ \(_)/ _|/ _(_)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> | |  | |_| |_| |_ _  ___
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> | |  | | |  _|  _| |/ _ </span><span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span><span style="color:#e6db74"> | |__| | | | | | | |  __/
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> |_____/|_|_| |_| |_|\___|
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> | |  | |    | | |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> | |__| | ___| | |_ __ ___   __ _ _ __
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> |  __  |/ _ \ | | &#39;_ ` _ \ / _` | &#39;_ </span><span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span><span style="color:#e6db74"> | |  | |  __/ | | | | | | | (_| | | | |
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> |_|  |_|\___|_|_|_| |_| |_|\__,_|_| |_|
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                                        &#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pkcs7_padded</span>(message):
 </span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span>message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:]
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all(padding[i] <span style="color:#f92672">==</span> len(padding) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padding)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pkcs7_unpad</span>(message, block_size<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(message) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;The input data must contain at least one byte&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_pkcs7_padded(message):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> message
+</span></span><span style="display:flex;"><span>    padding_len <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> message[:<span style="color:#f92672">-</span>padding_len]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_flag</span>(shared_secret: int, iv: str, ciphertext: str):
@@ -867,129 +836,147 @@ $$</p>
 </span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
 </span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
 </span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pkcs7_unpad(plaintext)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_pkcs7_padded(plaintext):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> unpad(plaintext, <span style="color:#ae81ff">16</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_public_int</span>(g, a, p):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> g <span style="color:#f92672">^</span> a <span style="color:#f92672">%</span> p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_shared_secret</span>(A, b, p):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> A <span style="color:#f92672">^</span> b <span style="color:#f92672">%</span> p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">goodbye</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Goodbye!&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    header()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;[-] Collecting data from Alice&#39;</span>)
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> int(input(<span style="color:#e6db74">&#39;&gt; p: &#39;</span>))
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> (p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    g <span style="color:#f92672">=</span> int(input(<span style="color:#e6db74">&#39;&gt; g: &#39;</span>))
+</span></span><span style="display:flex;"><span>    A <span style="color:#f92672">=</span> int(input(<span style="color:#e6db74">&#39;&gt; A: &#39;</span>))
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;[+] All data collected from Alice&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;[+] Generating public integer for alice&#39;</span>)
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> secrets<span style="color:#f92672">.</span>randbelow(q)
+</span></span><span style="display:flex;"><span>    B <span style="color:#f92672">=</span> generate_public_int(g, b, p)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;[+] Please send the public integer to Alice: </span><span style="color:#e6db74">{</span>B<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    input(<span style="color:#e6db74">&#39;[+] Press any key to continue&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;[+] Generating shared secret&#39;</span>)
+</span></span><span style="display:flex;"><span>    shared_secret <span style="color:#f92672">=</span> generate_shared_secret(A, b, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    query <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;Would you like to decrypt a message? (y/n)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> query <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;y&#39;</span>:
+</span></span><span style="display:flex;"><span>        iv <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;[-] Please enter iv (hex string)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>        ciphertext <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;[-] Please enter ciphertext (hex string)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>        flag <span style="color:#f92672">=</span> decrypt_flag(shared_secret, iv, ciphertext)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;[+] Flag recovered: </span><span style="color:#e6db74">{</span>flag<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>        goodbye()
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> plaintext<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_json</span>(s):
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>loads(s[s<span style="color:#f92672">.</span>index(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;{&#34;</span>):])
+</span></span><span style="display:flex;"><span>        goodbye()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_alice_params</span>():
-</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13373</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    alice_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
-</span></span><span style="display:flex;"><span>    bob_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
-</span></span><span style="display:flex;"><span>    flag_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    _ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4096</span>)
-</span></span><span style="display:flex;"><span>    _ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4096</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>close()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> alice_params, flag_params
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_bob_secret</span>(a, g, p):
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>            r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;socket.cryptohack.org&#39;</span>, <span style="color:#ae81ff">13373</span>)
-</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Connected&#34;</span>)
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            alice_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline(timeout<span style="color:#f92672">=</span>t))
-</span></span><span style="display:flex;"><span>            bob_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline(timeout<span style="color:#f92672">=</span>t))
-</span></span><span style="display:flex;"><span>            flag_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline(timeout<span style="color:#f92672">=</span>t))
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            _ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4096</span>, timeout<span style="color:#f92672">=</span>t)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> len(<span style="color:#e6db74">&#34;Bob connects to you, send him some parameters: &#34;</span>) <span style="color:#f92672">!=</span> len(_):
-</span></span><span style="display:flex;"><span>                _ <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4096</span>, timeout<span style="color:#f92672">=</span>t)
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>            my_A <span style="color:#f92672">=</span> pow(g, a, p)
-</span></span><span style="display:flex;"><span>            my_params <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;p&#34;</span>: hex(p), <span style="color:#e6db74">&#34;g&#34;</span>: hex(g), <span style="color:#e6db74">&#34;A&#34;</span>: hex(my_A)}
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            r<span style="color:#f92672">.</span>send(json<span style="color:#f92672">.</span>dumps(my_params)<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>            new_bob_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline(timeout<span style="color:#f92672">=</span>t))
-</span></span><span style="display:flex;"><span>            new_flag_params <span style="color:#f92672">=</span> get_json(r<span style="color:#f92672">.</span>recvline(timeout<span style="color:#f92672">=</span>t))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            r<span style="color:#f92672">.</span>close()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> int(new_bob_params[<span style="color:#e6db74">&#34;B&#34;</span>], <span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>            print(e)
-</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get primes under limit</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sieve_of_eratosthenes</span>(limit):
-</span></span><span style="display:flex;"><span>    primes <span style="color:#f92672">=</span> [<span style="color:#66d9ef">True</span>] <span style="color:#f92672">*</span> (limit <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>    primes[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> primes[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>, int(limit <span style="color:#f92672">**</span> <span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> primes[i]:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">*</span> i, limit <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, i):
-</span></span><span style="display:flex;"><span>                primes[j] <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>, limit <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">if</span> primes[i]]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>alice_params, flag_params <span style="color:#f92672">=</span> get_alice_params()
-</span></span><span style="display:flex;"><span>alice_p <span style="color:#f92672">=</span> int(alice_params[<span style="color:#e6db74">&#34;p&#34;</span>], <span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>alice_p_bit_length <span style="color:#f92672">=</span> alice_p<span style="color:#f92672">.</span>bit_length()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>prime_numbers <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> sieve_of_eratosthenes(<span style="color:#ae81ff">3000</span>) <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1800</span>]
-</span></span><span style="display:flex;"><span>prime_numbers<span style="color:#f92672">.</span>reverse()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>reminders <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, current_prime <span style="color:#f92672">in</span> enumerate(prime_numbers):
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    current_p <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> current_prime) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    B <span style="color:#f92672">=</span> get_bob_secret(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, current_p)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    l <span style="color:#f92672">=</span> int(math<span style="color:#f92672">.</span>log2(B))
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    reminders<span style="color:#f92672">.</span>append((l, current_prime, <span style="color:#66d9ef">True</span>))
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;[</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">]Found log2 = </span><span style="color:#e6db74">{</span>l<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Found all reminders&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>candidate_b <span style="color:#f92672">=</span> chinese_remainder_theorem<span style="color:#f92672">.</span>chinese_reminder_faster(reminders)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Found candidate_b = </span><span style="color:#e6db74">{</span>candidate_b<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># use this candidate to bruteforce real b</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># B = 2 ** b</span>
-</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> get_bob_secret(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, alice_p)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
-</span></span><span style="display:flex;"><span>    curr_candidate_b <span style="color:#f92672">=</span> (candidate_b <span style="color:#f92672">*</span> i) <span style="color:#f92672">%</span> alice_p
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> pow(<span style="color:#ae81ff">2</span>, curr_candidate_b, alice_p) <span style="color:#f92672">==</span> B:
-</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Found the real b: &#34;</span> <span style="color:#f92672">+</span> str(curr_candidate_b))
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> curr_candidate_b
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>shared_secret <span style="color:#f92672">=</span> pow(int(alice_params[<span style="color:#e6db74">&#34;A&#34;</span>], <span style="color:#ae81ff">16</span>), b, alice_p)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># decrypt flag</span>
-</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> decrypt_flag(shared_secret, flag_params[<span style="color:#e6db74">&#34;iv&#34;</span>], flag_params[<span style="color:#e6db74">&#34;encrypted&#34;</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    main()</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/diffie_hellman/code/static_client.py">static_client.py</a></p>
+<h1 id="solution">Solution</h1>
+<p>The problem in this implementation is that at the functions <code>generate_public_int</code> and <code>generate_shared_secret</code>.
+Those functions use the keyword <code>^</code> instead of the keyword <code>pow(a, b, p)</code>.</p>
+<p>The keyword <code>^</code> is a keyword for xor and not for <code>pow</code>, that&rsquo;s why the whole implementation is reversable by the same functions and we can do it.</p>
+<p><code>pow(pow(a, b, p), b, p) = a ^ b ^ b = a</code></p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> secrets
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_pkcs7_padded</span>(message):
+</span></span><span style="display:flex;"><span>    padding <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span>message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> all(padding[i] <span style="color:#f92672">==</span> len(padding) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padding)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pkcs7_unpad</span>(message, block_size<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(message) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;The input data must contain at least one byte&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_pkcs7_padded(message):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> message
+</span></span><span style="display:flex;"><span>    padding_len <span style="color:#f92672">=</span> message[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> message[:<span style="color:#f92672">-</span>padding_len]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_flag</span>(shared_secret: int, iv: str, ciphertext: str):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Derive AES key from shared secret</span>
+</span></span><span style="display:flex;"><span>    sha1 <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha1()
+</span></span><span style="display:flex;"><span>    sha1<span style="color:#f92672">.</span>update(str(shared_secret)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>))
+</span></span><span style="display:flex;"><span>    key <span style="color:#f92672">=</span> sha1<span style="color:#f92672">.</span>digest()[:<span style="color:#ae81ff">16</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Decrypt flag</span>
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(key, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pkcs7_unpad(plaintext)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_public_int</span>(g, a, p):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> g <span style="color:#f92672">^</span> a <span style="color:#f92672">%</span> p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_shared_secret</span>(A, b, p):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> A <span style="color:#f92672">^</span> b <span style="color:#f92672">%</span> p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;p: 2410312426921032588552076022197566074856950548502459942654116941958108831682612228890093858261341614673227141477904012196503648957050582631942730706805009223062734745341073406696246014589361659774041027169249453200378729434170325843778659198143763193776859869524088940195577346119843545301547043747207749969763750084308926339295559968882457872412993810129130294592999947926365264059284647209730384947211681434464714438488520940127459844288859336526896320919633919
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">g: 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">A: 539556019868756019035615487062583764545019803793635712947528463889304486869497162061335997527971977050049337464152478479265992127749780103259420400564906895897077512359628760656227084039215210033374611483959802841868892445902197049235745933150328311259162433075155095844532813412268773066318780724878693701177217733659861396010057464019948199892231790191103752209797118863201066964703008895947360077614198735382678809731252084194135812256359294228383696551949882
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">B: 652888676809466256406904653886313023288609075262748718135045355786028783611182379919130347165201199876762400523413029908630805888567578414109983228590188758171259420566830374793540891937904402387134765200478072915215871011267065310188328883039327167068295517693269989835771255162641401501080811953709743259493453369152994501213224841052509818015422338794357540968552645357127943400146625902468838113443484208599332251406190345653880206706388377388164982846343351
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">iv: &#39;c044059ae57b61821a9090fbdefc63c5&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">encrypted_flag: &#39;f60522a95bde87a9ff00dc2c3d99177019f625f3364188c1058183004506bf96541cf241dad1c0e92535564e537322d7&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>p <span style="color:#f92672">=</span> int(data[<span style="color:#ae81ff">0</span>][len(<span style="color:#e6db74">&#34;p: &#34;</span>):])
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> int(data[<span style="color:#ae81ff">1</span>][len(<span style="color:#e6db74">&#34;g: &#34;</span>):])
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">=</span> int(data[<span style="color:#ae81ff">2</span>][len(<span style="color:#e6db74">&#34;A: &#34;</span>):])
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> int(data[<span style="color:#ae81ff">3</span>][len(<span style="color:#e6db74">&#34;B: &#34;</span>):])
+</span></span><span style="display:flex;"><span>iv <span style="color:#f92672">=</span> data[<span style="color:#ae81ff">4</span>][len(<span style="color:#e6db74">&#34;iv: &#39;&#34;</span>):<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>encrypted_flag <span style="color:#f92672">=</span> data[<span style="color:#ae81ff">5</span>][len(<span style="color:#e6db74">&#34;encrypted_flag: &#39;&#34;</span>):<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>q <span style="color:#f92672">=</span> (p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> generate_public_int(<span style="color:#ae81ff">2</span>, B, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>shared_secret <span style="color:#f92672">=</span> generate_shared_secret(A, b, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> decrypt_flag(shared_secret, iv, encrypted_flag)
+</span></span><span style="display:flex;"><span>print(flag)</span></span></code></pre></div>
+    
+</div>
+<p><a href="/cryptohack/diffie_hellman/code/additive.py">additive.py</a></p>
 
             
         </div>
@@ -1038,7 +1025,7 @@ $$</p>
                 <li>
                     
                         Word Count:
-                        735
+                        597
                     
                 </li>
             
@@ -1074,7 +1061,7 @@ $$</p>
                     
                         Last modified: &nbsp;
                         <time>
-                            May 25 2024 00:00:00
+                            May 29 2024 00:00:00
                         </time>
                     
                 </li>

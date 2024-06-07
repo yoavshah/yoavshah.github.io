@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/</loc>
+    <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/</loc>
+    <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/</loc>
+    <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/cryptohack/</loc>
+    <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/</loc>
+    <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</loc>
     <lastmod>2024-05-29T00:00:00+00:00</lastmod>
   </url><url>
@@ -9,12 +24,6 @@
     <lastmod>2024-05-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/</loc>
-    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/</loc>
-    <lastmod>2024-05-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yoavshah.github.io/</loc>
     <lastmod>2024-05-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</loc>

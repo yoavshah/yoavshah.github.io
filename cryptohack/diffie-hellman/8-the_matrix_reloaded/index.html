@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="generator" content="Hugo 0.125.3">
+
+    
+
+    
+
+    
+        
+            <meta
+                name="description"
+                content="This is my new hugo site" />
+        
+
+        
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
+        
+
+    
+
+
+    <title>
+        
+            8-the_matrix_reloaded |
+            SecurityBlog
+        
+    </title>
+
+    
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+        
+        
+
+
+        
+        
+
+
+        <link
+            rel="stylesheet"
+            href="/css/index_d751713.min.912d03bce61461ecbc3ca083479e1ed814bba94df76d0bdc6aa88fdca33621b9bb410dc2c81af31e8101fec62decfa5f6e48901ad673bc5056d2f1d1f2368a34.css"
+            integrity="sha512-kS0DvOYUYey8PKCDR54e2BS7qU33bQvcaqiP3KM2Ibm7QQ3CyBrzHoEB/sYt7PpfbkiQGtZzvFBW0vHR8jaKNA==" />
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+		
+        
+
+            
+
+
+
+
+    
+        
+    
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous" />
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"></script>
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+    
+        onload="renderMathInElement(document.body , { trust: true });"
+    ></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+
+            
+                trust: true
+            
+        });
+    });
+</script>
+
+        
+
+    
+</head>
+
+
+
+    <body>
+        <header class="header">
+    <div class="header_left">
+        
+    </div>
+
+    <div class="header_middle">
+        
+            8-the_matrix_reloaded -
+            SecurityBlog
+        
+    </div>
+</header>
+
+
+
+        <main>
+            <aside class="sidebar" style="overflow-y: auto;">
+    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Cryptohack </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> diffie-helman </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/" title="./cryptohack/diffie-hellman/0-diffie_hellman_explained/">
+                        
+                            0-diffie_hellman_explained
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/" title="./cryptohack/diffie-hellman/1-parameter_injection/">
+                        
+                            1-parameter_injection
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/" title="./cryptohack/diffie-hellman/2-export_grade/">
+                        
+                            2-export_grade
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/" title="./cryptohack/diffie-hellman/3-static_client/">
+                        
+                            3-static_client
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/" title="./cryptohack/diffie-hellman/4-additive/">
+                        
+                            4-additive
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/" title="./cryptohack/diffie-hellman/5-static_client_2/">
+                        
+                            5-static_client_2
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/" title="./cryptohack/diffie-hellman/6-script_kiddie/">
+                        
+                            6-script_kiddie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/" title="./cryptohack/diffie-hellman/7-the_matrix/">
+                        
+                            7-the_matrix
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/" title="./cryptohack/diffie-hellman/8-the_matrix_reloaded/">
+                        
+                            8-the_matrix_reloaded
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/" title="./cryptohack/diffie-hellman/9-the_matrix_revolutions/">
+                        
+                            9-the_matrix_revolutions
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> hashes </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
+                        
+                            1-collider
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
+                        
+                            2-hash_stuffing
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
+                        
+                            3-PriMeD5
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
+                        
+                            4-twin_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
+                        
+                            5-no_difference
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
+                        
+                            6-md0
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
+                        
+                            7-mdflag
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/" title="./cryptohack/hashes/8-mixed_up/">
+                        
+                            8-mixed_up
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/9-invariant/" title="./cryptohack/hashes/9-invariant/">
+                        
+                            9-invariant
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> symmetric </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
+                        
+                            01-passwords_as_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
+                        
+                            02-ecbcbcwtf
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
+                        
+                            03-ecb_oracle
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
+                        
+                            04-flipping_cookie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
+                        
+                            05-lazy_cbc
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
+                        
+                            06-triple_des
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
+                        
+                            07-symmetry
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
+                        
+                            08-bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
+                        
+                            09-ctrime
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
+                        
+                            10-logon_zero
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
+                        
+                            11-stream_consciousness
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
+                        
+                            12-dancing_queen
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
+                        
+                            13-oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
+                        
+                            14-paper_plane
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
+                        
+                            15-forbidden_fruit
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
+                        
+                            16-beatboxer
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+</aside>
+<aside class="exapandable"></aside>
+
+
+            
+    <article class="main">
+        <button
+    class="sidebar-toggle-btn"
+    type="menu"
+    aria-expanded="false"
+    aria-haspopup="true">
+    <i class="bi bi-list"></i>
+</button>
+
+
+
+        <div class="title">
+            <h1 class="title-header">
+                8-the_matrix_reloaded
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.06.03"
+                            >2024.06.03
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        5 mins to read
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="https://yoavshah.github.io/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/" class="bread-btn">
+    
+
+    
+        Cryptohack
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/" class="bread-btn">
+    
+
+    
+        diffie-helman
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/" class="bread-btn">
+    
+
+    
+        
+            8-the_matrix_reloaded
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
+        </div>
+
+        
+            <nav id="TableOfContents"></nav>
+        
+
+
+        <div class="content">
+            
+                <h1 id="challenge">Challenge</h1>
+<p>In this challenge we get a matrix called generator, the program creating a random value and calculates $generator^{secret}$, then it creates a random vector $v$ and calculates $w = generator^{secret} * v$</p>
+<p>We get the generator, w, v, and we need to find the secret.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Hash <span style="color:#f92672">import</span> SHA256
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> os <span style="color:#f92672">import</span> urandom
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;crypto{?????????????????????????????????????}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>P <span style="color:#f92672">=</span> <span style="color:#ae81ff">13322168333598193507807385110954579994440518298037390249219367653433362879385570348589112466639563190026187881314341273227495066439490025867330585397455471</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_matrix</span>(fname):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> open(fname, <span style="color:#e6db74">&#39;r&#39;</span>)<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>    rows <span style="color:#f92672">=</span> [list(map(int, row<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>))) <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>splitlines()]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Matrix(GF(P), rows)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SECRET <span style="color:#f92672">=</span> getRandomRange(<span style="color:#ae81ff">0</span>, P<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>KEY_LENGTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>
+</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> SHA256<span style="color:#f92672">.</span>new(data<span style="color:#f92672">=</span>str(SECRET)<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()[:KEY_LENGTH]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>G <span style="color:#f92672">=</span> load_matrix(<span style="color:#e6db74">&#34;generator.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>H <span style="color:#f92672">=</span> G<span style="color:#f92672">^</span>SECRET
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">=</span> vector(GF(P), [getRandomRange(<span style="color:#ae81ff">0</span>, P<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(N)])
+</span></span><span style="display:flex;"><span>w <span style="color:#f92672">=</span> H<span style="color:#f92672">*</span>v
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>json<span style="color:#f92672">.</span>dump({
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;v&#39;</span>: [int(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> list(v)],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;w&#39;</span>: [int(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> list(w)]
+</span></span><span style="display:flex;"><span>}, open(<span style="color:#e6db74">&#39;output.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>iv <span style="color:#f92672">=</span> urandom(<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>plaintext <span style="color:#f92672">=</span> pad(FLAG, <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>ciphertext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(plaintext)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>json<span style="color:#f92672">.</span>dump({
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;iv&#34;</span>: iv<span style="color:#f92672">.</span>hex(), 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;ciphertext&#34;</span>: ciphertext<span style="color:#f92672">.</span>hex()
+</span></span><span style="display:flex;"><span>}, open(<span style="color:#e6db74">&#39;flag.enc&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>))</span></span></code></pre></div>
+    
+</div>
+<h1 id="solution">Solution</h1>
+<p>This is actualy a discrete log problem over matrices instead of numbers.</p>
+<p>We can calculate the <a href="https://en.wikipedia.org/wiki/Jordan_normal_form">Jordan form</a> of the generator matrix and get</p>
+<p>$$
+G = P<em>J</em>P^{-1}
+$$</p>
+<p>Where $J$ is the Jordan matrix, $P$ and $P^{-1}$ are the transformation matrixes.</p>
+<p>We need to find $k$ (the secret) such that</p>
+<p>$$
+G ^ {k} * v = w
+$$</p>
+<p>So we can set the equation above and change the problem to finding an $k$ such that</p>
+<p>$$
+P * J ^ {k} * P^{-1} * v = w
+$$</p>
+<p>We can multiply from left with $P^{-1}$ and get</p>
+<p>$$
+J ^ {k} * P^{-1} * v = P^{-1} * w
+$$</p>
+<p>We can calculate some part of the equation and set and get $X$ and $Y$ where they both vectors
+$$
+X = P^{-1} * v
+$$
+and
+$$
+Y = P^{-1} * w
+$$</p>
+<p>And then we get the new equation to find $k$ for it
+$$
+J ^ {k} * X = Y
+$$</p>
+<p>After finding the Jordan form of the generator matrix we got that one of its eigenvalues appears twice at the end of the matrix</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_jordan_blocks</span>(J):
+</span></span><span style="display:flex;"><span>    blocks <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> J<span style="color:#f92672">.</span>nrows():
+</span></span><span style="display:flex;"><span>        j <span style="color:#f92672">=</span> i
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> j <span style="color:#f92672">&lt;</span> J<span style="color:#f92672">.</span>nrows() <span style="color:#f92672">and</span> J[j, j] <span style="color:#f92672">==</span> J[i, i]:
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        blocks<span style="color:#f92672">.</span>append(J[range(i, j), range(i, j)])
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> j
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> blocks</span></span></code></pre></div>
+    
+</div>
+<p>Because we know that a Jordan matrix powered by $k$ results in each jordan_block powered by $k$ then we can look at the <a href="https://math.stackexchange.com/questions/326688/why-does-the-n-th-power-of-a-jordan-matrix-involve-the-binomial-coefficient">last jordan block after it is powered by $k$</a>.</p>
+<p>Given the eigenvalue at the last block (let&rsquo;s call it $e$), in our last 2x2 block of the powered Jordan matrix we will get
+$$
+J^k = \begin{bmatrix}
+e^k &amp; k * e^{k-1} \
+0 &amp; e^k
+\end{bmatrix}
+$$</p>
+<p>Using the next equation we create above
+$$
+J ^ {k} * X = Y
+$$</p>
+<p>We can look at $J ^ k * X$</p>
+<p>$$
+J^k * X = \begin{bmatrix}
+e^k &amp; k * e^{k-1} \
+0 &amp; e^k
+\end{bmatrix} * \begin{bmatrix}
+x_0 \
+x_1
+\end{bmatrix} = \begin{bmatrix}
+x_0 * e^k + x_1 * k * e^{k-1}\
+x_1 * e^k
+\end{bmatrix}
+$$</p>
+<p>Because we know the output vector is equal to $Y$ we know that</p>
+<p>$$
+\begin{bmatrix}
+x_0 * e^k + x_1 * k * e^{k-1}\
+x_1 * e^k
+\end{bmatrix} = \begin{bmatrix}
+y_0\
+y_1
+\end{bmatrix}
+$$</p>
+<p>So we get 2 equations</p>
+<p>$$
+y_1 = x_1 * e^k \rightarrow y_1 * inv(x_1) = e^k
+$$$$
+y_0 = x_0 * e^k + x_1<em>k</em>e^{k-1}
+$$</p>
+<p>We can change the second equation to be
+$$
+y_0 = x_0 * e^k + x_1<em>k</em>e^{k-1} = x_0<em>e^k + x_1</em>k*inv(e)*e^k
+$$</p>
+<p>We can set the first equation in the second one to reduce the unknown $e^k$ elements and get
+$$
+y_0 = x_0*(y_1 * inv(x_1)) + x_1<em>k</em>inv(e)*(y_1 * inv(x_1))
+$$</p>
+<p>Now we can isolate $k$</p>
+<p>$$
+y_0 - (x_0*(y_1 * inv(x_1))) = x_1<em>k</em>inv(e)<em>(y_1 * inv(x_1))
+$$$$
+(y_0 - (x_0</em>(y_1 * inv(x_1)))) * inv(x_1) = k<em>inv(e)</em>(y_1 * inv(x_1))
+$$$$
+(y_0 - (x_0*(y_1 * inv(x_1)))) * inv(x_1) * e = k*(y_1 * inv(x_1))
+$$$$
+(y_0 - (x_0*(y_1 * inv(x_1)))) * inv(x_1) * e * inv((y_1 * inv(x_1)))= k
+$$</p>
+<p>So we got an equation for $k$, using this $k$ we can calculate the sha256 and find the key for the ciphertext</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> hashlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> os <span style="color:#f92672">import</span> urandom
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;crypto{?????????????????????????????????????}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>P <span style="color:#f92672">=</span> <span style="color:#ae81ff">13322168333598193507807385110954579994440518298037390249219367653433362879385570348589112466639563190026187881314341273227495066439490025867330585397455471</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_matrix</span>(fname):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> open(fname, <span style="color:#e6db74">&#39;r&#39;</span>)<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>    rows <span style="color:#f92672">=</span> [list(map(int, row<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>))) <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>splitlines()]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Matrix(GF(P), rows)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt_cipher</span>(secret, ciphertext, iv):
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
+</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    KEY_LENGTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> hashlib<span style="color:#f92672">.</span>sha256(str(secret)<span style="color:#f92672">.</span>encode())<span style="color:#f92672">.</span>digest()[:KEY_LENGTH]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(k, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
+</span></span><span style="display:flex;"><span>    plaintext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> plaintext
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_jordan_blocks</span>(J):
+</span></span><span style="display:flex;"><span>    blocks <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> J<span style="color:#f92672">.</span>nrows():
+</span></span><span style="display:flex;"><span>        j <span style="color:#f92672">=</span> i
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> j <span style="color:#f92672">&lt;</span> J<span style="color:#f92672">.</span>nrows() <span style="color:#f92672">and</span> J[j, j] <span style="color:#f92672">==</span> J[i, i]:
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        blocks<span style="color:#f92672">.</span>append(J[range(i, j), range(i, j)])
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> j
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> blocks
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>G <span style="color:#f92672">=</span> load_matrix(<span style="color:#e6db74">&#34;files</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">the_matrix_reloaded</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">generator.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;files</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">the_matrix_reloaded</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">flag.enc&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    flag_params <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;files</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">the_matrix_reloaded</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">output.txt&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    output_params <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(f)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">=</span> vector(GF(P), output_params[<span style="color:#e6db74">&#34;v&#34;</span>])
+</span></span><span style="display:flex;"><span>w <span style="color:#f92672">=</span> vector(GF(P), output_params[<span style="color:#e6db74">&#34;w&#34;</span>])
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># P_transformation * J * P_transformation^-1 = G</span>
+</span></span><span style="display:flex;"><span>J, P_transformation <span style="color:#f92672">=</span> G<span style="color:#f92672">.</span>jordan_form(transformation<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># J^k * P^-1 * v = P^-1 * w</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># X = P^-1 * v</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Y = P^-1 * w</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># J^k * X = Y</span>
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> P_transformation<span style="color:#f92672">.</span>inverse() <span style="color:#f92672">*</span> v
+</span></span><span style="display:flex;"><span>Y <span style="color:#f92672">=</span> P_transformation<span style="color:#f92672">.</span>inverse() <span style="color:#f92672">*</span> w
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>jordan_blocks <span style="color:#f92672">=</span> get_jordan_blocks(J)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The last eigenvalue size is 2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># jordan_blocks[-1]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> jordan_blocks[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pinv</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pow(n, P<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, P)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x0, x1 <span style="color:#f92672">=</span> X[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>], X[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>y0, y1 <span style="color:#f92672">=</span> Y[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>], Y[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> (y0 <span style="color:#f92672">-</span> (x0 <span style="color:#f92672">*</span> (y1 <span style="color:#f92672">*</span> pinv(x1)))) <span style="color:#f92672">*</span> pinv(x1) <span style="color:#f92672">*</span> e <span style="color:#f92672">*</span> pinv((y1 <span style="color:#f92672">*</span> pinv(x1)))
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> int(k)
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> k <span style="color:#f92672">%</span> P
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Verify</span>
+</span></span><span style="display:flex;"><span>H <span style="color:#f92672">=</span> G<span style="color:#f92672">^</span>k
+</span></span><span style="display:flex;"><span>print(w <span style="color:#f92672">==</span> H<span style="color:#f92672">*</span>v)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(decrypt_cipher(k, flag_params[<span style="color:#e6db74">&#34;ciphertext&#34;</span>], flag_params[<span style="color:#e6db74">&#34;iv&#34;</span>]))</span></span></code></pre></div>
+    
+</div>
+<p><a href="/cryptohack/diffie_hellman/code/matrix_reloaded.ipynb">matrix_reloaded.ipynb</a></p>
+
+            
+        </div>
+    </article>
+
+        </main>
+
+        <footer class="footer">
+    <div class="footer-left">
+        <ul class="social">
+            
+                <li>All Rights Reserved ®.</li>
+            
+
+            
+                <li>yoavshah</li>
+            
+
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="footer-right">
+        <ul class="control status clearfix">
+            
+                <li>
+                    
+                        Word Count:
+                        969
+                    
+                </li>
+            
+
+            
+            
+
+            
+                <li>en</li>
+            
+
+            
+                <li>
+                    <a href="https://gohugo.io" class="btn" target="_blank"
+                        >Hugo: 0.125.3</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    <a
+                        href="https://github.com/JingWangTW/dark-theme-editor"
+                        class="btn"
+                        target="_blank"
+                        >Theme: dark-theme-editor</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    
+                        Last modified: &nbsp;
+                        <time>
+                            Jun 03 2024 00:00:00
+                        </time>
+                    
+                </li>
+            
+
+            
+                <li title="">
+                    
+                </li>
+            
+        </ul>
+    </div>
+</footer>
+
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+    
+    
+
+
+    <script
+        type="text/javascript"
+        src="/js/index_d751713.min.5eeb120f16ea146352725c420364f87befead45f678142b8f0ffbef024646931fbc06bff07a7bd6cb57fa2f8cd8a21ba6a4ee5a278ec32303a378bc1cd17f246.js"
+        integrity="sha512-XusSDxbqFGNSclxCA2T4e&#43;/q1F9ngUK48P&#43;&#43;8CRkaTH7wGv/B6e9bLV/ovjNiiG6ak7lonjsMjA6N4vBzRfyRg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+
+
+</html>

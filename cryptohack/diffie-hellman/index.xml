@@ -6,8 +6,29 @@
     <description>Recent content in diffie-helman on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/cryptohack/diffie-hellman/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>7-the_matrix</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/</guid>
+      <description>Challenge In this challenge we get a python (+ SageMath) code that generates a random matrix (with the flag) and power it by 31337. we get the powered matrix and we need to find the base matrix and extract from it the flag.&#xA;import random P = 2 N = 50 E = 31337 FLAG = b&amp;#39;crypto{??????????????????????????}&amp;#39; def bytes_to_binary(s): bin_str = &amp;#39;&amp;#39;.join(format(b, &amp;#39;08b&amp;#39;) for b in s) bits = [int(c) for c in bin_str] return bits def generate_mat(): while True: msg = bytes_to_binary(FLAG) msg += [random.</description>
+    </item>
+    <item>
+      <title>8-the_matrix_reloaded</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/</guid>
+      <description>Challenge In this challenge we get a matrix called generator, the program creating a random value and calculates $generator^{secret}$, then it creates a random vector $v$ and calculates $w = generator^{secret} * v$&#xA;We get the generator, w, v, and we need to find the secret.&#xA;from Crypto.Cipher import AES from Crypto.Hash import SHA256 from Crypto.Util.number import * from Crypto.Util.Padding import pad, unpad import json from os import urandom FLAG = b&amp;#39;crypto{?</description>
+    </item>
+    <item>
+      <title>9-the_matrix_revolutions</title>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/</guid>
+      <description>Challenge from Crypto.Cipher import AES from Crypto.Hash import SHA256 from Crypto.Util.number import * from Crypto.Util.Padding import pad, unpad import json from os import urandom FLAG = b&amp;#39;crypto{????????????????????????????????????????}&amp;#39; P = 2 N = 150 def load_matrix(fname): data = open(fname, &amp;#39;r&amp;#39;).read().strip() rows = [list(map(int, row)) for row in data.splitlines()] return Matrix(GF(P), rows) def save_matrix(M, fname): open(fname, &amp;#39;w&amp;#39;).write(&amp;#39;\n&amp;#39;.join(&amp;#39;&amp;#39;.join(str(x) for x in row) for row in M)) KEY_LENGTH = 128 def derive_aes_key(M): mat_str = &amp;#39;&amp;#39;.</description>
+    </item>
     <item>
       <title>4-additive</title>
       <link>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</link>

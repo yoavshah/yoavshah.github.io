@@ -36,7 +36,7 @@
 
     <title>
         
-            04-flipping_cookie |
+            0-rsa_explained |
             SecurityBlog
         
     </title>
@@ -172,7 +172,7 @@
 
     <div class="header_middle">
         
-            04-flipping_cookie -
+            0-rsa_explained -
             SecurityBlog
         
     </div>
@@ -464,7 +464,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> rsa </span>
 
@@ -501,7 +501,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> symmetric </span>
 
@@ -712,7 +712,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                04-flipping_cookie
+                0-rsa_explained
             </h1>
 
             <div class="author-date-readtime">
@@ -735,8 +735,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.04.26"
-                            >2024.04.26
+                            datetime="2024.06.18"
+                            >2024.06.18
                         </time>
                     </div>
                 
@@ -800,11 +800,11 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/rsa/" class="bread-btn">
     
 
     
-        symmetric
+        rsa
     
 </a>
 
@@ -815,12 +815,12 @@
 
 
 
-<a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" class="bread-btn">
+<a href="https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/" class="bread-btn">
     
 
     
         
-            04-flipping_cookie
+            0-rsa_explained
         
 
     
@@ -839,128 +839,60 @@
 
         <div class="content">
             
-                <h1 id="challenge">Challenge</h1>
-<p>In this challenge we get a data encrypted with CBC mode and its randomized IV.
-To get the flag for this challenge we need to use the check_admin method, but use a cookie and an IV that will make the program think we has the string &ldquo;admin=True;&rdquo; instead of &ldquo;admin=False;&rdquo; (As generated in our cookie)</p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="%0d%0afrom%20Crypto.Cipher%20import%20AES%0d%0aimport%20os%0d%0afrom%20Crypto.Util.Padding%20import%20pad,%20unpad%0d%0afrom%20datetime%20import%20datetime,%20timedelta%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/flipping_cookie/check_admin/%3ccookie%3e/%3civ%3e/%27%29%0d%0adef%20check_admin%28cookie,%20iv%29:%0d%0a%20%20%20%20cookie%20=%20bytes.fromhex%28cookie%29%0d%0a%20%20%20%20iv%20=%20bytes.fromhex%28iv%29%0d%0a%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CBC,%20iv%29%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28cookie%29%0d%0a%20%20%20%20%20%20%20%20unpadded%20=%20unpad%28decrypted,%2016%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20if%20b%22admin=True%22%20in%20unpadded.split%28b%22;%22%29:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22flag%22:%20FLAG%7d%0d%0a%20%20%20%20else:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20%22Only%20admin%20can%20read%20the%20flag%22%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/flipping_cookie/get_cookie/%27%29%0d%0adef%20get_cookie%28%29:%0d%0a%20%20%20%20expires_at%20=%20%28datetime.today%28%29%20&#43;%20timedelta%28days=1%29%29.strftime%28%22%25s%22%29%0d%0a%20%20%20%20cookie%20=%20f%22admin=False;expiry=%7bexpires_at%7d%22.encode%28%29%0d%0a%0d%0a%20%20%20%20iv%20=%20os.urandom%2816%29%0d%0a%20%20%20%20padded%20=%20pad%28cookie,%2016%29%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CBC,%20iv%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28padded%29%0d%0a%20%20%20%20ciphertext%20=%20iv.hex%28%29%20&#43;%20encrypted.hex%28%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22cookie%22:%20ciphertext%7d">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime, timedelta
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/flipping_cookie/check_admin/&lt;cookie&gt;/&lt;iv&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_admin</span>(cookie, iv):
-</span></span><span style="display:flex;"><span>    cookie <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(cookie)
-</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(iv)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(cookie)
-</span></span><span style="display:flex;"><span>        unpadded <span style="color:#f92672">=</span> unpad(decrypted, <span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;admin=True&#34;</span> <span style="color:#f92672">in</span> unpadded<span style="color:#f92672">.</span>split(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;;&#34;</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;flag&#34;</span>: FLAG}
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Only admin can read the flag&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/flipping_cookie/get_cookie/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_cookie</span>():
-</span></span><span style="display:flex;"><span>    expires_at <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>today() <span style="color:#f92672">+</span> timedelta(days<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    cookie <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;admin=False;expiry=</span><span style="color:#e6db74">{</span>expires_at<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>encode()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>    padded <span style="color:#f92672">=</span> pad(cookie, <span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(padded)
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> iv<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> encrypted<span style="color:#f92672">.</span>hex()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;cookie&#34;</span>: ciphertext}</span></span></code></pre></div>
-    
-</div>
-<p><img src="/cryptohack/symmetric/images/CBC_encryption.svg" alt="CBC Encryption"></p>
-<h1 id="solution">Solution</h1>
-<p>First, we get the encrypted cookie from the server using the get_cookie method.</p>
-<p>We know some of the decrypted cookie characters which are &ldquo;admin=False;expiry=&hellip;&rdquo; and we also have control over the IV in the function check_admin.</p>
-<p>Because of how the CBC mode is built we can use the plaintext of the cookie and the IV we recieved earlier to use the check_admin method with other IV that will change the prefix of the decrypted cookie to &ldquo;admin=True;&hellip;&rdquo;</p>
-<p>So how do we do it?</p>
-<p>After the AES block decryption routine, the output is xored with the IV and the result is the plaintext (&ldquo;admin=False;&hellip;&rdquo;). If we set the new IV to be [Last IV] ⊕ [Plaintext] (or at least the part we know - &ldquo;admin=False;&rdquo;), we get decrypted output as zeros.</p>
-<p>Because of that, if we set the new IV to be [Last IV] ⊕ [Plaintext exists (&ldquo;admin=False;&hellip;&rdquo;)] ⊕ [Plaintext needed (&ldquo;admin=True;&rdquo;)] the decrypted output will be &ldquo;admin=True;&hellip;&rdquo; which is what was needed.</p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="#ZgotmplZ">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Util.Padding <span style="color:#f92672">import</span> pad, unpad
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime, timedelta
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SITE_GET_COOKIE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/flipping_cookie/get_cookie&#34;</span>
-</span></span><span style="display:flex;"><span>SITE_CHECK_ADMIN <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/flipping_cookie/check_admin/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cookie <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_GET_COOKIE)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;cookie&#34;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>iv <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(cookie[:<span style="color:#ae81ff">32</span>])
-</span></span><span style="display:flex;"><span>enc <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(cookie[<span style="color:#ae81ff">32</span>:])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>needed <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;admin=True;&#34;</span>
-</span></span><span style="display:flex;"><span>exists <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;admin=False&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>new_iv <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, _ <span style="color:#f92672">in</span> enumerate(needed):
-</span></span><span style="display:flex;"><span>    new_iv <span style="color:#f92672">+=</span> (ord(needed[i]) <span style="color:#f92672">^</span> ord(exists[i]) <span style="color:#f92672">^</span> iv[i])<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;little&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>new_iv <span style="color:#f92672">+=</span> iv[len(new_iv):]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;COOKIE&#34;</span> <span style="color:#f92672">+</span> enc<span style="color:#f92672">.</span>hex())
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;IV: &#34;</span> <span style="color:#f92672">+</span> new_iv<span style="color:#f92672">.</span>hex())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_CHECK_ADMIN<span style="color:#f92672">.</span>format(enc<span style="color:#f92672">.</span>hex(), new_iv<span style="color:#f92672">.</span>hex()))<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;flag&#34;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(flag)</span></span></code></pre></div>
-    
-</div>
-<p><a href="/cryptohack/symmetric/code/flipping_cookie.py">flipping_cookie.py</a></p>
+                <p>Here I will explain RSA</p>
+<h1 id="rsa">RSA</h1>
+<p>RSA is an asymmetric encryption algorithm with a public key and a private key.
+The key generation follows</p>
+<ul>
+<li>Choose $p$ and $q$ large prime numbers.</li>
+<li>Calculate $N = p * q$.</li>
+<li>Calculate the <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">Euler&rsquo;s totient function</a> of $N$, because $N$ is multiplication of 2 prime numbers, $\varphi(N) = \varphi(p) * \varphi(q) = (p - 1) * (q - 1)$.</li>
+<li>Choose exponent $e$.</li>
+<li>Calculate the inverse of $e$ in $\varphi(N)$ ring (There is an inverse only if $GCD(e, \varphi(N)) = 1$), let&rsquo;s call it $d$.</li>
+</ul>
+<p>The public key above is $N$, $e$
+The private key above is $p$, $q$, $d$</p>
+<p>$$
+c = m^e \bmod N
+$$$$
+m = c^d \bmod N
+$$</p>
+<h1 id="rsa-proof">RSA Proof</h1>
+<p>The proof for RSA is very easy to understand.
+We use the <a href="https://en.wikipedia.org/wiki/Euler%27s_theorem">Euler-Fermat Theorem</a>.</p>
+<p>$$
+a^{\varphi(N)} = 1 \bmod N
+$$</p>
+<p>Let&rsquo;s say
+$$
+c = m^e \bmod N
+$$</p>
+<p>Power both sides by $d$
+$$
+c^d = (m^e)^d \bmod N
+$$
+$$
+= m ^ {e*d} \bmod N
+$$</p>
+<p>We know that
+$$
+e*d = 1 \bmod \varphi(N)
+$$</p>
+<p>So
+$$
+c^d = m ^ {1 + k * \varphi(N)} \bmod N
+$$$$
+= m * m ^ {k * \varphi(N)} \bmod N
+$$</p>
+<p>Using Euler-Fermat Theorem we can conclude that $m ^ {\varphi(N)} = 1 \bmod N$ so $(m ^ {\varphi(N)}) ^ k = m ^ {k * \varphi(N)} = 1 \bmod N$</p>
+<p>So
+$$
+c^d = m \bmod N
+$$</p>
+<h1 id="rsa-strength">RSA Strength</h1>
+<p>The RSA encryption strength comes from the hardness of calculating $\varphi(N)$ of a large number and from the hardness of factoring a large number to its primes.</p>
+<p>Because the private key contains $p$ and $q$ and that $N = p*q$ we can calculate $\varphi(N)$ easly using its properties on prime numbers
+$\varphi(N) = \varphi(p * q) = (p - 1) * (q - 1)$</p>
 
             
         </div>
@@ -1009,7 +941,7 @@ To get the flag for this challenge we need to use the check_admin method, but us
                 <li>
                     
                         Word Count:
-                        392
+                        309
                     
                 </li>
             
@@ -1045,7 +977,7 @@ To get the flag for this challenge we need to use the check_admin method, but us
                     
                         Last modified: &nbsp;
                         <time>
-                            Apr 26 2024 10:59:55
+                            Jun 18 2024 00:00:00
                         </time>
                     
                 </li>

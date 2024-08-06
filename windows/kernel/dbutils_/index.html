@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="generator" content="Hugo 0.125.3">
+
+    
+
+    
+
+    
+        
+            <meta
+                name="description"
+                content="This is my new hugo site" />
+        
+
+        
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
+        
+
+    
+
+
+    <title>
+        
+            0-diffie_hellman_explained |
+            SecurityBlog
+        
+    </title>
+
+    
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+        
+            
+            <link
+                rel="stylesheet"
+                href="/reset.min_6851612176967065231.3662e40c85350bf0bcf308b7db81c173e4b690b862d3c3cde460de5155550bf055b7ff48cddb1cf5255e55f0355196d8dec1d49434b2457842cc77ebea198f3f.css"
+                integrity="sha512-NmLkDIU1C/C88wi324HBc&#43;S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" />
+        
+            
+            <link
+                rel="stylesheet"
+                href="/_theme/css/01_layout.26ffaaf7a32c233cbe1c7c9093d3b744e9466ea0a11559a8f3350a40468de72856a6fd3fd8f38bc13f66093fbeeee908d56483cac2ac01de75b17f999fd2606a.css"
+                integrity="sha512-Jv&#43;q96MsIzy&#43;HHyQk9O3ROlGbqChFVmo8zUKQEaN5yhWpv0/2POLwT9mCT&#43;&#43;7ukI1WSDysKsAd51sX&#43;Zn9Jgag==" />
+        
+            
+            <link
+                rel="stylesheet"
+                href="/_theme/css/02_style.6e547a963eb4b47b8466738206d9e1d164b1af63a268440672bd5138749f058278dbecc942f26f32c884fba203dc138d3dbdc0d3b559a049feec71464bb56ca1.css"
+                integrity="sha512-blR6lj60tHuEZnOCBtnh0WSxr2OiaEQGcr1ROHSfBYJ42&#43;zJQvJvMsiE&#43;6ID3BONPb3A07VZoEn&#43;7HFGS7VsoQ==" />
+        
+            
+            <link
+                rel="stylesheet"
+                href="/_theme/css/03_home.c12c2a68104bddb5523ceeaafb439534c4574cc4e78ffbab3a8e7d8c2bd3bd4eab28a89e9039fb588153dbf64108c4eafaee3c52d6192050f7ef5ec4ecc7c21f.css"
+                integrity="sha512-wSwqaBBL3bVSPO6q&#43;0OVNMRXTMTnj/urOo59jCvTvU6rKKiekDn7WIFT2/ZBCMTq&#43;u48UtYZIFD3717E7MfCHw==" />
+        
+            
+            <link
+                rel="stylesheet"
+                href="/_theme/css/04_responsive.cd3527afabdc02c3c117d57389f622b57e143ac3ee5dcc150b0e4b6ef262353217a1bf92f365e0f23f3021fd5e97abab71b1f06c2c431e885f46a27f5d9e9730.css"
+                integrity="sha512-zTUnr6vcAsPBF9VzifYitX4UOsPuXcwVCw5LbvJiNTIXob&#43;S82Xg8j8wIf1el6urcbHwbCxDHohfRqJ/XZ6XMA==" />
+        
+            
+            <link
+                rel="stylesheet"
+                href="/_theme/css/05_markdown.b84d310882bf53ceaa3e614e623874bb542bacb17445bb27c2deb29e6dc0525a4d9fa5c49532000df51ca1cb29d2697dcd4ec4ef2493bd86f5d820de17ebae21.css"
+                integrity="sha512-uE0xCIK/U86qPmFOYjh0u1QrrLF0Rbsnwt6ynm3AUlpNn6XElTIADfUcocsp0ml9zU7E7ySTvYb12CDeF&#43;uuIQ==" />
+        
+
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+		
+        
+
+            
+
+
+
+
+    
+        
+    
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous" />
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"></script>
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+    
+        onload="renderMathInElement(document.body , { trust: true });"
+    ></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+
+            
+                trust: true
+            
+        });
+    });
+</script>
+
+        
+
+    
+</head>
+
+
+
+    <body>
+        <header class="header">
+    <div class="header_left">
+        
+    </div>
+
+    <div class="header_middle">
+        
+            0-diffie_hellman_explained -
+            SecurityBlog
+        
+    </div>
+</header>
+
+
+
+        <main>
+            <aside class="sidebar" style="overflow-y: auto;">
+    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Cryptohack </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> diffie-helman </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/0-diffie_hellman_explained/" title="./cryptohack/diffie-hellman/0-diffie_hellman_explained/">
+                        
+                            0-diffie_hellman_explained
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/1-parameter_injection/" title="./cryptohack/diffie-hellman/1-parameter_injection/">
+                        
+                            1-parameter_injection
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/2-export_grade/" title="./cryptohack/diffie-hellman/2-export_grade/">
+                        
+                            2-export_grade
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/3-static_client/" title="./cryptohack/diffie-hellman/3-static_client/">
+                        
+                            3-static_client
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/4-additive/" title="./cryptohack/diffie-hellman/4-additive/">
+                        
+                            4-additive
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/5-static_client_2/" title="./cryptohack/diffie-hellman/5-static_client_2/">
+                        
+                            5-static_client_2
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/6-script_kiddie/" title="./cryptohack/diffie-hellman/6-script_kiddie/">
+                        
+                            6-script_kiddie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/7-the_matrix/" title="./cryptohack/diffie-hellman/7-the_matrix/">
+                        
+                            7-the_matrix
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/8-the_matrix_reloaded/" title="./cryptohack/diffie-hellman/8-the_matrix_reloaded/">
+                        
+                            8-the_matrix_reloaded
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/diffie-hellman/9-the_matrix_revolutions/" title="./cryptohack/diffie-hellman/9-the_matrix_revolutions/">
+                        
+                            9-the_matrix_revolutions
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> hashes </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
+                        
+                            1-collider
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
+                        
+                            2-hash_stuffing
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
+                        
+                            3-PriMeD5
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
+                        
+                            4-twin_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
+                        
+                            5-no_difference
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
+                        
+                            6-md0
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
+                        
+                            7-mdflag
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/8-mixed_up/" title="./cryptohack/hashes/8-mixed_up/">
+                        
+                            8-mixed_up
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/hashes/9-invariant/" title="./cryptohack/hashes/9-invariant/">
+                        
+                            9-invariant
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> rsa </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/rsa/0-rsa_explained/" title="./cryptohack/rsa/0-rsa_explained/">
+                        
+                            0-rsa_explained
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> symmetric </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
+                        
+                            01-passwords_as_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
+                        
+                            02-ecbcbcwtf
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
+                        
+                            03-ecb_oracle
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
+                        
+                            04-flipping_cookie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
+                        
+                            05-lazy_cbc
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
+                        
+                            06-triple_des
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
+                        
+                            07-symmetry
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
+                        
+                            08-bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
+                        
+                            09-ctrime
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
+                        
+                            10-logon_zero
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
+                        
+                            11-stream_consciousness
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
+                        
+                            12-dancing_queen
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
+                        
+                            13-oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
+                        
+                            14-paper_plane
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
+                        
+                            15-forbidden_fruit
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
+                        
+                            16-beatboxer
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Windows </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Kernel </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/windows/kernel/dbutils_/" title="./windows/kernel/dbutils_/">
+                        
+                            0-diffie_hellman_explained
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Reversing </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Portable-Executable </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="http://localhost:1313/windows/portable-executable/fileinfector/" title="./windows/portable-executable/fileinfector/">
+                        
+                            FileInfector
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+</aside>
+<aside class="exapandable"></aside>
+
+
+            
+    <article class="main">
+        <button
+    class="sidebar-toggle-btn"
+    type="menu"
+    aria-expanded="false"
+    aria-haspopup="true">
+    <i class="bi bi-list"></i>
+</button>
+
+
+
+        <div class="title">
+            <h1 class="title-header">
+                0-diffie_hellman_explained
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.05.25"
+                            >2024.05.25
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        2 mins to read
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="http://localhost:1313/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="http://localhost:1313/windows/" class="bread-btn">
+    
+
+    
+        Windows
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="http://localhost:1313/windows/kernel/" class="bread-btn">
+    
+
+    
+        Kernel
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="http://localhost:1313/windows/kernel/dbutils_/" class="bread-btn">
+    
+
+    
+        
+            0-diffie_hellman_explained
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
+        </div>
+
+        
+            <nav id="TableOfContents"></nav>
+        
+
+
+        <div class="content">
+            
+                <p>Here I will explain the Diffie-Hellman algorithm and the discrete log problem!</p>
+<h1 id="diffie-hellman">Diffie-Hellman</h1>
+<p><img src="/cryptohack/diffie-hellman/images/DiffieHellman.svg" alt="DiffieHellman"></p>
+<p>In the algorithm first Alice generates ahead of time a prime number <code>p</code> and a generator <code>g</code>.</p>
+<p>Then when Bob starts a converstation with Alice, Alice generates a random value <code>a</code>, calculates <code>A = pow(g, a, p)</code>, and then sends to Bob <code>(g, p, A)</code>.</p>
+<p>Bob generates a random value <code>b</code>, calculates <code>B = pow(g, b, p)</code>, and then sends it to Alice.</p>
+<p>So the only parameters being sent through the public unsecured channel are <code>g, p, A, B</code>.</p>
+<p>To calculate the <code>shared_secret</code>, Alice calculates <code>shared_secret = pow(B, a, p)</code> and Bob calculates <code>shared_secret = pow(A, b, p)</code>.</p>
+<p>The <code>shared_secret</code> will be the same because</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="A%20=%20pow%28g,%20a,%20p%29%0d%0ashared_secret%20=%20pow%28A,%20b,%20p%29%20=%20pow%28pow%28g,%20a,%20p%29,%20b,%20p%29%0d%0a%0d%0aB%20=%20pow%28g,%20b,%20p%29%0d%0ashared_secret%20=%20pow%28B,%20a,%20p%29%20=%20pow%28pow%28g,%20b,%20p%29,%20a,%20p%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>A = pow(g, a, p)
+shared_secret = pow(A, b, p) = pow(pow(g, a, p), b, p)
+
+B = pow(g, b, p)
+shared_secret = pow(B, a, p) = pow(pow(g, b, p), a, p)</code></pre>
+    
+</div>
+<p>$$
+(g^a)^b = (g^b)^a = g^{ab}
+$$</p>
+<p>The strength of this algorithm comes from that using the parameters that are exposed to the public channel (<code>g, p, A, B</code>) an attacker cannot forge <code>shared_secret</code>!</p>
+<h1 id="discrete-log">Discrete-Log</h1>
+<p>The Discrete-Log problem is that when given <code>a, b, p</code> calculate <code>x</code> such that</p>
+<p>$$
+a^x \equiv_p b
+$$</p>
+<p>Which is
+$$
+log_a(b) \bmod p
+$$</p>
+<p>In normal $log$, to calculate the $log_a(b)$ by trial and error, for example to calculate $log_2(1000)$, we can try $2^{10} = 1024$ and $2^9 = 512$ so we know the solution is between 9 to 10, but is much much closer to 10.</p>
+<p>In fields it is not straight forward, it is much more difficult.</p>
+<h1 id="diffie-hellman-and-the-discrete-log">Diffie-Hellman and the Discrete-Log</h1>
+<p>An eavesdropper can gather the publich channel DH parameters (<code>g, p, a, B</code>) and if has an efficient solution to the discrete-log problem, he can calculate
+$$
+a \equiv_p log_g(A)
+$$</p>
+<p>After he calculates <code>a</code>, he can just calculate the <code>shared_secret</code>!</p>
+<p>So we can conclude that solving the Discrete-Log problem will cause Diffie-Hellman lose its security powers.</p>
+<h1 id="solving-the-discrete-log">Solving the Discrete-Log</h1>
+<p>There are many algorithms for solving the discrete log problem.</p>
+<ul>
+<li>Baby step Giant step (BSGS)</li>
+<li>Pohlig-Hellman</li>
+<li>etc&hellip;</li>
+</ul>
+<p>Yet they are not enough efficient to crack Diffie-Hellman with an enough key length (bit size)</p>
+<p>There are also misuses of Diffie-Hellman when choosing bad parameters which can lower the strength of the algorithm.</p>
+
+            
+        </div>
+    </article>
+
+        </main>
+
+        <footer class="footer">
+    <div class="footer-left">
+        <ul class="social">
+            
+                <li>All Rights Reserved ®.</li>
+            
+
+            
+                <li>yoavshah</li>
+            
+
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="footer-right">
+        <ul class="control status clearfix">
+            
+                <li>
+                    
+                        Word Count:
+                        381
+                    
+                </li>
+            
+
+            
+            
+
+            
+                <li>en</li>
+            
+
+            
+                <li>
+                    <a href="https://gohugo.io" class="btn" target="_blank"
+                        >Hugo: 0.125.3</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    <a
+                        href="https://github.com/JingWangTW/dark-theme-editor"
+                        class="btn"
+                        target="_blank"
+                        >Theme: dark-theme-editor</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    
+                        Last modified: &nbsp;
+                        <time>
+                            May 25 2024 00:00:00
+                        </time>
+                    
+                </li>
+            
+
+            
+                <li title="">
+                    
+                </li>
+            
+        </ul>
+    </div>
+</footer>
+
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        
+        <script
+            type="text/javascript"
+            src="/_theme/js/codeblock_copy.2e8ec6d1c2acd298acca044dd90a3e6c550bfe467768a22d8ce69c30cefdf813e1f2bdf31939c94542b977db46bdc0e844c807779972408d8a58df29657a635b.js"
+            integrity="sha512-Lo7G0cKs0pisygRN2Qo&#43;bFUL/kZ3aKItjOacMM79&#43;BPh8r3zGTnJRUK5d9tGvcDoRMgHd5lyQI2KWN8pZXpjWw=="></script>
+    
+        
+        <script
+            type="text/javascript"
+            src="/_theme/js/dir_toggle.35e8f79b370b43fa56a12e33f2a6498fdd571d6d857796df2ade4bf9af6a2d6b274fcc3846de6aa679a12d2e9cce53330ee1eeec121bc40d0a42d98b2b413b8f.js"
+            integrity="sha512-Nej3mzcLQ/pWoS4z8qZJj91XHW2Fd5bfKt5L&#43;a9qLWsnT8w4Rt5qpnmhLS6czlMzDuHu7BIbxA0KQtmLK0E7jw=="></script>
+    
+        
+        <script
+            type="text/javascript"
+            src="/_theme/js/sidebar.c85fe41e1d2b187f402cf6abbc0273c6c8b0767b0d20dec7ca6134a4dc3e01a4bc8a9bcee30203dea8546be9fdbd73d53e09aa8908f54a44429ca324e81905da.js"
+            integrity="sha512-yF/kHh0rGH9ALParvAJzxsiwdnsNIN7HymE0pNw&#43;AaS8ipvO4wID3qhUa&#43;n9vXPVPgmqiQj1SkRCnKMk6BkF2g=="></script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+
+
+</html>

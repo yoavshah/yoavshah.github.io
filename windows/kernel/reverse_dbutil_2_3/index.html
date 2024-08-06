@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="generator" content="Hugo 0.125.3">
+
+    
+
+    
+
+    
+        
+            <meta
+                name="description"
+                content="This is my new hugo site" />
+        
+
+        
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
+        
+
+    
+
+
+    <title>
+        
+            Reverse dbutil_2_3 |
+            SecurityBlog
+        
+    </title>
+
+    
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+        
+        
+
+
+        
+        
+
+
+        <link
+            rel="stylesheet"
+            href="/css/index_d751713.min.912d03bce61461ecbc3ca083479e1ed814bba94df76d0bdc6aa88fdca33621b9bb410dc2c81af31e8101fec62decfa5f6e48901ad673bc5056d2f1d1f2368a34.css"
+            integrity="sha512-kS0DvOYUYey8PKCDR54e2BS7qU33bQvcaqiP3KM2Ibm7QQ3CyBrzHoEB/sYt7PpfbkiQGtZzvFBW0vHR8jaKNA==" />
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+		
+        
+
+            
+
+
+
+
+    
+        
+    
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous" />
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"></script>
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+    
+        onload="renderMathInElement(document.body , { trust: true });"
+    ></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+
+            
+                trust: true
+            
+        });
+    });
+</script>
+
+        
+
+    
+</head>
+
+
+
+    <body>
+        <header class="header">
+    <div class="header_left">
+        
+    </div>
+
+    <div class="header_middle">
+        
+            Reverse dbutil_2_3 -
+            SecurityBlog
+        
+    </div>
+</header>
+
+
+
+        <main>
+            <aside class="sidebar" style="overflow-y: auto;">
+    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Cryptohack </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> diffie-helman </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/" title="./cryptohack/diffie-hellman/0-diffie_hellman_explained/">
+                        
+                            0-diffie_hellman_explained
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/" title="./cryptohack/diffie-hellman/1-parameter_injection/">
+                        
+                            1-parameter_injection
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/" title="./cryptohack/diffie-hellman/2-export_grade/">
+                        
+                            2-export_grade
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/" title="./cryptohack/diffie-hellman/3-static_client/">
+                        
+                            3-static_client
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/" title="./cryptohack/diffie-hellman/4-additive/">
+                        
+                            4-additive
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/" title="./cryptohack/diffie-hellman/5-static_client_2/">
+                        
+                            5-static_client_2
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/" title="./cryptohack/diffie-hellman/6-script_kiddie/">
+                        
+                            6-script_kiddie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/" title="./cryptohack/diffie-hellman/7-the_matrix/">
+                        
+                            7-the_matrix
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/" title="./cryptohack/diffie-hellman/8-the_matrix_reloaded/">
+                        
+                            8-the_matrix_reloaded
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/" title="./cryptohack/diffie-hellman/9-the_matrix_revolutions/">
+                        
+                            9-the_matrix_revolutions
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> hashes </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
+                        
+                            1-collider
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
+                        
+                            2-hash_stuffing
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
+                        
+                            3-PriMeD5
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
+                        
+                            4-twin_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
+                        
+                            5-no_difference
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
+                        
+                            6-md0
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
+                        
+                            7-mdflag
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/" title="./cryptohack/hashes/8-mixed_up/">
+                        
+                            8-mixed_up
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/9-invariant/" title="./cryptohack/hashes/9-invariant/">
+                        
+                            9-invariant
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> rsa </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/" title="./cryptohack/rsa/0-rsa_explained/">
+                        
+                            0-rsa_explained
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> symmetric </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
+                        
+                            01-passwords_as_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
+                        
+                            02-ecbcbcwtf
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
+                        
+                            03-ecb_oracle
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
+                        
+                            04-flipping_cookie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
+                        
+                            05-lazy_cbc
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
+                        
+                            06-triple_des
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
+                        
+                            07-symmetry
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
+                        
+                            08-bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
+                        
+                            09-ctrime
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
+                        
+                            10-logon_zero
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
+                        
+                            11-stream_consciousness
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
+                        
+                            12-dancing_queen
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
+                        
+                            13-oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
+                        
+                            14-paper_plane
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
+                        
+                            15-forbidden_fruit
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
+                        
+                            16-beatboxer
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Windows </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Kernel </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/" title="./windows/kernel/reverse_dbutil_2_3/">
+                        
+                            Reverse dbutil_2_3
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Portable-Executable </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/windows/portable-executable/fileinfector/" title="./windows/portable-executable/fileinfector/">
+                        
+                            FileInfector
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+</aside>
+<aside class="exapandable"></aside>
+
+
+            
+    <article class="main">
+        <button
+    class="sidebar-toggle-btn"
+    type="menu"
+    aria-expanded="false"
+    aria-haspopup="true">
+    <i class="bi bi-list"></i>
+</button>
+
+
+
+        <div class="title">
+            <h1 class="title-header">
+                Reverse dbutil_2_3
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.05.25"
+                            >2024.05.25
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        7 mins to read
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="https://yoavshah.github.io/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/windows/" class="bread-btn">
+    
+
+    
+        Windows
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/windows/kernel/" class="bread-btn">
+    
+
+    
+        Kernel
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/" class="bread-btn">
+    
+
+    
+        
+            Reverse dbutil_2_3
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
+        </div>
+
+        
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x9b0c1ec0">0x9B0C1EC0</a></li>
+    <li><a href="#0x9b0c1ec4--0x9b0c1ec8">0x9B0C1EC4 + 0x9B0C1EC8</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+        
+
+
+        <div class="content">
+            
+                <p>Here I will show the reversing process of dbutil_2_3.sys (CVE-2021-21551)</p>
+<h1 id="driverentry">DriverEntry</h1>
+<p>First have a look at the DriverEntry which is the first function that executes when the driver is loaded</p>
+<p><img src="/windows/kernel/reverse_dbutil_2_3/images/driver_entry.png" alt="DriverEntry"></p>
+<p>As we can see, all this function does is to do some sanity checks and then execute <code>sub_11008</code>, let&rsquo;s rename it to <code>RealDriverEntry</code> using the <code>n</code> keyword.</p>
+<p>This is the <code>RealDriverEntry</code> function</p>
+<p><img src="/windows/kernel/reverse_dbutil_2_3/images/real_driver_entry.png" alt="DriverEntry"></p>
+<p>Here we can see the device assosiated with the driver is being created (with undefined priviledges) with the <code>&quot;\Device\DBUtil_2_3&quot;</code> name and with with the symbolic link <code>&quot;\DosDevices\DBUtil_2_3&quot;</code>.</p>
+<p>We can see the MajorFunctions being set to the same function <code>sub_11170</code>, let&rsquo;s call it <code>GenericMajor</code>.</p>
+<p>We can see the initialization of the DeviceExtension of the driver, and that at DeviceExtension is a struct that at index 24 it is a <code>PRKDPC</code> object.</p>
+<p>Let&rsquo;s create a struct for our DeviceExtension and fill its fields one by one as we investigate this driver.</p>
+<p>Go to the <code>Structures</code> window, press <code>insert</code> and call this struct <code>dbutil_device_extension</code>, now press <code>a</code> and create an array of size 24 bytes (we will use 24 for now because we don&rsquo;t know the real size of the struct and we just want to fill bytes), press <code>d</code> to create a new field, press <code>y</code> to change its type to <code>KDPC</code> (in the decompiler we can see the pointer is <code>PRKDPC</code> so the field type is <code>KDPC</code>), and at last rename the field to something like <code>kdpc_object</code>.</p>
+<p>Now press <code>y</code> on the <code>DeviceExtension</code> and set its type to <code>dbutil_device_extension*</code>.</p>
+<p>You should have something like</p>
+<p><img src="/windows/kernel/reverse_dbutil_2_3/images/driver_entry_struct_created.png" alt="DriverEntry"></p>
+<p>Now let&rsquo;s have a look at the <code>GenericMajor</code> function, first let&rsquo;s set its type to <code>PDRIVER_DISPATCH</code> by pressing <code>y</code> on this function and writing it.</p>
+<h1 id="genericmajor">GenericMajor</h1>
+<p>This function is a big one so I will not be able to show an image with all of its code.</p>
+<p><img src="/windows/kernel/reverse_dbutil_2_3/images/generic_major_first.png" alt="GenericMajor"></p>
+<p>We can see here that this function also uses the DeviceExtension, so we can just change its type.</p>
+<p>Also at line 30 there is an if that checks if the MajorFunction is <code>14</code>, we can press the <code>m</code> keyword to set this value as an enum, just search for <code>IRP_MJ_DEVICE_CONTROL</code>.</p>
+<p>Then we can se at line <code>33</code> that there is a mistake, it is setting <code>field_0</code> at in the device extension struct to MasterIrp.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="*%28_QWORD%20*%29DeviceExtension-%3efield_0%20=%20Irp-%3eAssociatedIrp.MasterIrp;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>*(_QWORD *)DeviceExtension-&gt;field_0 = Irp-&gt;AssociatedIrp.MasterIrp;</code></pre>
+    
+</div>
+<p>We know that the IRP struct contains unions, and <code>MasterIrp</code> is not the correct one, we can press the keyword <code>alt+y</code> and set it to <code>SystemBuffer</code> which is the buffer received in the IOCTL. The same problem occurs many times, also at line 34, there the <code>Create</code> field is invalid and should be changed to <code>DeviceIoControl</code>.</p>
+<p>After we changed them we can see that the first QWORD of DeviceExtension is a pointer to the SystemBuffer and the DWORD after it is the length of the input buffer, so let&rsquo;s add it to the struct.</p>
+<p><img src="/windows/kernel/reverse_dbutil_2_3/images/generic_major_fixed_first.png" alt="GenericMajor"></p>
+<p>Now we can follow the control flow based on the IOCTL code and find out about some of the functionality this driver performs.</p>
+<p>Here is a list of all the existing IOCTL codes in this driver:</p>
+<ul>
+<li>0x9B0C1EC0</li>
+<li>0x9B0C1EC4</li>
+<li>0x9B0C1ECC</li>
+<li>0x9B0C1F04</li>
+<li>0x9B0C1F04</li>
+<li>0x9B0C1F40</li>
+<li>0x9B0C1F44</li>
+<li>0x9B0C1F80</li>
+<li>0x9B0C1F88</li>
+<li>0x9B0C1F84</li>
+<li>0x9B0C1F8C</li>
+<li>0x9B0C1FC4</li>
+</ul>
+<h2 id="0x9b0c1ec0">0x9B0C1EC0</h2>
+<p>As we can see, this IOCTL just executes the following function <code>sub_151D4</code></p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v15%20=%20sub_151D4%28DeviceExtension%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v15 = sub_151D4(DeviceExtension);</code></pre>
+    
+</div>
+<p>Let&rsquo;s call it ioctl_9B0C1EC0</p>
+<p>Now inside the function we know that the parameter sent is DeviceExtension, so let&rsquo;s change its type to it.</p>
+<p>We can see that there is the following check</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="if%20%28%20DeviceExtension-%3eInputBufferLength%20!=%2048%20%29%0d%0a%20%20%20%20return%203221225485i64;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>if ( DeviceExtension-&gt;InputBufferLength != 48 )
+    return 3221225485i64;</code></pre>
+    
+</div>
+<p>Then we can see a <code>memmove</code> operation from the <code>SystemBuffer</code> into an array of size 0x30.
+So let&rsquo;s create a new struct that will represent this IOCTL data (let&rsquo;s call it <code>ioctl_9B0C1EC0_struct</code>). Then we can set the local variable called <code>Dst</code> to the be of this type.</p>
+<p>Now we can see this code which means that the <code>&amp;field_0[4]</code> is actualy a QWORD, so I added an unknown field and then set this field to be just a random name I will notice next time it appear.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v3%20=%20*%28_QWORD%20*%29&amp;DeviceExtension-%3efield_0[4];">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v3 = *(_QWORD *)&amp;DeviceExtension-&gt;field_0[4];</code></pre>
+    
+</div>
+<p>After that we can see this compare</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="if%20%28%20unknown_address%20&amp;&amp;%20unknown_address%20!=%20*%28_QWORD%20*%29Dst.field_0%20%29%0d%0a%20%20%20%20return%203221225477i64;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>if ( unknown_address &amp;&amp; unknown_address != *(_QWORD *)Dst.field_0 )
+    return 3221225477i64;</code></pre>
+    
+</div>
+<p>We can conclude that the first pointer is of type QWORD.</p>
+<p>After we changed the struct, we can see operations on Dst.field_0[8] and Dst.field_0[16] which are both QWORDS.</p>
+<p>Now we see this call</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="ContiguousMemorySpecifyCache%20=%20MmAllocateContiguousMemorySpecifyCache%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20LODWORD%28Dst.field_8%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28PHYSICAL_ADDRESS%29v4,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v5,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v6,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20MmNonCached%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>ContiguousMemorySpecifyCache = MmAllocateContiguousMemorySpecifyCache(
+                                LODWORD(Dst.field_8),
+                                (PHYSICAL_ADDRESS)v4,
+                                v5,
+                                v6,
+                                MmNonCached);</code></pre>
+    
+</div>
+<p>So <code>field_8</code> is <code>NumberOfBytes</code> and <code>v4</code> which is <code>field_10</code> is <code>LowestAcceptableAddress</code>, so let&rsquo;s rewrite the struct.</p>
+<p>Then we can see the output goes into <code>field_0</code> (remember it is not the real <code>field_0</code> but the one after we changed the struct, it is 0x20 offset)</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="*%28_QWORD%20*%29Dst.field_0%20=%20ContiguousMemorySpecifyCache;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>*(_QWORD *)Dst.field_0 = ContiguousMemorySpecifyCache;</code></pre>
+    
+</div>
+<p>So we can set this field as <code>VirtualMemoryAllocated</code>.</p>
+<p>We can see then these code lines</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="PhysicalAddress%20=%20MmGetPhysicalAddress%28ContiguousMemorySpecifyCache%29;%0d%0av9%20=%20%28%28__int64%20%28__fastcall%20*%29%28_QWORD%29%29sub_11574%29%28%28PHYSICAL_ADDRESS%29PhysicalAddress.QuadPart%29;%0d%0a*%28_QWORD%20*%29Dst.field_0%20=%20v9">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>PhysicalAddress = MmGetPhysicalAddress(ContiguousMemorySpecifyCache);
+v9 = ((__int64 (__fastcall *)(_QWORD))sub_11574)((PHYSICAL_ADDRESS)PhysicalAddress.QuadPart);
+*(_QWORD *)Dst.field_0 = v9</code></pre>
+    
+</div>
+<p>Which gets the newly created PhysicalAddress, then execute a little function with it that convert it to an __int64 number, and then set it to offset 0x28, we can change the struct.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="unsigned%20__int64%20__fastcall%20sub_11574%28__int64%20a1%29%0d%0a%7b%0d%0a%20%20return%20%28unsigned%20int%29a1%20%5e%20%28unsigned%20__int64%29%28%28__int64%29SHIDWORD%28a1%29%20%3c%3c%2032%29;%0d%0a%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>unsigned __int64 __fastcall sub_11574(__int64 a1)
+{
+  return (unsigned int)a1 ^ (unsigned __int64)((__int64)SHIDWORD(a1) &lt;&lt; 32);
+}</code></pre>
+    
+</div>
+<p>Nice! So we successfully built the struct</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>00000000 ioctl_9B0C1EC0_struct struc ; (sizeof=0x30, mappedto_379)
+00000000                                         ; XREF: ioctl_9B0C1EC0/r
+00000000 unknown_address dq ?                    ; XREF: ioctl_9B0C1EC0&#43;35/r
+00000008 NumberOfBytes   dq ?                    ; XREF: ioctl_9B0C1EC0&#43;64/r
+00000010 LowestPhysicalAddress dq ?
+00000018 field_18        dq ?
+00000020 VirtualMemoryAllocated dq ?
+00000028 PhysicalAddressAllocated dq ?
+00000030 ioctl_9B0C1EC0_struct ends
+00000030</code></pre>
+    
+</div>
+<p>Then the function just use the <code>memmove</code> from the local variable <code>Dst</code> to the <code>DeviceExtension-&gt;SystemBuffer</code> which will then returned to the user.</p>
+<p>So an user without permissions can use this IOCTL to allocate NonCached contiguous memory! doesn&rsquo;t seem right.</p>
+<h2 id="0x9b0c1ec4--0x9b0c1ec8">0x9B0C1EC4 + 0x9B0C1EC8</h2>
+<p>In this code we first set a variable to 1</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="LOBYTE%28v8%29%20=%201;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>LOBYTE(v8) = 1;</code></pre>
+    
+</div>
+<p>and then this function is execute - let&rsquo;s call this function <code>ioctl_9B0C1EC4</code> dive in</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v15%20=%20sub_15294%28DeviceExtension,%20v8%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v15 = sub_15294(DeviceExtension, v8);</code></pre>
+    
+</div>
+<p>let&rsquo;s fix the parameters types so we have clear view on what this function do</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="InputBufferLength%20=%20DeviceExtension-%3eInputBufferLength;%0d%0aif%20%28%20InputBufferLength%20%3c%200x18%20%29%0d%0a%20%20%20%20return%203221225485i64;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>InputBufferLength = DeviceExtension-&gt;InputBufferLength;
+if ( InputBufferLength &lt; 0x18 )
+    return 3221225485i64;</code></pre>
+    
+</div>
+<p>First we can see the input for the function is 0x18 bytes.</p>
+<p>We can then see these lines of code</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v11%20=%20*%28_QWORD%20*%29DeviceExtension-%3eSystemBuffer;%0d%0av12%20=%20*%28_QWORD%20*%29%28DeviceExtension-%3eSystemBuffer%20&#43;%208%29;%0d%0av13%20=%20*%28_QWORD%20*%29%28DeviceExtension-%3eSystemBuffer%20&#43;%2016%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v11 = *(_QWORD *)DeviceExtension-&gt;SystemBuffer;
+v12 = *(_QWORD *)(DeviceExtension-&gt;SystemBuffer &#43; 8);
+v13 = *(_QWORD *)(DeviceExtension-&gt;SystemBuffer &#43; 16);</code></pre>
+    
+</div>
+<p>It seems that the the input from the user is 3 pointers.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v7%20=%20InputBufferLength%20-%2024;%0d%0av8%20=%20%28void%20*%29%28v12%20&#43;%20%28unsigned%20int%29v13%29;%0d%0aif%20%28%20a2%20%29%0d%0a%7b%0d%0a%20%20%20%20v9%20=%20%28const%20void%20*%29%28v12%20&#43;%20%28unsigned%20int%29v13%29;%0d%0a%20%20%20%20v8%20=%20%28void%20*%29%28SystemBuffer%20&#43;%2024%29;%0d%0a%7d%0d%0aelse%0d%0a%7b%0d%0a%20%20%20%20v9%20=%20%28const%20void%20*%29%28SystemBuffer%20&#43;%2024%29;%0d%0a%7d%0d%0amemmove%28v8,%20v9,%20totalNumberMinus24%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v7 = InputBufferLength - 24;
+v8 = (void *)(v12 &#43; (unsigned int)v13);
+if ( a2 )
+{
+    v9 = (const void *)(v12 &#43; (unsigned int)v13);
+    v8 = (void *)(SystemBuffer &#43; 24);
+}
+else
+{
+    v9 = (const void *)(SystemBuffer &#43; 24);
+}
+memmove(v8, v9, totalNumberMinus24);</code></pre>
+    
+</div>
+<p>We can see that <code>v7</code> is actually the length minus 24 (which is the size of the 3 first pointers). Then we see some variables being set, let&rsquo;s see their usage to understand what they are up to. They are using <code>memmove</code> from <code>v9</code> to <code>v8</code> using the remaining bytes available from the SystemBuffer, name them <code>src_pointer</code> and <code>dst_pointer</code> accordinly</p>
+<p>When <code>a2</code> is set, <code>src_pointer</code> equals <code>v12 + v13</code> and <code>dst_pointer</code> equals to data at <code>SystemBuffer</code> which is later returned to the user, this is read operation</p>
+<p>When <code>a2</code> is not set, <code>src_pointer</code> equals to some index in <code>SystemBuffer</code> which received from the user, and <code>dst_pointer</code> equals to <code>v12 + v13</code>, this is write operation</p>
+<p>So this function allows a user to read\write data based on <code>a2</code>, in this ioctl <code>a2</code> is set to 1, meaning this ioctl allows to read any memory from the kernel.</p>
+<p>After that we can see in the code path of IOCTL 0x9B0C1EC8 that it calls the same function but with <code>a2</code> not set, so this is a write operation.</p>
+<p>Those 2 IOCTL allows read and write operation on any address in the kernel! In the next article we will exploit this to elevate priviledges.</p>
+<h2 id="summary">Summary</h2>
+<p>This was an example for reverse engineering a vulnerable driver, this driver has more nice IOCTLS to view but using the same methodology shown here you can reverse the other IOCTLs.
+In the next article I will show how to exploit the vulnerabilities shown here.</p>
+
+            
+        </div>
+    </article>
+
+        </main>
+
+        <footer class="footer">
+    <div class="footer-left">
+        <ul class="social">
+            
+                <li>All Rights Reserved ®.</li>
+            
+
+            
+                <li>yoavshah</li>
+            
+
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="footer-right">
+        <ul class="control status clearfix">
+            
+                <li>
+                    
+                        Word Count:
+                        1338
+                    
+                </li>
+            
+
+            
+            
+
+            
+                <li>en</li>
+            
+
+            
+                <li>
+                    <a href="https://gohugo.io" class="btn" target="_blank"
+                        >Hugo: 0.125.3</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    <a
+                        href="https://github.com/JingWangTW/dark-theme-editor"
+                        class="btn"
+                        target="_blank"
+                        >Theme: dark-theme-editor</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    
+                        Last modified: &nbsp;
+                        <time>
+                            May 25 2024 00:00:00
+                        </time>
+                    
+                </li>
+            
+
+            
+                <li title="">
+                    
+                </li>
+            
+        </ul>
+    </div>
+</footer>
+
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+    
+    
+
+
+    <script
+        type="text/javascript"
+        src="/js/index_d751713.min.5eeb120f16ea146352725c420364f87befead45f678142b8f0ffbef024646931fbc06bff07a7bd6cb57fa2f8cd8a21ba6a4ee5a278ec32303a378bc1cd17f246.js"
+        integrity="sha512-XusSDxbqFGNSclxCA2T4e&#43;/q1F9ngUK48P&#43;&#43;8CRkaTH7wGv/B6e9bLV/ovjNiiG6ak7lonjsMjA6N4vBzRfyRg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+
+
+</html>

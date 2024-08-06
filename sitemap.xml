@@ -2,13 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yoavshah.github.io/windows/kernel/</loc>
+    <lastmod>2024-06-24T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/windows/portable-executable/</loc>
+    <lastmod>2024-06-24T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/</loc>
+    <lastmod>2024-06-24T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/windows/</loc>
+    <lastmod>2024-06-24T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/windows/portable-executable/fileinfector/</loc>
+    <lastmod>2024-06-24T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://yoavshah.github.io/cryptohack/</loc>
     <lastmod>2024-06-18T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/rsa/</loc>
-    <lastmod>2024-06-18T10:59:55+03:00</lastmod>
-  </url><url>
-    <loc>https://yoavshah.github.io/</loc>
     <lastmod>2024-06-18T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/</loc>
@@ -42,6 +54,9 @@
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</loc>
+    <lastmod>2024-05-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/</loc>
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/hashes/</loc>

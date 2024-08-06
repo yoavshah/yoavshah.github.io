@@ -6,8 +6,15 @@
     <description>Recent content on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FileInfector</title>
+      <link>https://yoavshah.github.io/windows/portable-executable/fileinfector/</link>
+      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/windows/portable-executable/fileinfector/</guid>
+      <description></description>
+    </item>
     <item>
       <title>0-rsa_explained</title>
       <link>https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/</link>
@@ -84,6 +91,13 @@
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
       <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</guid>
       <description>Challenge In this challenge we eavesdropping a session between Alice and Bob, we later can start a new session with Bob.&#xA;Solution The vulnerabillity in this challenge is that Bob reuses his secret key b and that he allows us to choose any p and g .&#xA;At the second part of the call, we can send any g, a, p and Bob will return us B = pow(g, b, p), using that we need to find his secret b.</description>
+    </item>
+    <item>
+      <title>Reverse dbutil_2_3</title>
+      <link>https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/</link>
+      <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/</guid>
+      <description>Here I will show the reversing process of dbutil_2_3.sys (CVE-2021-21551)&#xA;DriverEntry First have a look at the DriverEntry which is the first function that executes when the driver is loaded&#xA;As we can see, all this function does is to do some sanity checks and then execute sub_11008, let&amp;rsquo;s rename it to RealDriverEntry using the n keyword.&#xA;This is the RealDriverEntry function&#xA;Here we can see the device assosiated with the driver is being created (with undefined priviledges) with the &amp;quot;\Device\DBUtil_2_3&amp;quot; name and with with the symbolic link &amp;quot;\DosDevices\DBUtil_2_3&amp;quot;.</description>
     </item>
     <item>
       <title>1-collider</title>

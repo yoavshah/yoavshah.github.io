@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Portable-Executable on Securiy Blog</title>
+    <link>https://yoavshah.github.io/windows/portable-executable/</link>
+    <description>Recent content in Portable-Executable on Securiy Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://yoavshah.github.io/windows/portable-executable/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FileInfector</title>
+      <link>https://yoavshah.github.io/windows/portable-executable/fileinfector/</link>
+      <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/windows/portable-executable/fileinfector/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>diffie-helman on Securiy Blog</title>
-    <link>http://localhost:1313/cryptohack/diffie-hellman/</link>
+    <link>https://yoavshah.github.io/cryptohack/diffie-hellman/</link>
     <description>Recent content in diffie-helman on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 03 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/cryptohack/diffie-hellman/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yoavshah.github.io/cryptohack/diffie-hellman/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>7-the_matrix</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/7-the_matrix/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/</link>
       <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/7-the_matrix/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/</guid>
       <description>Challenge In this challenge we get a python (+ SageMath) code that generates a random matrix (with the flag) and power it by 31337. we get the powered matrix and we need to find the base matrix and extract from it the flag.&#xA;import random P = 2 N = 50 E = 31337 FLAG = b&amp;#39;crypto{??????????????????????????}&amp;#39; def bytes_to_binary(s): bin_str = &amp;#39;&amp;#39;.join(format(b, &amp;#39;08b&amp;#39;) for b in s) bits = [int(c) for c in bin_str] return bits def generate_mat(): while True: msg = bytes_to_binary(FLAG) msg += [random.</description>
     </item>
     <item>
       <title>8-the_matrix_reloaded</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/8-the_matrix_reloaded/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/</link>
       <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/8-the_matrix_reloaded/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/</guid>
       <description>Challenge In this challenge we get a matrix called generator, the program creating a random value and calculates $generator^{secret}$, then it creates a random vector $v$ and calculates $w = generator^{secret} * v$&#xA;We get the generator, w, v, and we need to find the secret.&#xA;from Crypto.Cipher import AES from Crypto.Hash import SHA256 from Crypto.Util.number import * from Crypto.Util.Padding import pad, unpad import json from os import urandom FLAG = b&amp;#39;crypto{?</description>
     </item>
     <item>
       <title>9-the_matrix_revolutions</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/9-the_matrix_revolutions/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/</link>
       <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/9-the_matrix_revolutions/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/</guid>
       <description>Challenge from Crypto.Cipher import AES from Crypto.Hash import SHA256 from Crypto.Util.number import * from Crypto.Util.Padding import pad, unpad import json from os import urandom FLAG = b&amp;#39;crypto{????????????????????????????????????????}&amp;#39; P = 2 N = 150 def load_matrix(fname): data = open(fname, &amp;#39;r&amp;#39;).read().strip() rows = [list(map(int, row)) for row in data.splitlines()] return Matrix(GF(P), rows) def save_matrix(M, fname): open(fname, &amp;#39;w&amp;#39;).write(&amp;#39;\n&amp;#39;.join(&amp;#39;&amp;#39;.join(str(x) for x in row) for row in M)) KEY_LENGTH = 128 def derive_aes_key(M): mat_str = &amp;#39;&amp;#39;.</description>
     </item>
     <item>
       <title>4-additive</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/4-additive/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</link>
       <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/4-additive/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</guid>
       <description>Challenge In this challenge we eavesdrop a converstation between Alice and Bob that use Diffie-Hellman in the key changing but this time they choose to use the operator Add instead of Multiply! What could go wrong :) ?&#xA;Solution Because in normal Diffie-Hellman $$ B = g^b \bmod p $$&#xA;In the Diffie-Hellman in this challenge $$ B = g*b \bmod p $$&#xA;So we could find the inverse of $g$ in $Z_p$ field using the Little Fermat Theorem.</description>
     </item>
     <item>
       <title>5-static_client_2</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/5-static_client_2/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/</link>
       <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/5-static_client_2/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/</guid>
       <description>Challenge In this challenge we get again a converstation of Alice and Bob, we later can exchange keys with Bob. The problem here is that Bob uses the same secret key. The difference between 3-static_client is that Bob now verifies $g$ and verifies $p$.&#xA;Solution To solve this challenge we will generate a new large weak prime number $p$. To make this prime number be weak we need that $\varphi(p)$ will be factored to many small prime numbers.</description>
     </item>
     <item>
       <title>6-script_kiddie</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/6-script_kiddie/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/</link>
       <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/6-script_kiddie/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/</guid>
       <description>Challenge In this challenge we get a custom made DH implementation, we need to find weaknesses there.&#xA;from Crypto.Cipher import AES import hashlib import secrets def header(): print(&amp;#34;&amp;#34;&amp;#34; _____ _ __ __ _ | __ \(_)/ _|/ _(_) | | | |_| |_| |_ _ ___ | | | | | _| _| |/ _ \ | |__| | | | | | | | __/ |_____/|_|_| |_| |_|\___| | | | | | | | | |__| | ___| | |_ __ ___ __ _ _ __ | __ |/ _ \ | | &amp;#39;_ ` _ \ / _` | &amp;#39;_ \ | | | | __/ | | | | | | | (_| | | | | |_| |_|\___|_|_|_| |_| |_|\__,_|_| |_| &amp;#34;&amp;#34;&amp;#34;) def is_pkcs7_padded(message): padding = message[-message[-1]:] return all(padding[i] == len(padding) for i in range(0, len(padding))) def pkcs7_unpad(message, block_size=16): if len(message) == 0: raise Exception(&amp;#34;The input data must contain at least one byte&amp;#34;) if not is_pkcs7_padded(message): return message padding_len = message[-1] return message[:-padding_len] def decrypt_flag(shared_secret: int, iv: str, ciphertext: str): # Derive AES key from shared secret sha1 = hashlib.</description>
     </item>
     <item>
       <title>0-diffie_hellman_explained</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/0-diffie_hellman_explained/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</link>
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/0-diffie_hellman_explained/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</guid>
       <description>Here I will explain the Diffie-Hellman algorithm and the discrete log problem!&#xA;Diffie-Hellman In the algorithm first Alice generates ahead of time a prime number p and a generator g.&#xA;Then when Bob starts a converstation with Alice, Alice generates a random value a, calculates A = pow(g, a, p), and then sends to Bob (g, p, A).&#xA;Bob generates a random value b, calculates B = pow(g, b, p), and then sends it to Alice.</description>
     </item>
     <item>
       <title>1-parameter_injection</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/1-parameter_injection/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/</link>
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/1-parameter_injection/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/</guid>
       <description>Challenge In this challenge we are an attacker sits between Alice and Bob and we perform &amp;ldquo;Man in the Middle&amp;rdquo; attack. We need to get the flag and decrypt it.&#xA;Solution This is an easy challenge, all we need to do is to generate our own b, then the change the message of Bob to contain our B!&#xA;Now Alice will use our B, thus we can calculate the shared_secret by calculating</description>
     </item>
     <item>
       <title>2-export_grade</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/2-export_grade/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/</link>
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/2-export_grade/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/</guid>
       <description>Challenge In this challenge we are an attacker sits between Alice and Bob and we perform &amp;ldquo;Man in the Middle&amp;rdquo; attack. We cannot change any parameter but the number of bytes chosen and support in the algorithm. Of course we will choose DH-64 bits, but how can we crack it?&#xA;Solution This was quite a hard challenge because I wanted to understand the algorithms used to expolit DH with small keys.</description>
     </item>
     <item>
       <title>3-static_client</title>
-      <link>http://localhost:1313/cryptohack/diffie-hellman/3-static_client/</link>
+      <link>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</link>
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cryptohack/diffie-hellman/3-static_client/</guid>
+      <guid>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</guid>
       <description>Challenge In this challenge we eavesdropping a session between Alice and Bob, we later can start a new session with Bob.&#xA;Solution The vulnerabillity in this challenge is that Bob reuses his secret key b and that he allows us to choose any p and g .&#xA;At the second part of the call, we can send any g, a, p and Bob will return us B = pow(g, b, p), using that we need to find his secret b.</description>
     </item>
   </channel>

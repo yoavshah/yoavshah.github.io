@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kernel on Securiy Blog</title>
-    <link>http://localhost:1313/windows/kernel/</link>
+    <link>https://yoavshah.github.io/windows/kernel/</link>
     <description>Recent content in Kernel on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 07 Aug 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/windows/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yoavshah.github.io/windows/kernel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Read/Write using dbutil_2_3</title>
-      <link>http://localhost:1313/windows/kernel/readwrite_using_dbutil_2_3/</link>
+      <link>https://yoavshah.github.io/windows/kernel/readwrite_using_dbutil_2_3/</link>
       <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/windows/kernel/readwrite_using_dbutil_2_3/</guid>
+      <guid>https://yoavshah.github.io/windows/kernel/readwrite_using_dbutil_2_3/</guid>
       <description>This article is the second article about dbutil_2_3.sys, in this one I will exploit the vulnerabilities in this driver to gain priviledges in the computer We will use the following IOCTLs which allow us to read and write memory to any location in the kernel.&#xA;Architecture I will first create a class called DBUtilInterface which will have the functionality we need for the driver.&#xA;class DBUtilInterface { private: HANDLE device_handle; public: DBUtilInterface(); ~DBUtilInterface(); bool read_kernel_memory(void* dst, void* src, unsigned int size); bool write_kernel_memory(void* dst, void* src, unsigned int size); };&#xD;Constructor We want that in the constructor of the class a new handle to the device driver will be open</description>
     </item>
     <item>
       <title>Reverse dbutil_2_3</title>
-      <link>http://localhost:1313/windows/kernel/reverse_dbutil_2_3/</link>
+      <link>https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/</link>
       <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/windows/kernel/reverse_dbutil_2_3/</guid>
+      <guid>https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/</guid>
       <description>Here I will show the reversing process of dbutil_2_3.sys (CVE-2021-21551)&#xA;DriverEntry First have a look at the DriverEntry which is the first function that executes when the driver is loaded&#xA;As we can see, all this function does is to do some sanity checks and then execute sub_11008, let&amp;rsquo;s rename it to RealDriverEntry using the n keyword.&#xA;This is the RealDriverEntry function&#xA;Here we can see the device assosiated with the driver is being created (with undefined priviledges) with the &amp;quot;\Device\DBUtil_2_3&amp;quot; name and with with the symbolic link &amp;quot;\DosDevices\DBUtil_2_3&amp;quot;.</description>
     </item>
   </channel>

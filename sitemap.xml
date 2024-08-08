@@ -2,151 +2,154 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://yoavshah.github.io/windows/kernel/</loc>
+    <loc>http://localhost:1313/windows/kernel/readwrite_using_dbutil_2_3/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/windows/kernel/</loc>
     <lastmod>2024-06-24T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/windows/portable-executable/</loc>
+    <loc>http://localhost:1313/windows/portable-executable/</loc>
     <lastmod>2024-06-24T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/</loc>
+    <loc>http://localhost:1313/windows/</loc>
     <lastmod>2024-06-24T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/windows/</loc>
-    <lastmod>2024-06-24T10:59:55+03:00</lastmod>
-  </url><url>
-    <loc>https://yoavshah.github.io/windows/portable-executable/fileinfector/</loc>
+    <loc>http://localhost:1313/windows/portable-executable/fileinfector/</loc>
     <lastmod>2024-06-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/</loc>
+    <loc>http://localhost:1313/cryptohack/</loc>
     <lastmod>2024-06-18T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/rsa/</loc>
+    <loc>http://localhost:1313/cryptohack/rsa/</loc>
     <lastmod>2024-06-18T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/</loc>
+    <loc>http://localhost:1313/cryptohack/rsa/0-rsa_explained/</loc>
     <lastmod>2024-06-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/7-the_matrix/</loc>
     <lastmod>2024-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/8-the_matrix_reloaded/</loc>
     <lastmod>2024-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/9-the_matrix_revolutions/</loc>
     <lastmod>2024-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/4-additive/</loc>
     <lastmod>2024-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/5-static_client_2/</loc>
     <lastmod>2024-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/6-script_kiddie/</loc>
     <lastmod>2024-05-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/0-diffie_hellman_explained/</loc>
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/1-parameter_injection/</loc>
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/2-export_grade/</loc>
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/3-static_client/</loc>
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/</loc>
+    <loc>http://localhost:1313/windows/kernel/reverse_dbutil_2_3/</loc>
     <lastmod>2024-05-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/</loc>
     <lastmod>2024-05-13T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/1-collider/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/1-collider/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/2-hash_stuffing/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/3-primed5/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/3-primed5/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/4-twin_keys/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/5-no_difference/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/5-no_difference/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/6-md0/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/6-md0/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/7-mdflag/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/7-mdflag/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/8-mixed_up/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/hashes/9-invariant/</loc>
+    <loc>http://localhost:1313/cryptohack/hashes/9-invariant/</loc>
     <lastmod>2024-05-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/16-beatboxer/</loc>
     <lastmod>2024-05-08T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/15-forbidden_fruit/</loc>
     <lastmod>2024-05-06T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/14-paper_plane/</loc>
     <lastmod>2024-04-30T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/13-oh-snap/</loc>
     <lastmod>2024-04-28T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/01-passwords_as_keys/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/02-ecbcbcwtf/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/03-ecb_oracle/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/04-flipping_cookie/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/05-lazy_cbc/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/06-triple_des/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/07-symmetry/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/08-bean_counter/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/09-ctrime/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/10-logon_zero/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/11-stream_consciousness/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/12-dancing_queen/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/diffie-hellman/</loc>
+    <loc>http://localhost:1313/cryptohack/diffie-hellman/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/symmetric/</loc>
+    <loc>http://localhost:1313/cryptohack/symmetric/</loc>
     <lastmod>2024-04-26T10:59:55+03:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/author/</loc>
+    <loc>http://localhost:1313/author/</loc>
   </url><url>
-    <loc>https://yoavshah.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>https://yoavshah.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>

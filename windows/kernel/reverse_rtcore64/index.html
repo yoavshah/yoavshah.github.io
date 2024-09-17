@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="generator" content="Hugo 0.125.3">
+
+    
+
+    
+
+    
+        
+            <meta
+                name="description"
+                content="This is my new hugo site" />
+        
+
+        
+            <meta
+                name="keywords"
+                content="security,cryptohack,writeups,cyber" />
+        
+
+        
+            <meta
+                name="author"
+                content="yoavshah" />
+        
+
+    
+
+
+    <title>
+        
+            Reverse RTCore64 |
+            SecurityBlog
+        
+    </title>
+
+    
+
+
+    
+    
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+
+    
+    
+
+    
+
+
+    
+    
+
+    
+
+    
+
+        
+        
+
+
+        
+        
+
+
+        <link
+            rel="stylesheet"
+            href="/css/index_d751713.min.912d03bce61461ecbc3ca083479e1ed814bba94df76d0bdc6aa88fdca33621b9bb410dc2c81af31e8101fec62decfa5f6e48901ad673bc5056d2f1d1f2368a34.css"
+            integrity="sha512-kS0DvOYUYey8PKCDR54e2BS7qU33bQvcaqiP3KM2Ibm7QQ3CyBrzHoEB/sYt7PpfbkiQGtZzvFBW0vHR8jaKNA==" />
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+		
+        
+
+            
+
+
+
+
+    
+        
+    
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+    crossorigin="anonymous" />
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+    crossorigin="anonymous"></script>
+
+
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+    crossorigin="anonymous"
+    
+        onload="renderMathInElement(document.body , { trust: true });"
+    ></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            
+            
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true },
+            ],
+            
+            throwOnError: false,
+
+            
+                trust: true
+            
+        });
+    });
+</script>
+
+        
+
+    
+</head>
+
+
+
+    <body>
+        <header class="header">
+    <div class="header_left">
+        
+    </div>
+
+    <div class="header_middle">
+        
+            Reverse RTCore64 -
+            SecurityBlog
+        
+    </div>
+</header>
+
+
+
+        <main>
+            <aside class="sidebar" style="overflow-y: auto;">
+    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Blockchain </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> smart-contracts-development </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/blockchain/development/0-setting_up_environment/" title="./blockchain/development/0-setting_up_environment/">
+                        
+                            0-setting_up_environment
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/blockchain/development/1-kingofthehill/" title="./blockchain/development/1-kingofthehill/">
+                        
+                            1-KingOfTheHill
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> ethernaut </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/blockchain/ethernaut/0-setting_up_environment/" title="./blockchain/ethernaut/0-setting_up_environment/">
+                        
+                            0-setting_up_environment
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Cryptohack </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> diffie-helman </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/0-diffie_hellman_explained/" title="./cryptohack/diffie-hellman/0-diffie_hellman_explained/">
+                        
+                            0-diffie_hellman_explained
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/1-parameter_injection/" title="./cryptohack/diffie-hellman/1-parameter_injection/">
+                        
+                            1-parameter_injection
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/2-export_grade/" title="./cryptohack/diffie-hellman/2-export_grade/">
+                        
+                            2-export_grade
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/3-static_client/" title="./cryptohack/diffie-hellman/3-static_client/">
+                        
+                            3-static_client
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/4-additive/" title="./cryptohack/diffie-hellman/4-additive/">
+                        
+                            4-additive
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/5-static_client_2/" title="./cryptohack/diffie-hellman/5-static_client_2/">
+                        
+                            5-static_client_2
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/6-script_kiddie/" title="./cryptohack/diffie-hellman/6-script_kiddie/">
+                        
+                            6-script_kiddie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/7-the_matrix/" title="./cryptohack/diffie-hellman/7-the_matrix/">
+                        
+                            7-the_matrix
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/8-the_matrix_reloaded/" title="./cryptohack/diffie-hellman/8-the_matrix_reloaded/">
+                        
+                            8-the_matrix_reloaded
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/diffie-hellman/9-the_matrix_revolutions/" title="./cryptohack/diffie-hellman/9-the_matrix_revolutions/">
+                        
+                            9-the_matrix_revolutions
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> hashes </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/1-collider/" title="./cryptohack/hashes/1-collider/">
+                        
+                            1-collider
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/2-hash_stuffing/" title="./cryptohack/hashes/2-hash_stuffing/">
+                        
+                            2-hash_stuffing
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/3-primed5/" title="./cryptohack/hashes/3-primed5/">
+                        
+                            3-PriMeD5
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/4-twin_keys/" title="./cryptohack/hashes/4-twin_keys/">
+                        
+                            4-twin_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/5-no_difference/" title="./cryptohack/hashes/5-no_difference/">
+                        
+                            5-no_difference
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/6-md0/" title="./cryptohack/hashes/6-md0/">
+                        
+                            6-md0
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/7-mdflag/" title="./cryptohack/hashes/7-mdflag/">
+                        
+                            7-mdflag
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/8-mixed_up/" title="./cryptohack/hashes/8-mixed_up/">
+                        
+                            8-mixed_up
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/hashes/9-invariant/" title="./cryptohack/hashes/9-invariant/">
+                        
+                            9-invariant
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> rsa </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/rsa/0-rsa_explained/" title="./cryptohack/rsa/0-rsa_explained/">
+                        
+                            0-rsa_explained
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> symmetric </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/01-passwords_as_keys/" title="./cryptohack/symmetric/01-passwords_as_keys/">
+                        
+                            01-passwords_as_keys
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/02-ecbcbcwtf/" title="./cryptohack/symmetric/02-ecbcbcwtf/">
+                        
+                            02-ecbcbcwtf
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/03-ecb_oracle/" title="./cryptohack/symmetric/03-ecb_oracle/">
+                        
+                            03-ecb_oracle
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/04-flipping_cookie/" title="./cryptohack/symmetric/04-flipping_cookie/">
+                        
+                            04-flipping_cookie
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/05-lazy_cbc/" title="./cryptohack/symmetric/05-lazy_cbc/">
+                        
+                            05-lazy_cbc
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/06-triple_des/" title="./cryptohack/symmetric/06-triple_des/">
+                        
+                            06-triple_des
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/07-symmetry/" title="./cryptohack/symmetric/07-symmetry/">
+                        
+                            07-symmetry
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/08-bean_counter/" title="./cryptohack/symmetric/08-bean_counter/">
+                        
+                            08-bean_counter
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/09-ctrime/" title="./cryptohack/symmetric/09-ctrime/">
+                        
+                            09-ctrime
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/10-logon_zero/" title="./cryptohack/symmetric/10-logon_zero/">
+                        
+                            10-logon_zero
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/11-stream_consciousness/" title="./cryptohack/symmetric/11-stream_consciousness/">
+                        
+                            11-stream_consciousness
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/12-dancing_queen/" title="./cryptohack/symmetric/12-dancing_queen/">
+                        
+                            12-dancing_queen
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/13-oh-snap/" title="./cryptohack/symmetric/13-oh-snap/">
+                        
+                            13-oh-snap
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/14-paper_plane/" title="./cryptohack/symmetric/14-paper_plane/">
+                        
+                            14-paper_plane
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/15-forbidden_fruit/" title="./cryptohack/symmetric/15-forbidden_fruit/">
+                        
+                            15-forbidden_fruit
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/cryptohack/symmetric/16-beatboxer/" title="./cryptohack/symmetric/16-beatboxer/">
+                        
+                            16-beatboxer
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Windows </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li
+                    
+                        class="dir opened-dir"
+                    >
+                    <span class="dir-text"> Kernel </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/windows/kernel/readwrite_using_dbutil_2_3/" title="./windows/kernel/readwrite_using_dbutil_2_3/">
+                        
+                            Read/Write using dbutil_2_3
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/windows/kernel/reverse_dbutil_2_3/" title="./windows/kernel/reverse_dbutil_2_3/">
+                        
+                            Reverse dbutil_2_3
+                        
+                    </a>
+                </li>
+            
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/windows/kernel/reverse_rtcore64/" title="./windows/kernel/reverse_rtcore64/">
+                        
+                            Reverse RTCore64
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+            
+                <li
+                    
+                        class="dir closed-dir"
+                    >
+                    <span class="dir-text"> Portable-Executable </span>
+
+                    
+
+
+
+    
+    
+
+    
+    
+
+    
+
+    <ul class="section-tree">
+        
+            
+                <li class="file">
+                    <a href="https://yoavshah.github.io/windows/portable-executable/fileinfector/" title="./windows/portable-executable/fileinfector/">
+                        
+                            FileInfector
+                        
+                    </a>
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+                </li>
+            
+        
+    </ul>
+
+
+</aside>
+<aside class="exapandable"></aside>
+
+
+            
+    <article class="main">
+        <button
+    class="sidebar-toggle-btn"
+    type="menu"
+    aria-expanded="false"
+    aria-haspopup="true">
+    <i class="bi bi-list"></i>
+</button>
+
+
+
+        <div class="title">
+            <h1 class="title-header">
+                Reverse RTCore64
+            </h1>
+
+            <div class="author-date-readtime">
+                
+
+                    
+                        <div class="author" title="Author">
+                            <i class="bi bi-person"></i>
+                            <a
+                                href="/author/yoavshah/"
+                                class="cat-btn">
+                                yoavshah
+                            </a>
+                        </div>
+                    
+
+                
+
+                
+                    <div class="date" title="Date">
+                        <i class="bi bi-calendar3"></i>
+                        <time
+                            datetime="2024.08.12"
+                            >2024.08.12
+                        </time>
+                    </div>
+                
+
+                
+                    <div
+                        class="readtime"
+                        title="Time to Read">
+                        <i class="bi bi-clock"></i>
+                        10 mins to read
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="article-meta">
+            
+
+            
+
+            
+                <div class="breadcumb">
+                    <i class="bi bi-folder"></i>
+                    
+    
+    
+    
+
+
+
+
+<a href="https://yoavshah.github.io/" class="bread-btn">
+    
+        <i class="bi bi-house-fill"></i>
+    
+
+    
+        Home
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/windows/" class="bread-btn">
+    
+
+    
+        Windows
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/windows/kernel/" class="bread-btn">
+    
+
+    
+        Kernel
+    
+</a>
+
+
+
+
+    /
+
+
+
+<a href="https://yoavshah.github.io/windows/kernel/reverse_rtcore64/" class="bread-btn">
+    
+
+    
+        
+            Reverse RTCore64
+        
+
+    
+</a>
+
+                </div>
+            
+
+            
+        </div>
+
+        
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x9b0c1ec0">0x9B0C1EC0</a></li>
+    <li><a href="#0x9b0c1ec4--0x9b0c1ec8">0x9B0C1EC4 + 0x9B0C1EC8</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+        
+
+
+        <div class="content">
+            
+                <p>Here I will show the reversing process of RTCore64.sys
+I first recommend going through reverse_dbutil_2_3.</p>
+<h1 id="driverentry">DriverEntry</h1>
+<p>A very easy DriverEntry, all it does is to create a device driver and a symbolic link, later setting the Major functions</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="NTSTATUS%20__stdcall%20DriverEntry%28PDRIVER_OBJECT%20DriverObject,%20PUNICODE_STRING%20RegistryPath%29%0d%0a%7b%0d%0a%20%20NTSTATUS%20result;%20//%20eax%0d%0a%20%20PDEVICE_OBJECT%20DeviceObject;%20//%20[rsp&#43;40h]%20[rbp-38h]%20BYREF%0d%0a%20%20_UNICODE_STRING%20DestinationString;%20//%20[rsp&#43;48h]%20[rbp-30h]%20BYREF%0d%0a%20%20_UNICODE_STRING%20SymbolicLinkName;%20//%20[rsp&#43;58h]%20[rbp-20h]%20BYREF%0d%0a%0d%0a%20%20RtlInitUnicodeString%28&amp;DestinationString,%20aDeviceRtcore64%29;%0d%0a%20%20RtlInitUnicodeString%28&amp;SymbolicLinkName,%20SourceString%29;%0d%0a%20%20result%20=%20IoCreateDevice%28DriverObject,%200,%20&amp;DestinationString,%200x22u,%200,%200,%20&amp;DeviceObject%29;%0d%0a%20%20if%20%28%20result%20%3e=%200%20%29%0d%0a%20%20%7b%0d%0a%20%20%20%20result%20=%20IoCreateSymbolicLink%28&amp;SymbolicLinkName,%20&amp;DestinationString%29;%0d%0a%20%20%20%20if%20%28%20result%20%3e=%200%20%29%0d%0a%20%20%20%20%7b%0d%0a%20%20%20%20%20%20DriverObject-%3eMajorFunction[0]%20=%20GenericMajor;%0d%0a%20%20%20%20%20%20DriverObject-%3eMajorFunction[2]%20=%20GenericMajor;%0d%0a%20%20%20%20%20%20DriverObject-%3eMajorFunction[IRP_MJ_DEVICE_CONTROL]%20=%20GenericMajor;%0d%0a%20%20%20%20%20%20DriverObject-%3eDriverUnload%20=%20%28PDRIVER_UNLOAD%29sub_11000;%0d%0a%20%20%20%20%20%20return%200;%0d%0a%20%20%20%20%7d%0d%0a%20%20%7d%0d%0a%20%20return%20result;%0d%0a%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NTSTATUS <span style="color:#66d9ef">__stdcall</span> <span style="color:#a6e22e">DriverEntry</span>(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  NTSTATUS result; <span style="color:#75715e">// eax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  PDEVICE_OBJECT DeviceObject; <span style="color:#75715e">// [rsp+40h] [rbp-38h] BYREF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  _UNICODE_STRING DestinationString; <span style="color:#75715e">// [rsp+48h] [rbp-30h] BYREF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  _UNICODE_STRING SymbolicLinkName; <span style="color:#75715e">// [rsp+58h] [rbp-20h] BYREF
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  RtlInitUnicodeString(<span style="color:#f92672">&amp;</span>DestinationString, aDeviceRtcore64);
+</span></span><span style="display:flex;"><span>  RtlInitUnicodeString(<span style="color:#f92672">&amp;</span>SymbolicLinkName, SourceString);
+</span></span><span style="display:flex;"><span>  result <span style="color:#f92672">=</span> IoCreateDevice(DriverObject, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>DestinationString, <span style="color:#ae81ff">0x22u</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>DeviceObject);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ( result <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> IoCreateSymbolicLink(<span style="color:#f92672">&amp;</span>SymbolicLinkName, <span style="color:#f92672">&amp;</span>DestinationString);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ( result <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      DriverObject<span style="color:#f92672">-&gt;</span>MajorFunction[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> GenericMajor;
+</span></span><span style="display:flex;"><span>      DriverObject<span style="color:#f92672">-&gt;</span>MajorFunction[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> GenericMajor;
+</span></span><span style="display:flex;"><span>      DriverObject<span style="color:#f92672">-&gt;</span>MajorFunction[IRP_MJ_DEVICE_CONTROL] <span style="color:#f92672">=</span> GenericMajor;
+</span></span><span style="display:flex;"><span>      DriverObject<span style="color:#f92672">-&gt;</span>DriverUnload <span style="color:#f92672">=</span> (PDRIVER_UNLOAD)sub_11000;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<h1 id="genericmajor">GenericMajor</h1>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="NTSTATUS%20__stdcall%20GenericMajor%28_DEVICE_OBJECT%20*DeviceObject,%20_IRP%20*Irp%29%0d%0a%7b%0d%0a%20%20_IO_STACK_LOCATION%20*CurrentStackLocation;%20//%20rax%0d%0a%20%20_IRP%20*SystemBuffer;%20//%20r10%0d%0a%20%20__int64%20SystemBufferInputLength;%20//%20rdx%0d%0a%20%20__int64%20SystemBufferOutputLength;%20//%20r9%0d%0a%20%20PMDL%20v7;%20//%20rcx%0d%0a%20%20PMDL%20v8;%20//%20rdx%0d%0a%20%20NTSTATUS%20v9;%20//%20eax%0d%0a%20%20PMDL%20MdlAddress;%20//%20rcx%0d%0a%20%20NTSTATUS%20v11;%20//%20eax%0d%0a%20%20char%20v12;%20//%20al%0d%0a%20%20unsigned%20__int16%20v13;%20//%20ax%0d%0a%20%20unsigned%20__int32%20v14;%20//%20eax%0d%0a%20%20__int64%20v15;%20//%20r10%0d%0a%20%20unsigned%20__int16%20*v16;%20//%20r10%0d%0a%20%20__int64%20v17;%20//%20r10%0d%0a%20%20int%20v18;%20//%20ecx%0d%0a%20%20ULONG%20Length;%20//%20ecx%0d%0a%20%20ULONG%20Flags;%20//%20ecx%0d%0a%20%20ULONG%20Offset;%20//%20edx%0d%0a%20%20NTSTATUS%20Status;%20//%20ebx%0d%0a%20%20unsigned%20__int64%20v24;%20//%20[rsp&#43;30h]%20[rbp-28h]%0d%0a%0d%0a%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20Irp-%3eIoStatus.Information%20=%200i64;%0d%0a%20%20CurrentStackLocation%20=%20Irp-%3eTail.Overlay.CurrentStackLocation;%0d%0a%20%20SystemBuffer%20=%20%28_IRP%20*%29Irp-%3eAssociatedIrp.SystemBuffer;%0d%0a%20%20SystemBufferInputLength%20=%20CurrentStackLocation-%3eParameters.DeviceIoControl.InputBufferLength;%0d%0a%20%20SystemBufferOutputLength%20=%20CurrentStackLocation-%3eParameters.DeviceIoControl.OutputBufferLength;%0d%0a%20%20if%20%28%20CurrentStackLocation-%3eMajorFunction%20==%20IRP_MJ_DEVICE_CONTROL%20%29%0d%0a%20%20%7b%0d%0a%20%20%20%20switch%20%28%20CurrentStackLocation-%3eParameters.DeviceIoControl.IoControlCode%20%29%0d%0a%20%20%20%20%7b%0d%0a%20%20%20%20%20%20case%200x80002000:%0d%0a%20%20%20%20%20%20%20%20v11%20=%20sub_11120%28DeviceObject,%20SystemBuffer,%20%28unsigned%20int%29SystemBufferInputLength,%20SystemBufferOutputLength%29;%0d%0a%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20v11;%0d%0a%20%20%20%20%20%20%20%20if%20%28%20v11%20%3c%200%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002004:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28unsigned%20int%29SystemBufferInputLength%20%3c%208%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741823;%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20ZwUnmapViewOfSection%28%28HANDLE%290xFFFFFFFFFFFFFFFFi64,%20*%28PVOID%20*%29&amp;SystemBuffer-%3eType%29;%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002008:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v12%20=%20__inbyte%28SystemBuffer-%3eType%29;%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20=%20v12;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x8000200C:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v13%20=%20__inword%28SystemBuffer-%3eType%29;%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20=%20v13;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002010:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v14%20=%20__indword%28SystemBuffer-%3eType%29;%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20=%20v14;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002014:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20%28unsigned%20__int8%29sub_11420%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28unsigned%20int%20*%29&amp;SystemBuffer-%3eType,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28unsigned%20int%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;loc_114B6,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SystemBufferOutputLength%29%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20__outbyte%28*%28_WORD%20*%29v15,%20*%28_BYTE%20*%29%28v15%20&#43;%204%29%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002018:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20%28unsigned%20__int8%29sub_11420%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28unsigned%20int%20*%29&amp;SystemBuffer-%3eType,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28unsigned%20int%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;loc_114B6,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SystemBufferOutputLength%29%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20__outword%28*v16,%20v16[2]%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x8000201C:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20%28unsigned%20__int8%29sub_11420%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28unsigned%20int%20*%29&amp;SystemBuffer-%3eType,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28unsigned%20int%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;loc_114B6,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20SystemBufferOutputLength%29%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20__outdword%28*%28_WORD%20*%29v17,%20*%28_DWORD%20*%29%28v17%20&#43;%204%29%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002028:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType%20=%201;%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20=%208;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x8000202C:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%208%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v18%20=%20dword_13054;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType%20!=%200x80000000%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20v18%20=%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType;%0d%0a%20%20%20%20%20%20%20%20%20%20dword_13054%20=%20v18;%0d%0a%20%20%20%20%20%20%20%20%20%20dword_13054%20=%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20&#43;%20v18;%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType%20=%20dword_13054;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%208i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002030:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2012%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v24%20=%20__readmsr%28*%28_DWORD%20*%29&amp;SystemBuffer-%3eType%29;%0d%0a%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20=%20HIDWORD%28v24%29;%0d%0a%20%20%20%20%20%20%20%20%20%20LODWORD%28SystemBuffer-%3eMdlAddress%29%20=%20v24;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2012i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002034:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2012%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20__writemsr%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20__PAIR64__%28*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29,%20SystemBuffer-%3eMdlAddress%29%29;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2012i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002040:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2048%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v9%20=%20sub_113A0%28SystemBuffer,%20SystemBufferInputLength,%20&amp;loc_114B6,%20SystemBufferOutputLength%29;%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20v9;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20v9%20%3c%200%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741670;%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2048i64;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002044:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2048%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20MdlAddress%20=%20SystemBuffer-%3eMdlAddress;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20MdlAddress%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20MmUnmapIoSpace%28MdlAddress,%20SystemBuffer-%3eFlags%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002048:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2048%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v7%20=%20SystemBuffer-%3eMdlAddress;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20v7%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20switch%20%28%20SystemBuffer-%3eAssociatedIrp.IrpCount%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%201:%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20HIDWORD%28SystemBuffer-%3eAssociatedIrp.SystemBuffer%29%20=%20*%28%28unsigned%20__int8%20*%29&amp;v7-%3eNext%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&#43;%20*%28&amp;SystemBuffer-%3eFlags%20&#43;%201%29%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%202:%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20HIDWORD%28SystemBuffer-%3eAssociatedIrp.SystemBuffer%29%20=%20*%28unsigned%20__int16%20*%29%28%28char%20*%29&amp;v7-%3eNext%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&#43;%20*%28&amp;SystemBuffer-%3eFlags%20&#43;%201%29%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%204:%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20HIDWORD%28SystemBuffer-%3eAssociatedIrp.SystemBuffer%29%20=%20*%28_DWORD%20*%29%28%28char%20*%29&amp;v7-%3eNext%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&#43;%20*%28&amp;SystemBuffer-%3eFlags%20&#43;%201%29%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2048i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x8000204C:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2048%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20v8%20=%20SystemBuffer-%3eMdlAddress;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20v8%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20switch%20%28%20SystemBuffer-%3eAssociatedIrp.IrpCount%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%201:%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28%28_BYTE%20*%29&amp;v8-%3eNext%20&#43;%20*%28&amp;SystemBuffer-%3eFlags%20&#43;%201%29%29%20=%20BYTE4%28SystemBuffer-%3eAssociatedIrp.SystemBuffer%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%202:%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28_WORD%20*%29%28%28char%20*%29&amp;v8-%3eNext%20&#43;%20*%28&amp;SystemBuffer-%3eFlags%20&#43;%201%29%29%20=%20WORD2%28SystemBuffer-%3eAssociatedIrp.SystemBuffer%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%204:%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28%28char%20*%29&amp;v8-%3eNext%20&#43;%20*%28&amp;SystemBuffer-%3eFlags%20&#43;%201%29%29%20=%20HIDWORD%28SystemBuffer-%3eAssociatedIrp.SystemBuffer%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2048i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741670;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002050:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2024%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Length%20=%20SystemBuffer-%3eFlags;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20Length%20&amp;&amp;%20Length%20%3c=%204%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20HalGetBusDataByOffset%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20PCIConfiguration,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20&amp;%200x1F%20%7c%20%2832%20*%20%28%28__int64%29SystemBuffer-%3eMdlAddress%20&amp;%207%29%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;SystemBuffer-%3eFlags%20&#43;%201,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20HIDWORD%28SystemBuffer-%3eMdlAddress%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20Length%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2024i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20case%200x80002054:%0d%0a%20%20%20%20%20%20%20%20if%20%28%20%28_DWORD%29SystemBufferInputLength%20==%2024%20%29%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Flags%20=%20SystemBuffer-%3eFlags;%0d%0a%20%20%20%20%20%20%20%20%20%20if%20%28%20Flags%20&amp;&amp;%20Flags%20%3c=%204%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Offset%20=%20HIDWORD%28SystemBuffer-%3eMdlAddress%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20if%20%28%20Offset%20%3c%200x10%20%7c%7c%20Offset%20%3e%200x27%20%29%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20HalSetBusDataByOffset%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20PCIConfiguration,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29&amp;SystemBuffer-%3eType,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*%28_DWORD%20*%29%28&amp;SystemBuffer-%3eSize%20&#43;%201%29%20&amp;%200x1F%20%7c%20%2832%20*%20%28%28__int64%29SystemBuffer-%3eMdlAddress%20&amp;%207%29%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20&amp;SystemBuffer-%3eFlags%20&#43;%201,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Offset,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Flags%29;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%200;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Information%20=%2024i64;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20else%0d%0a%20%20%20%20%20%20%20%20%7b%0d%0a%20%20%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20%7d%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%20%20default:%0d%0a%20%20%20%20%20%20%20%20Irp-%3eIoStatus.Status%20=%20-1073741811;%0d%0a%20%20%20%20%20%20%20%20break;%0d%0a%20%20%20%20%7d%0d%0a%20%20%7d%0d%0a%20%20Status%20=%20Irp-%3eIoStatus.Status;%0d%0a%20%20IofCompleteRequest%28Irp,%200%29;%0d%0a%20%20return%20Status;%0d%0a%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NTSTATUS <span style="color:#66d9ef">__stdcall</span> <span style="color:#a6e22e">GenericMajor</span>(_DEVICE_OBJECT <span style="color:#f92672">*</span>DeviceObject, _IRP <span style="color:#f92672">*</span>Irp)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  _IO_STACK_LOCATION <span style="color:#f92672">*</span>CurrentStackLocation; <span style="color:#75715e">// rax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  _IRP <span style="color:#f92672">*</span>SystemBuffer; <span style="color:#75715e">// r10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> SystemBufferInputLength; <span style="color:#75715e">// rdx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> SystemBufferOutputLength; <span style="color:#75715e">// r9
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  PMDL v7; <span style="color:#75715e">// rcx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  PMDL v8; <span style="color:#75715e">// rdx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  NTSTATUS v9; <span style="color:#75715e">// eax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  PMDL MdlAddress; <span style="color:#75715e">// rcx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  NTSTATUS v11; <span style="color:#75715e">// eax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v12; <span style="color:#75715e">// al
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int16</span> v13; <span style="color:#75715e">// ax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int32</span> v14; <span style="color:#75715e">// eax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> v15; <span style="color:#75715e">// r10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int16</span> <span style="color:#f92672">*</span>v16; <span style="color:#75715e">// r10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> v17; <span style="color:#75715e">// r10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v18; <span style="color:#75715e">// ecx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  ULONG Length; <span style="color:#75715e">// ecx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  ULONG Flags; <span style="color:#75715e">// ecx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  ULONG Offset; <span style="color:#75715e">// edx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  NTSTATUS Status; <span style="color:#75715e">// ebx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v24; <span style="color:#75715e">// [rsp+30h] [rbp-28h]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>i64;
+</span></span><span style="display:flex;"><span>  CurrentStackLocation <span style="color:#f92672">=</span> Irp<span style="color:#f92672">-&gt;</span>Tail.Overlay.CurrentStackLocation;
+</span></span><span style="display:flex;"><span>  SystemBuffer <span style="color:#f92672">=</span> (_IRP <span style="color:#f92672">*</span>)Irp<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer;
+</span></span><span style="display:flex;"><span>  SystemBufferInputLength <span style="color:#f92672">=</span> CurrentStackLocation<span style="color:#f92672">-&gt;</span>Parameters.DeviceIoControl.InputBufferLength;
+</span></span><span style="display:flex;"><span>  SystemBufferOutputLength <span style="color:#f92672">=</span> CurrentStackLocation<span style="color:#f92672">-&gt;</span>Parameters.DeviceIoControl.OutputBufferLength;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ( CurrentStackLocation<span style="color:#f92672">-&gt;</span>MajorFunction <span style="color:#f92672">==</span> IRP_MJ_DEVICE_CONTROL )
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> ( CurrentStackLocation<span style="color:#f92672">-&gt;</span>Parameters.DeviceIoControl.IoControlCode )
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002000</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        v11 <span style="color:#f92672">=</span> sub_11120(DeviceObject, SystemBuffer, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)SystemBufferInputLength, SystemBufferOutputLength);
+</span></span><span style="display:flex;"><span>        Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> v11;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( v11 <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002004</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)SystemBufferInputLength <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741823</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> ZwUnmapViewOfSection((HANDLE)<span style="color:#ae81ff">0xFFFFFFFFFFFFFFFF</span>i64, <span style="color:#f92672">*</span>(PVOID <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002008</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v12 <span style="color:#f92672">=</span> __inbyte(SystemBuffer<span style="color:#f92672">-&gt;</span>Type);
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> v12;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x8000200C</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v13 <span style="color:#f92672">=</span> __inword(SystemBuffer<span style="color:#f92672">-&gt;</span>Type);
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> v13;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002010</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v14 <span style="color:#f92672">=</span> __indword(SystemBuffer<span style="color:#f92672">-&gt;</span>Type);
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> v14;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002014</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)sub_11420(
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type,
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">&amp;</span>loc_114B6,
+</span></span><span style="display:flex;"><span>                                  SystemBufferOutputLength) )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            __outbyte(<span style="color:#f92672">*</span>(_WORD <span style="color:#f92672">*</span>)v15, <span style="color:#f92672">*</span>(_BYTE <span style="color:#f92672">*</span>)(v15 <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>));
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002018</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)sub_11420(
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type,
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">&amp;</span>loc_114B6,
+</span></span><span style="display:flex;"><span>                                  SystemBufferOutputLength) )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            __outword(<span style="color:#f92672">*</span>v16, v16[<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x8000201C</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span>)sub_11420(
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type,
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>                                  <span style="color:#f92672">&amp;</span>loc_114B6,
+</span></span><span style="display:flex;"><span>                                  SystemBufferOutputLength) )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            __outdword(<span style="color:#f92672">*</span>(_WORD <span style="color:#f92672">*</span>)v17, <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(v17 <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>));
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002028</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x8000202C</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v18 <span style="color:#f92672">=</span> dword_13054;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0x80000000</span> )
+</span></span><span style="display:flex;"><span>            v18 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type;
+</span></span><span style="display:flex;"><span>          dword_13054 <span style="color:#f92672">=</span> v18;
+</span></span><span style="display:flex;"><span>          dword_13054 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> v18;
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type <span style="color:#f92672">=</span> dword_13054;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002030</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">12</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v24 <span style="color:#f92672">=</span> __readmsr(<span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type);
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> HIDWORD(v24);
+</span></span><span style="display:flex;"><span>          LODWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress) <span style="color:#f92672">=</span> v24;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002034</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">12</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          __writemsr(
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type,
+</span></span><span style="display:flex;"><span>            __PAIR64__(<span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress));
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002040</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">48</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v9 <span style="color:#f92672">=</span> sub_113A0(SystemBuffer, SystemBufferInputLength, <span style="color:#f92672">&amp;</span>loc_114B6, SystemBufferOutputLength);
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> v9;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( v9 <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741670</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">48</span>i64;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002044</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">48</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          MdlAddress <span style="color:#f92672">=</span> SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( MdlAddress )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            MmUnmapIoSpace(MdlAddress, SystemBuffer<span style="color:#f92672">-&gt;</span>Flags);
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002048</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">48</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v7 <span style="color:#f92672">=</span> SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( v7 )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> ( SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.IrpCount )
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                HIDWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int8</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>v7<span style="color:#f92672">-&gt;</span>Next
+</span></span><span style="display:flex;"><span>                                                                    <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                HIDWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int16</span> <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>v7<span style="color:#f92672">-&gt;</span>Next
+</span></span><span style="display:flex;"><span>                                                                                        <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                HIDWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>v7<span style="color:#f92672">-&gt;</span>Next
+</span></span><span style="display:flex;"><span>                                                                              <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">48</span>i64;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x8000204C</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">48</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          v8 <span style="color:#f92672">=</span> SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( v8 )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> ( SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.IrpCount )
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>v8<span style="color:#f92672">-&gt;</span>Next <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> BYTE4(SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">*</span>(_WORD <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>v8<span style="color:#f92672">-&gt;</span>Next <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> WORD2(SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>v8<span style="color:#f92672">-&gt;</span>Next <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> HIDWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>AssociatedIrp.SystemBuffer);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">48</span>i64;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741670</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002050</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">24</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Length <span style="color:#f92672">=</span> SystemBuffer<span style="color:#f92672">-&gt;</span>Flags;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( Length <span style="color:#f92672">&amp;&amp;</span> Length <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">4</span> )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            HalGetBusDataByOffset(
+</span></span><span style="display:flex;"><span>              PCIConfiguration,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x1F</span> <span style="color:#f92672">|</span> (<span style="color:#ae81ff">32</span> <span style="color:#f92672">*</span> ((<span style="color:#66d9ef">__int64</span>)SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>)),
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>              HIDWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress),
+</span></span><span style="display:flex;"><span>              Length);
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">24</span>i64;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0x80002054</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (_DWORD)SystemBufferInputLength <span style="color:#f92672">==</span> <span style="color:#ae81ff">24</span> )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Flags <span style="color:#f92672">=</span> SystemBuffer<span style="color:#f92672">-&gt;</span>Flags;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> ( Flags <span style="color:#f92672">&amp;&amp;</span> Flags <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">4</span> )
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Offset <span style="color:#f92672">=</span> HIDWORD(SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ( Offset <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0x10</span> <span style="color:#f92672">||</span> Offset <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0x27</span> )
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              HalSetBusDataByOffset(
+</span></span><span style="display:flex;"><span>                PCIConfiguration,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Type,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Size <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x1F</span> <span style="color:#f92672">|</span> (<span style="color:#ae81ff">32</span> <span style="color:#f92672">*</span> ((<span style="color:#66d9ef">__int64</span>)SystemBuffer<span style="color:#f92672">-&gt;</span>MdlAddress <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>)),
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&amp;</span>SystemBuffer<span style="color:#f92672">-&gt;</span>Flags <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                Offset,
+</span></span><span style="display:flex;"><span>                Flags);
+</span></span><span style="display:flex;"><span>              Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>              Irp<span style="color:#f92672">-&gt;</span>IoStatus.Information <span style="color:#f92672">=</span> <span style="color:#ae81ff">24</span>i64;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>              Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>          {
+</span></span><span style="display:flex;"><span>            Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>          Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1073741811</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  Status <span style="color:#f92672">=</span> Irp<span style="color:#f92672">-&gt;</span>IoStatus.Status;
+</span></span><span style="display:flex;"><span>  IofCompleteRequest(Irp, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> Status;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+    
+</div>
+<p>Now we can follow the control flow based on the IOCTL code and find out about some of the functionality this driver performs.</p>
+<p>Here is a list of all the existing IOCTL codes in this driver:</p>
+<ul>
+<li>0x80002000</li>
+<li>0x80002004</li>
+<li>0x80002008</li>
+<li>0x8000200C</li>
+<li>0x80002010</li>
+<li>0x80002014</li>
+<li>0x80002018</li>
+<li>0x8000201C</li>
+<li>0x80002028</li>
+<li>0x8000202C</li>
+<li>0x80002030</li>
+<li>0x80002034</li>
+<li>0x80002040</li>
+<li>0x80002044</li>
+<li>0x80002048</li>
+<li>0x8000204C</li>
+<li>0x80002050</li>
+<li>0x80002054</li>
+</ul>
+<h2 id="0x9b0c1ec0">0x9B0C1EC0</h2>
+<p>As we can see, this IOCTL just executes the following function <code>sub_151D4</code></p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v15%20=%20sub_151D4%28DeviceExtension%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v15 = sub_151D4(DeviceExtension);</code></pre>
+    
+</div>
+<p>Let&rsquo;s call it ioctl_9B0C1EC0</p>
+<p>Now inside the function we know that the parameter sent is DeviceExtension, so let&rsquo;s change its type to it.</p>
+<p>We can see that there is the following check</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="if%20%28%20DeviceExtension-%3eInputBufferLength%20!=%2048%20%29%0d%0a%20%20%20%20return%203221225485i64;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>if ( DeviceExtension-&gt;InputBufferLength != 48 )
+    return 3221225485i64;</code></pre>
+    
+</div>
+<p>Then we can see a <code>memmove</code> operation from the <code>SystemBuffer</code> into an array of size 0x30.
+So let&rsquo;s create a new struct that will represent this IOCTL data (let&rsquo;s call it <code>ioctl_9B0C1EC0_struct</code>). Then we can set the local variable called <code>Dst</code> to the be of this type.</p>
+<p>Now we can see this code which means that the <code>&amp;field_0[4]</code> is actualy a QWORD, so I added an unknown field and then set this field to be just a random name I will notice next time it appear.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v3%20=%20*%28_QWORD%20*%29&amp;DeviceExtension-%3efield_0[4];">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v3 = *(_QWORD *)&amp;DeviceExtension-&gt;field_0[4];</code></pre>
+    
+</div>
+<p>After that we can see this compare</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="if%20%28%20unknown_address%20&amp;&amp;%20unknown_address%20!=%20*%28_QWORD%20*%29Dst.field_0%20%29%0d%0a%20%20%20%20return%203221225477i64;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>if ( unknown_address &amp;&amp; unknown_address != *(_QWORD *)Dst.field_0 )
+    return 3221225477i64;</code></pre>
+    
+</div>
+<p>We can conclude that the first pointer is of type QWORD.</p>
+<p>After we changed the struct, we can see operations on Dst.field_0[8] and Dst.field_0[16] which are both QWORDS.</p>
+<p>Now we see this call</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="ContiguousMemorySpecifyCache%20=%20MmAllocateContiguousMemorySpecifyCache%28%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20LODWORD%28Dst.field_8%29,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%28PHYSICAL_ADDRESS%29v4,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v5,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v6,%0d%0a%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20MmNonCached%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>ContiguousMemorySpecifyCache = MmAllocateContiguousMemorySpecifyCache(
+                                LODWORD(Dst.field_8),
+                                (PHYSICAL_ADDRESS)v4,
+                                v5,
+                                v6,
+                                MmNonCached);</code></pre>
+    
+</div>
+<p>So <code>field_8</code> is <code>NumberOfBytes</code> and <code>v4</code> which is <code>field_10</code> is <code>LowestAcceptableAddress</code>, so let&rsquo;s rewrite the struct.</p>
+<p>Then we can see the output goes into <code>field_0</code> (remember it is not the real <code>field_0</code> but the one after we changed the struct, it is 0x20 offset)</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="*%28_QWORD%20*%29Dst.field_0%20=%20ContiguousMemorySpecifyCache;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>*(_QWORD *)Dst.field_0 = ContiguousMemorySpecifyCache;</code></pre>
+    
+</div>
+<p>So we can set this field as <code>VirtualMemoryAllocated</code>.</p>
+<p>We can see then these code lines</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="PhysicalAddress%20=%20MmGetPhysicalAddress%28ContiguousMemorySpecifyCache%29;%0d%0av9%20=%20%28%28__int64%20%28__fastcall%20*%29%28_QWORD%29%29sub_11574%29%28%28PHYSICAL_ADDRESS%29PhysicalAddress.QuadPart%29;%0d%0a*%28_QWORD%20*%29Dst.field_0%20=%20v9">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>PhysicalAddress = MmGetPhysicalAddress(ContiguousMemorySpecifyCache);
+v9 = ((__int64 (__fastcall *)(_QWORD))sub_11574)((PHYSICAL_ADDRESS)PhysicalAddress.QuadPart);
+*(_QWORD *)Dst.field_0 = v9</code></pre>
+    
+</div>
+<p>Which gets the newly created PhysicalAddress, then execute a little function with it that convert it to an __int64 number, and then set it to offset 0x28, we can change the struct.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="unsigned%20__int64%20__fastcall%20sub_11574%28__int64%20a1%29%0d%0a%7b%0d%0a%20%20return%20%28unsigned%20int%29a1%20%5e%20%28unsigned%20__int64%29%28%28__int64%29SHIDWORD%28a1%29%20%3c%3c%2032%29;%0d%0a%7d">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>unsigned __int64 __fastcall sub_11574(__int64 a1)
+{
+  return (unsigned int)a1 ^ (unsigned __int64)((__int64)SHIDWORD(a1) &lt;&lt; 32);
+}</code></pre>
+    
+</div>
+<p>Nice! So we successfully built the struct</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="#ZgotmplZ">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>00000000 ioctl_9B0C1EC0_struct struc ; (sizeof=0x30, mappedto_379)
+00000000                                         ; XREF: ioctl_9B0C1EC0/r
+00000000 unknown_address dq ?                    ; XREF: ioctl_9B0C1EC0&#43;35/r
+00000008 NumberOfBytes   dq ?                    ; XREF: ioctl_9B0C1EC0&#43;64/r
+00000010 LowestPhysicalAddress dq ?
+00000018 field_18        dq ?
+00000020 VirtualMemoryAllocated dq ?
+00000028 PhysicalAddressAllocated dq ?
+00000030 ioctl_9B0C1EC0_struct ends
+00000030</code></pre>
+    
+</div>
+<p>Then the function just use the <code>memmove</code> from the local variable <code>Dst</code> to the <code>DeviceExtension-&gt;SystemBuffer</code> which will then returned to the user.</p>
+<p>So an user without permissions can use this IOCTL to allocate NonCached contiguous memory! doesn&rsquo;t seem right.</p>
+<h2 id="0x9b0c1ec4--0x9b0c1ec8">0x9B0C1EC4 + 0x9B0C1EC8</h2>
+<p>In this code we first set a variable to 1</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="LOBYTE%28v8%29%20=%201;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>LOBYTE(v8) = 1;</code></pre>
+    
+</div>
+<p>and then this function is execute - let&rsquo;s call this function <code>ioctl_9B0C1EC4</code> dive in</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v15%20=%20sub_15294%28DeviceExtension,%20v8%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v15 = sub_15294(DeviceExtension, v8);</code></pre>
+    
+</div>
+<p>let&rsquo;s fix the parameters types so we have clear view on what this function do</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="InputBufferLength%20=%20DeviceExtension-%3eInputBufferLength;%0d%0aif%20%28%20InputBufferLength%20%3c%200x18%20%29%0d%0a%20%20%20%20return%203221225485i64;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>InputBufferLength = DeviceExtension-&gt;InputBufferLength;
+if ( InputBufferLength &lt; 0x18 )
+    return 3221225485i64;</code></pre>
+    
+</div>
+<p>First we can see the input for the function is 0x18 bytes.</p>
+<p>We can then see these lines of code</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v11%20=%20*%28_QWORD%20*%29DeviceExtension-%3eSystemBuffer;%0d%0av12%20=%20*%28_QWORD%20*%29%28DeviceExtension-%3eSystemBuffer%20&#43;%208%29;%0d%0av13%20=%20*%28_QWORD%20*%29%28DeviceExtension-%3eSystemBuffer%20&#43;%2016%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v11 = *(_QWORD *)DeviceExtension-&gt;SystemBuffer;
+v12 = *(_QWORD *)(DeviceExtension-&gt;SystemBuffer &#43; 8);
+v13 = *(_QWORD *)(DeviceExtension-&gt;SystemBuffer &#43; 16);</code></pre>
+    
+</div>
+<p>It seems that the the input from the user is 3 pointers.</p>
+
+
+
+
+
+
+
+<div class="codeblock">
+    
+        <div class="copy-button-box">
+            <button class="copy-button" state="copy" data="v7%20=%20InputBufferLength%20-%2024;%0d%0av8%20=%20%28void%20*%29%28v12%20&#43;%20%28unsigned%20int%29v13%29;%0d%0aif%20%28%20a2%20%29%0d%0a%7b%0d%0a%20%20%20%20v9%20=%20%28const%20void%20*%29%28v12%20&#43;%20%28unsigned%20int%29v13%29;%0d%0a%20%20%20%20v8%20=%20%28void%20*%29%28SystemBuffer%20&#43;%2024%29;%0d%0a%7d%0d%0aelse%0d%0a%7b%0d%0a%20%20%20%20v9%20=%20%28const%20void%20*%29%28SystemBuffer%20&#43;%2024%29;%0d%0a%7d%0d%0amemmove%28v8,%20v9,%20totalNumberMinus24%29;">
+                <i class="bi bi-copy"></i>
+            </button>
+        </div>
+    
+
+    
+        <pre><code>v7 = InputBufferLength - 24;
+v8 = (void *)(v12 &#43; (unsigned int)v13);
+if ( a2 )
+{
+    v9 = (const void *)(v12 &#43; (unsigned int)v13);
+    v8 = (void *)(SystemBuffer &#43; 24);
+}
+else
+{
+    v9 = (const void *)(SystemBuffer &#43; 24);
+}
+memmove(v8, v9, totalNumberMinus24);</code></pre>
+    
+</div>
+<p>We can see that <code>v7</code> is actually the length minus 24 (which is the size of the 3 first pointers). Then we see some variables being set, let&rsquo;s see their usage to understand what they are up to. They are using <code>memmove</code> from <code>v9</code> to <code>v8</code> using the remaining bytes available from the SystemBuffer, name them <code>src_pointer</code> and <code>dst_pointer</code> accordinly</p>
+<p>When <code>a2</code> is set, <code>src_pointer</code> equals <code>v12 + v13</code> and <code>dst_pointer</code> equals to data at <code>SystemBuffer</code> which is later returned to the user, this is read operation</p>
+<p>When <code>a2</code> is not set, <code>src_pointer</code> equals to some index in <code>SystemBuffer</code> which received from the user, and <code>dst_pointer</code> equals to <code>v12 + v13</code>, this is write operation</p>
+<p>So this function allows a user to read\write data based on <code>a2</code>, in this ioctl <code>a2</code> is set to 1, meaning this ioctl allows to read any memory from the kernel.</p>
+<p>After that we can see in the code path of IOCTL 0x9B0C1EC8 that it calls the same function but with <code>a2</code> not set, so this is a write operation.</p>
+<p>Those 2 IOCTL allows read and write operation on any address in the kernel! In the next article we will exploit this to elevate priviledges.</p>
+<h2 id="summary">Summary</h2>
+<p>This was an example for reverse engineering a vulnerable driver, this driver has more nice IOCTLS to view but using the same methodology shown here you can reverse the other IOCTLs.
+In the next article I will show how to exploit the vulnerabilities shown here.</p>
+<p><a href="/windows/kernel/reverse_dbutil_2_3/files/dbutil_2_3.sys">dbutil_2_3.sys</a></p>
+
+            
+        </div>
+    </article>
+
+        </main>
+
+        <footer class="footer">
+    <div class="footer-left">
+        <ul class="social">
+            
+                <li>All Rights Reserved ®.</li>
+            
+
+            
+                <li>yoavshah</li>
+            
+
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+
+    <div class="footer-right">
+        <ul class="control status clearfix">
+            
+                <li>
+                    
+                        Word Count:
+                        1959
+                    
+                </li>
+            
+
+            
+            
+
+            
+                <li>en</li>
+            
+
+            
+                <li>
+                    <a href="https://gohugo.io" class="btn" target="_blank"
+                        >Hugo: 0.125.3</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    <a
+                        href="https://github.com/JingWangTW/dark-theme-editor"
+                        class="btn"
+                        target="_blank"
+                        >Theme: dark-theme-editor</a
+                    >
+                </li>
+            
+
+            
+                <li>
+                    
+                        Last modified: &nbsp;
+                        <time>
+                            Aug 12 2024 00:00:00
+                        </time>
+                    
+                </li>
+            
+
+            
+                <li title="">
+                    
+                </li>
+            
+        </ul>
+    </div>
+</footer>
+
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+    
+    
+
+
+    <script
+        type="text/javascript"
+        src="/js/index_d751713.min.5eeb120f16ea146352725c420364f87befead45f678142b8f0ffbef024646931fbc06bff07a7bd6cb57fa2f8cd8a21ba6a4ee5a278ec32303a378bc1cd17f246.js"
+        integrity="sha512-XusSDxbqFGNSclxCA2T4e&#43;/q1F9ngUK48P&#43;&#43;8CRkaTH7wGv/B6e9bLV/ovjNiiG6ak7lonjsMjA6N4vBzRfyRg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+
+
+
+</html>

@@ -2,11 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yoavshah.github.io/blockchain/development/0-setting_up_environment/</loc>
+    <lastmod>2024-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/blockchain/ethernaut/0-setting_up_environment/</loc>
+    <lastmod>2024-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/blockchain/development/1-kingofthehill/</loc>
+    <lastmod>2024-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/</loc>
+    <lastmod>2024-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/blockchain/</loc>
+    <lastmod>2024-09-15T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/blockchain/ethernaut/</loc>
+    <lastmod>2024-09-15T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/blockchain/development/</loc>
+    <lastmod>2024-09-15T10:59:55+03:00</lastmod>
+  </url><url>
+    <loc>https://yoavshah.github.io/windows/kernel/reverse_rtcore64/</loc>
+    <lastmod>2024-08-12T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://yoavshah.github.io/windows/kernel/readwrite_using_dbutil_2_3/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://yoavshah.github.io/</loc>
-    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+    <loc>https://yoavshah.github.io/cryptohack/</loc>
+    <lastmod>2024-06-24T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/windows/kernel/</loc>
     <lastmod>2024-06-24T10:59:55+03:00</lastmod>
@@ -19,9 +43,6 @@
   </url><url>
     <loc>https://yoavshah.github.io/windows/portable-executable/fileinfector/</loc>
     <lastmod>2024-06-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://yoavshah.github.io/cryptohack/</loc>
-    <lastmod>2024-06-18T10:59:55+03:00</lastmod>
   </url><url>
     <loc>https://yoavshah.github.io/cryptohack/rsa/</loc>
     <lastmod>2024-06-18T10:59:55+03:00</lastmod>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>smart-contracts-development on Securiy Blog</title>
+    <link>https://yoavshah.github.io/blockchain/development/</link>
+    <description>Recent content in smart-contracts-development on Securiy Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://yoavshah.github.io/blockchain/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>0-setting_up_environment</title>
+      <link>https://yoavshah.github.io/blockchain/development/0-setting_up_environment/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/development/0-setting_up_environment/</guid>
+      <description>Here I will explain how to set up the enviornment for the development of smart contracts&#xA;Setting Up the Enviornment In this tutorial we will use hardhat.&#xA;We first can create a project using the following command and choose our option&#xA;npx hardhat init&#xD;In the initialization we get an example of smart contract called Lock.sol and many other files.&#xA;In the contracts folder, there is all the code for our smart contract.</description>
+    </item>
+    <item>
+      <title>1-KingOfTheHill</title>
+      <link>https://yoavshah.github.io/blockchain/development/1-kingofthehill/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/development/1-kingofthehill/</guid>
+      <description>Why? I learned about Ethereum and how it works and I wanted to try to interact with it. I decided to create a simple smart contract.&#xA;What? The smart contract I decided to create is a &amp;ldquo;KingOfTheHill&amp;rdquo; donation smart contract. The contract gets donations and saves each address, the amount of the donations it sent, and a message of this address.&#xA;Addresses can interact with the smart contract by:&#xA;sending donations (payments) getting the &amp;ldquo;King&amp;rdquo; address and its info (The &amp;ldquo;King&amp;rdquo; address is the one who donated the most amount of Ether) getting the current address info (amount donated, message) setting the message of the current address The Owner of the contract can withdraw the donations at anytime</description>
+    </item>
+  </channel>
+</rss>

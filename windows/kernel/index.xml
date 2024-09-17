@@ -6,8 +6,15 @@
     <description>Recent content in Kernel on Securiy Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoavshah.github.io/windows/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reverse RTCore64</title>
+      <link>https://yoavshah.github.io/windows/kernel/reverse_rtcore64/</link>
+      <pubDate>Mon, 12 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/windows/kernel/reverse_rtcore64/</guid>
+      <description>Here I will show the reversing process of RTCore64.sys I first recommend going through reverse_dbutil_2_3.&#xA;DriverEntry A very easy DriverEntry, all it does is to create a device driver and a symbolic link, later setting the Major functions&#xA;NTSTATUS __stdcall DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) { NTSTATUS result; // eax PDEVICE_OBJECT DeviceObject; // [rsp+40h] [rbp-38h] BYREF _UNICODE_STRING DestinationString; // [rsp+48h] [rbp-30h] BYREF _UNICODE_STRING SymbolicLinkName; // [rsp+58h] [rbp-20h] BYREF RtlInitUnicodeString(&amp;amp;DestinationString, aDeviceRtcore64); RtlInitUnicodeString(&amp;amp;SymbolicLinkName, SourceString); result = IoCreateDevice(DriverObject, 0, &amp;amp;DestinationString, 0x22u, 0, 0, &amp;amp;DeviceObject); if ( result &amp;gt;= 0 ) { result = IoCreateSymbolicLink(&amp;amp;SymbolicLinkName, &amp;amp;DestinationString); if ( result &amp;gt;= 0 ) { DriverObject-&amp;gt;MajorFunction[0] = GenericMajor; DriverObject-&amp;gt;MajorFunction[2] = GenericMajor; DriverObject-&amp;gt;MajorFunction[IRP_MJ_DEVICE_CONTROL] = GenericMajor; DriverObject-&amp;gt;DriverUnload = (PDRIVER_UNLOAD)sub_11000; return 0; } } return result; }&#xD;GenericMajor NTSTATUS __stdcall GenericMajor(_DEVICE_OBJECT *DeviceObject, _IRP *Irp) { _IO_STACK_LOCATION *CurrentStackLocation; // rax _IRP *SystemBuffer; // r10 __int64 SystemBufferInputLength; // rdx __int64 SystemBufferOutputLength; // r9 PMDL v7; // rcx PMDL v8; // rdx NTSTATUS v9; // eax PMDL MdlAddress; // rcx NTSTATUS v11; // eax char v12; // al unsigned __int16 v13; // ax unsigned __int32 v14; // eax __int64 v15; // r10 unsigned __int16 *v16; // r10 __int64 v17; // r10 int v18; // ecx ULONG Length; // ecx ULONG Flags; // ecx ULONG Offset; // edx NTSTATUS Status; // ebx unsigned __int64 v24; // [rsp+30h] [rbp-28h] Irp-&amp;gt;IoStatus.</description>
+    </item>
     <item>
       <title>Read/Write using dbutil_2_3</title>
       <link>https://yoavshah.github.io/windows/kernel/readwrite_using_dbutil_2_3/</link>

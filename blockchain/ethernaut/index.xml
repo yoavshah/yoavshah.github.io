@@ -20,7 +20,35 @@
       <link>https://yoavshah.github.io/blockchain/ethernaut/1-fallback/</link>
       <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
       <guid>https://yoavshah.github.io/blockchain/ethernaut/1-fallback/</guid>
-      <description>The description of the challenge&#xA;Look carefully at the contract&amp;#39;s code below. You will beat this level if you claim ownership of the contract you reduce its balance to 0&#xD;// SPDX-License-Identifier: MIT&#xD;pragma solidity ^0.8.0;&#xD;contract Fallback {&#xD;mapping(address =&amp;gt; uint256) public contributions;&#xD;address public owner;&#xD;constructor() {&#xD;owner = msg.sender;&#xD;contributions[msg.sender] = 1000 * (1 ether);&#xD;}&#xD;modifier onlyOwner() {&#xD;require(msg.sender == owner, &amp;#34;caller is not the owner&amp;#34;);&#xD;_;&#xD;}&#xD;function contribute() public payable {&#xD;require(msg.</description>
+      <description>The description of the challenge&#xA;Look carefully at the contract&amp;#39;s code below.&#xD;You will beat this level if&#xD;you claim ownership of the contract&#xD;you reduce its balance to 0&#xD;// SPDX-License-Identifier: MIT pragma solidity ^0.8.0; contract Fallback { mapping(address =&amp;gt; uint256) public contributions; address public owner; constructor() { owner = msg.sender; contributions[msg.sender] = 1000 * (1 ether); } modifier onlyOwner() { require(msg.sender == owner, &amp;#34;caller is not the owner&amp;#34;); _; } function contribute() public payable { require(msg.</description>
+    </item>
+    <item>
+      <title>2-fallout</title>
+      <link>https://yoavshah.github.io/blockchain/ethernaut/2-fallout/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/ethernaut/2-fallout/</guid>
+      <description>The description of the challenge&#xA;Claim ownership of the contract below to complete this level.&#xD;// SPDX-License-Identifier: MIT pragma solidity ^0.6.0; import &amp;#34;openzeppelin-contracts-06/math/SafeMath.sol&amp;#34;; contract Fallout { using SafeMath for uint256; mapping(address =&amp;gt; uint256) allocations; address payable public owner; /* constructor */ function Fal1out() public payable { owner = msg.sender; allocations[owner] = msg.value; } modifier onlyOwner() { require(msg.sender == owner, &amp;#34;caller is not the owner&amp;#34;); _; } function allocate() public payable { allocations[msg.</description>
+    </item>
+    <item>
+      <title>3-coinflip</title>
+      <link>https://yoavshah.github.io/blockchain/ethernaut/3-coinflip/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/ethernaut/3-coinflip/</guid>
+      <description>The description of the challenge&#xA;This is a coin flipping game where you need to build up your winning streak by guessing the outcome of a coin flip. To complete this level you&amp;#39;ll need to use your psychic abilities to guess the correct outcome 10 times in a row.&#xD;// SPDX-License-Identifier: MIT // SPDX-License-Identifier: MIT pragma solidity ^0.8.0; contract CoinFlip { uint256 public consecutiveWins; uint256 lastHash; uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968; constructor() { consecutiveWins = 0; } function flip(bool _guess) public returns (bool) { uint256 blockValue = uint256(blockhash(block.</description>
+    </item>
+    <item>
+      <title>4-telephone</title>
+      <link>https://yoavshah.github.io/blockchain/ethernaut/4-telephone/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/ethernaut/4-telephone/</guid>
+      <description>The description of the challenge&#xA;Claim ownership of the contract below to complete this level.&#xD;// SPDX-License-Identifier: MIT pragma solidity ^0.8.0; contract Telephone { address public owner; constructor() { owner = msg.sender; } function changeOwner(address _owner) public { if (tx.origin != msg.sender) { owner = _owner; } } }&#xD;This is a small challenge but interesting. We can see there is only one function that can change the owner and that&amp;rsquo;s the changeOwner function and we need that tx.</description>
+    </item>
+    <item>
+      <title>5-token</title>
+      <link>https://yoavshah.github.io/blockchain/ethernaut/5-token/</link>
+      <pubDate>Mon, 16 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://yoavshah.github.io/blockchain/ethernaut/5-token/</guid>
+      <description>The description of the challenge&#xA;The goal of this level is for you to hack the basic token contract below.&#xD;You are given 20 tokens to start with and you will beat the level if you somehow manage to get your hands on any additional tokens. Preferably a very large amount of tokens.&#xD;// SPDX-License-Identifier: MIT pragma solidity ^0.6.0; contract Token { mapping(address =&amp;gt; uint256) balances; uint256 public totalSupply; constructor(uint256 _initialSupply) public { balances[msg.</description>
     </item>
   </channel>
 </rss>
